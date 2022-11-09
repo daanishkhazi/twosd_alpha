@@ -4,13 +4,28 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [test, setTest] = useState("");
   const router = useRouter();
   const isActive: (pathname: string) => boolean = (pathname) => {
     return router.pathname === pathname;
   };
   const { data: session, status } = useSession();
+  const testPrompt = async () => {
+    const res = await fetch("/api/prompt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ subject: "Biology" }),
+    });
+    const data = await res.json();
+    setTest(data.result);
+    console.log(data);
+  };
+
   return (
     <>
       <Head>
@@ -33,6 +48,14 @@ export default function Home() {
           <button onClick={() => signOut()}>Sign out</button>
         </div>
       )}
+      <br />
+      <button
+        onClick={testPrompt}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Test Prompt
+      </button>
+      <p>{test}</p>
     </>
   );
 }
