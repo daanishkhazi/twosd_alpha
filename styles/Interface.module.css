@@ -1,0 +1,143 @@
+.container {
+    padding: 2rem 2rem;
+  }
+  
+  .formdiv {
+    /* min-height: 100vh; */
+    /* scroll-behavior: smooth; */
+    padding: 3rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 30%; */
+  }
+  
+  .submit {
+    display: inline-block;
+    flex: 1;
+    padding: 0.3rem 0.3rem;
+    /* position: relative; */
+    border: transparent;
+    border-radius: 20%;
+    background-color: rgb(95, 160, 138);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .submit:hover {
+    background-color: rgb(0, 255, 170);
+  }
+
+  .clear {
+    display: inline-block;
+    flex: 1;
+    padding: 0.3rem 0.3rem;
+    /* position: relative; */
+    border: transparent;
+    border-radius: 20%;
+    background-color: rgb(175, 96, 96);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clear:hover {
+    background-color: rgb(187, 0, 0);
+  }
+  
+  .input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    border-color: black;
+    border-width: 3px;
+    padding: 2rem 1rem;
+  }
+
+  .charCount {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-grow: 1;
+    color: grey;
+    font-style: italic;
+    font-size: small;
+  }
+
+  .query {
+    overflow-wrap: break-word;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0.1;
+    border-color: blue;
+    border-width: 3px;
+    padding: 2rem 5rem;
+    /* border-spacing: 0, 50000; */
+  }
+
+  .output {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0.1;
+    border-color: red;
+    border-width: 3px;
+    padding: 2rem 5rem;
+    overflow-wrap: break-word;
+    /* border-spacing: 0, 50000; */
+  }
+
+  .buttondiv {
+    width: 100%;
+    /* text-align: center; */
+    /* text-align: justify; */
+  }
+
+  .historyLabel {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-grow: 1;
+    color: grey;
+    font-style: italic;
+    font-size: small;
+  }
+
+  .promptButton {
+    display: inline-block;
+    flex: 1;
+    padding: 0.3rem 0.3rem;
+    border: whitesmoke;
+    border-radius: 20%;
+    color: black;
+    background-color: rgb(171, 177, 175);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .promptButton:hover {
+    background-color: rgb(224, 233, 242);
+  }
+
+/*
+Animation classes.
+*/
+
+.historyEntry {
+    padding: 20px;
+    animation: flasher 1s;
+}
+
+@keyframes flasher{
+    from {
+    opacity: 0.2;
+    }
+    to {
+    opacity: 1;
+    }
+}
+
+
