@@ -10,12 +10,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // 
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
-    prompt:
-      "Biology Tutor: Explain like I'm five why mitochondria is the powerhouse of the cell.",
+    prompt: req.body.query,
     temperature: 0.4,
-    max_tokens: 100,
+    max_tokens: req.body.output_limit,
   });
   res.status(200).json({ result: completion.data.choices[0].text });
 }
