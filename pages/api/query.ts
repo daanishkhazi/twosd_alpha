@@ -15,7 +15,7 @@ export default async function handler(
     model: "text-davinci-002",
     prompt: req.body.query,
     temperature: 0.4,
-    max_tokens: req.body.output_limit,
+    max_tokens: req.body.outputLimit,
   });
-  res.status(200).json({ result: completion.data.choices[0].text });
+  res.status(200).json({ result: completion.data.choices[0].text, usage: completion.data.usage});
 }
