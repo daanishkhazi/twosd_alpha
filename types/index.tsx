@@ -1,9 +1,9 @@
 export interface Prompt {
     description: string;
-    gpt3_prefix: string;
-    placeholder_text: string;
-    output_limit: number;
-    char_limit: number;
+    gpt3Prefix: string;
+    placeholder: string;
+    outputLimit: number;
+    charLimit: number;
 }
 
 export interface PromptSet {
@@ -12,14 +12,5 @@ export interface PromptSet {
 
 export interface Subject {
     name: string;
-    subject_prefix: string;
-}
-
-export interface PromptSet {
-    prompts: Array<Prompt>
-}
-
-export interface Subject {
-    name: string;
-    subject_prefix: string;
+    subjectPrefix: string;
 }
