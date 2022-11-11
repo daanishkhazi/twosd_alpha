@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         >
           <div className="px-5 py-2">
             <Link
-              href="#"
+              href="/terms"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Terms and Conditions
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="px-5 py-2">
             <Link
-              href="#"
+              href="/privacy"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Privacy Policy
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="px-5 py-2">
             <Link
-              href="#"
+              href="mailto:hello@gettala.com"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Contact
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="px-5 py-2">
             <Link
-              href="#"
+              href="https://www.greenhouse.io/"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Careers (We&apos;re Hiring!)

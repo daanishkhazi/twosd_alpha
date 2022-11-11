@@ -12,8 +12,6 @@ const Navbar: React.FC = () => {
 
   const { data: session, status } = useSession();
 
-  // Logo will be bream.svg from public folder
-
   return (
     <nav className="flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2">
       <div className="flex items-center mr-6">
@@ -25,17 +23,17 @@ const Navbar: React.FC = () => {
         <div className="text-sm font-semibold lg:flex-grow">
           <Link
             href="/interface"
-            className={`block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-gray-900 mr-4 ${
-              isActive("/interface") ? "text-primary" : ""
-            }`}
+            className={
+              "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
+            }
           >
             Tutor
           </Link>
           <Link
             href="/about"
-            className={`block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-gray-900 mr-4 ${
-              isActive("/about") ? "text-primary" : ""
-            }`}
+            className={
+              "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
+            }
           >
             Guide
           </Link>
@@ -46,7 +44,7 @@ const Navbar: React.FC = () => {
             <div>
               <Link
                 href="/api/auth/signin"
-                className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0"
+                className="inline-block text-sm font-semibold text-gray-700 px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300 mt-4 lg:mt-0"
               >
                 Sign In
               </Link>
@@ -55,11 +53,11 @@ const Navbar: React.FC = () => {
           {status === "authenticated" && (
             <div>
               <p className="inline-block text-sm px-4 py-2 leading-none text-gray-900 mt-4 lg:mt-0">
-                Hi {session.user?.name}!
+                {session.user?.name}
               </p>
               <button
                 onClick={() => signOut()}
-                className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-700 border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+                className="inline-block text-sm font-semibold text-gray-700 px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300 mt-4 lg:mt-0"
               >
                 Sign out
               </button>
