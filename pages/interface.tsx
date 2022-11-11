@@ -5,90 +5,41 @@ import { useState, useEffect, useRef } from "react";
 import { Prompt, Subject } from "../types/index";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Layout from "../components/Layout";
+import { createImportSpecifier } from "typescript";
 
 export default function Interface() {
-  // TODO - migrate the below to the DB
-  const dummyPrompts = [
-    {
-      description: "What's the difference between...",
-      gpt3_prefix: "What's the difference between ",
-      placeholder_text: "E.g. dogs and cats",
-      char_limit: 75,
-      output_limit: 1500,
-    },
-    {
-      description: "Explain the intuition behind...",
-      gpt3_prefix: "Explain the intuition behind ",
-      placeholder_text: "E.g. why cells need ATP",
-      char_limit: 250,
-      output_limit: 1500,
-    },
-    {
-      description: "Explain why this is wrong:",
-      gpt3_prefix: "Explain why this is wrong: ",
-      placeholder_text: "E.g. the civil war was not fought over slavery",
-      char_limit: 250,
-      output_limit: 1500,
-    },
-    {
-      description: "Finish the thought:",
-      gpt3_prefix: "Finish the thought: ",
-      placeholder_text:
-        "E.g. the most effective treatments for sickle cell anemia are...",
-      char_limit: 250,
-      output_limit: 1500,
-    },
-    {
-      description: "Ask an open ended question",
-      gpt3_prefix: "",
-      placeholder_text:
-        "E.g. Why does Louisiana have lower educational outcomes than other US states?",
-      char_limit: 500,
-      output_limit: 4000,
-    },
-  ];
-
-  const dummySubjects = [
-    {
-      name: "Biology",
-      subject_prefix:
-        "The following is a question posed by a student to their Biology teacher. ",
-    },
-    {
-      name: "History",
-      subject_prefix:
-        "The following is a question posed by a student to their History teacher. ",
-    },
-    {
-      name: "Medicine",
-      subject_prefix:
-        "The following is a question posed by a student to their Physician. ",
-    },
-    {
-      name: "Computer Science",
-      subject_prefix:
-        "The following is a question posed by a student to their Computer Science Teacher. ",
-    },
-    {
-      name: "SAT / ACT",
-      subject_prefix:
-        "The following is a question posed by a student to their SAT Tutor. ",
-    },
-  ];
-
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [history, setHistory] = useState([["", "XYZ"]]);
-  const [prompts, setPrompts] = useState<Array<Prompt>>(dummyPrompts);
-  // const [output, setOutput] = useState("");
-  // const [responseLoading, setResponseLoading] = useState(false);
+  const [prompts, setPrompts] = useState<Array<Prompt> | null>();
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>();
-  const [subjects, setSubjects] = useState<Array<Subject>>(dummySubjects);
+  const [subjects, setSubjects] = useState<Array<Subject> | null>();
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>();
+  // TODO - initialize from DB and write back to DB on session close
+  const [tokensUsed, setTokensUsed] = useState(0);
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
+
+  const getPromptsAndSubjects = async () => {
+    const res = await fetch("/api/subjectprompt", {
+      method: "GET",
+    });
+    const data = await res.json();
+    return data;
+  };
+
+  // Fetch prompt list and subject list from database on first render
+  // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
+  // If you want to do CSR - use something called SWR
+  useEffect(() => {
+    async function fetchData() {
+      const { result: PromptsAndSubjects } = await getPromptsAndSubjects();
+      setPrompts(PromptsAndSubjects.promptList);
+      setSubjects(PromptsAndSubjects.subjectList);
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
@@ -96,23 +47,21 @@ export default function Interface() {
   }, [history]);
 
   const sendPrompt = async () => {
-    const output_limit = selectedPrompt ? selectedPrompt.output_limit : 500;
-    const prefix = selectedPrompt ? selectedPrompt.gpt3_prefix : "";
-    const subject_prefix = selectedSubject
-      ? selectedSubject.subject_prefix
-      : "";
-    const res = await fetch("/api/prompt", {
+    const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500;
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
+    const subjectPrefix = selectedSubject ? selectedSubject.subjectPrefix : "";
+    const res = await fetch("/api/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // TODO - subj hardcoded - to change
-        query: subject_prefix + prefix + query,
-        output_limit: output_limit,
+        query: subjectPrefix + prefix + query,
+        outputLimit: outputLimit,
       }),
     });
     const data = await res.json();
+    console.log(outputLimit, data);
     return data;
   };
 
@@ -122,12 +71,12 @@ export default function Interface() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    const prefix = selectedPrompt ? selectedPrompt.gpt3_prefix : "";
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
     e.preventDefault();
-    // TODO - Add API request here
     setHistory([...history, [prefix + query, ""]]);
     const data = await sendPrompt();
     setHistory([...history, [prefix + query, data.result]]);
+    setTokensUsed(tokensUsed + data.usage.total_tokens);
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
@@ -139,7 +88,9 @@ export default function Interface() {
   };
 
   const selectPrompt = (index: number) => {
-    setSelectedPrompt(prompts[index]);
+    if (prompts) {
+      setSelectedPrompt(prompts[index]);
+    }
   };
 
   const loadingSymbol = () => {
@@ -155,21 +106,25 @@ export default function Interface() {
   };
 
   const subjectSelector = () => {
-    return (
-      <div className={styles.squareContainer}>
-        {subjects.map((subject: Subject, index: number) => {
-          return (
-            <button
-              className={styles.square}
-              key={index}
-              onClick={() => setSelectedSubject(subject)}
-            >
-              {subject.name}
-            </button>
-          );
-        })}
-      </div>
-    );
+    if (subjects) {
+      return (
+        <div className={styles.squareContainer}>
+          {subjects.map((subject: Subject, index: number) => {
+            return (
+              <button
+                className={styles.square}
+                key={index}
+                onClick={() => setSelectedSubject(subject)}
+              >
+                {subject.name}
+              </button>
+            );
+          })}
+        </div>
+      );
+    } else {
+      return loadingSymbol();
+    }
   };
 
   const historyGenerator = () => {
@@ -198,22 +153,24 @@ export default function Interface() {
   };
 
   const promptGenerator = () => {
-    return (
-      <div className={styles.formdiv}>
-        {prompts.map((p: Prompt, index: number) => {
-          return (
-            <div style={{ padding: "5px" }} key={index}>
-              <button
-                className={styles.promptButton}
-                onClick={() => selectPrompt(index)}
-              >
-                {p.description}
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    );
+    if (prompts) {
+      return (
+        <div className={styles.formdiv}>
+          {prompts.map((p: Prompt, index: number) => {
+            return (
+              <div style={{ padding: "5px" }} key={index}>
+                <button
+                  className={styles.promptButton}
+                  onClick={() => selectPrompt(index)}
+                >
+                  {p.description}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
   };
 
   const queryInput = (selectedPrompt: Prompt) => {
@@ -223,15 +180,15 @@ export default function Interface() {
           <label></label>
           <p>{selectedPrompt.description}</p>
           <p className={styles.charCount}>
-            {charCount} / {selectedPrompt.char_limit} Characters
+            {charCount} / {selectedPrompt.charLimit} Characters
           </p>
           <textarea
             rows={10}
-            placeholder={selectedPrompt.placeholder_text}
+            placeholder={selectedPrompt.placeholder}
             className={styles.input}
             onChange={handleQueryChange}
             value={query}
-            maxLength={selectedPrompt.char_limit}
+            maxLength={selectedPrompt.charLimit}
           />
           <div className={styles.buttondiv}>
             <button type="submit" className={styles.submit}>
@@ -279,30 +236,28 @@ export default function Interface() {
   };
 
   return (
-    <Layout>
-      <div className={styles.container}>
-        <Head>
-          <title>AI Tutor</title>
-          <meta
-            name="Personalized AI-enabled Tutoring"
-            content="Personalized AI-enabled Tutoring"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        {/* TODO - somehow fix this alignment... */}
-        <div style={{ alignContent: "center" }}>
-          {selectedSubject ? SubjectSelectedOutput() : subjectSelector()}
-          <br />
-          {session ? (
-            <button onClick={() => signOut()}>
-              Sign out {session?.user?.name}
-            </button>
-          ) : (
-            <Link href="/api/auth/signin">Sign in</Link>
-          )}
-        </div>
-        <div ref={bottomRef} />
+    <div className={styles.container}>
+      <Head>
+        <title>AI Tutor</title>
+        <meta
+          name="Personalized AI-enabled Tutoring"
+          content="Personalized AI-enabled Tutoring"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {/* TODO - somehow fix this alignment... */}
+      <div style={{ alignContent: "center" }}>
+        {selectedSubject ? SubjectSelectedOutput() : subjectSelector()}
+        <br />
+        {session ? (
+          <button onClick={() => signOut()}>
+            Sign out {session?.user?.name}
+          </button>
+        ) : (
+          <Link href="/api/auth/signin">Sign in</Link>
+        )}
       </div>
-    </Layout>
+      <div ref={bottomRef} />
+    </div>
   );
 }
