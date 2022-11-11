@@ -8,7 +8,6 @@ import Link from "next/link";
 import { createImportSpecifier } from "typescript";
 
 export default function Interface() {
-
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [history, setHistory] = useState([["", "XYZ"]]);
@@ -17,7 +16,7 @@ export default function Interface() {
   const [subjects, setSubjects] = useState<Array<Subject> | null>();
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>();
   // TODO - initialize from DB and write back to DB on session close
-  const [tokensUsed, setTokensUsed] = useState(0)
+  const [tokensUsed, setTokensUsed] = useState(0);
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
@@ -27,20 +26,20 @@ export default function Interface() {
       method: "GET",
     });
     const data = await res.json();
-    return data
+    return data;
   };
 
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
-  // If you want to do CSR - use something called SWR 
+  // If you want to do CSR - use something called SWR
   useEffect(() => {
     async function fetchData() {
-      const {result: PromptsAndSubjects} = await getPromptsAndSubjects() 
-      setPrompts(PromptsAndSubjects.promptList)
-      setSubjects(PromptsAndSubjects.subjectList)
+      const { result: PromptsAndSubjects } = await getPromptsAndSubjects();
+      setPrompts(PromptsAndSubjects.promptList);
+      setSubjects(PromptsAndSubjects.subjectList);
     }
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
@@ -48,22 +47,22 @@ export default function Interface() {
   }, [history]);
 
   const sendPrompt = async () => {
-    const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500
-    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : ""
-    const subjectPrefix = selectedSubject ? selectedSubject.subjectPrefix : ""
+    const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500;
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
+    const subjectPrefix = selectedSubject ? selectedSubject.subjectPrefix : "";
     const res = await fetch("/api/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         query: subjectPrefix + prefix + query,
-        outputLimit: outputLimit
+        outputLimit: outputLimit,
       }),
     });
     const data = await res.json();
-    console.log(outputLimit, data)
-    return data
+    console.log(outputLimit, data);
+    return data;
   };
 
   const handleQueryChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -72,12 +71,12 @@ export default function Interface() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : ""
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
     e.preventDefault();
     setHistory([...history, [prefix + query, ""]]);
-    const data = await sendPrompt()
+    const data = await sendPrompt();
     setHistory([...history, [prefix + query, data.result]]);
-    setTokensUsed(tokensUsed + data.usage.total_tokens)
+    setTokensUsed(tokensUsed + data.usage.total_tokens);
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
@@ -89,147 +88,152 @@ export default function Interface() {
   };
 
   const selectPrompt = (index: number) => {
-    if (prompts) {setSelectedPrompt(prompts[index])}
+    if (prompts) {
+      setSelectedPrompt(prompts[index]);
+    }
   };
 
   const loadingSymbol = () => {
     return (
-    <div style={{justifyContent: "center"}}>
-      <div className={styles.loader}>
-        <div></div><div></div><div></div>
+      <div style={{ justifyContent: "center" }}>
+        <div className={styles.loader}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
-    </div>
     );
   };
 
   const subjectSelector = () => {
-      if (subjects) {return (
+    if (subjects) {
+      return (
         <div className={styles.squareContainer}>
-          {
-            subjects.map(
-              (subject: Subject, index: number) => {
-                return (
-                  <button className={styles.square} key={index} onClick={() => setSelectedSubject(subject)}>
-                      {subject.name}
-                  </button>
-                )
-              }
-            )
-          }
+          {subjects.map((subject: Subject, index: number) => {
+            return (
+              <button
+                className={styles.square}
+                key={index}
+                onClick={() => setSelectedSubject(subject)}
+              >
+                {subject.name}
+              </button>
+            );
+          })}
         </div>
-      )} else {
-        return loadingSymbol()
-      }
-  }
+      );
+    } else {
+      return loadingSymbol();
+    }
+  };
 
   const historyGenerator = () => {
     return (
       <div>
-          {history.map((past_query_output: Array<string>, index: number) => {
-            if (past_query_output[0] != "") {
-              return (
-                <div className={styles.historyEntry} key={index}>
-                  <p className={styles.historyLabel}> Query </p>
-                  <div className={styles.query}>{past_query_output[0]}</div>
-                  <div>
-                    <p className={styles.charCount}> Output </p>
-                    {past_query_output[1] != "" ? (
-                      <div className={styles.output}>
-                        {past_query_output[1]}
-                      </div>
-                    ) : (
-                      <div className={styles.output}>{loadingSymbol()}</div>
-                    )}
-                  </div>
+        {history.map((past_query_output: Array<string>, index: number) => {
+          if (past_query_output[0] != "") {
+            return (
+              <div className={styles.historyEntry} key={index}>
+                <p className={styles.historyLabel}> Query </p>
+                <div className={styles.query}>{past_query_output[0]}</div>
+                <div>
+                  <p className={styles.charCount}> Output </p>
+                  {past_query_output[1] != "" ? (
+                    <div className={styles.output}>{past_query_output[1]}</div>
+                  ) : (
+                    <div className={styles.output}>{loadingSymbol()}</div>
+                  )}
                 </div>
-              );
-            }
-          })}
-        </div>
-    )
-  }
+              </div>
+            );
+          }
+        })}
+      </div>
+    );
+  };
 
   const promptGenerator = () => {
     if (prompts) {
-      return(
-      <div className={styles.formdiv}>
-            {prompts.map((p: Prompt, index: number) => {
-              return (
-                <div style={{ padding: "5px" }} key={index}>
-                  <button
-                    className={styles.promptButton}
-                    onClick={() => selectPrompt(index)}
-                  >
-                    {p.description}
-                  </button>
-                </div>
-              );
-            })}
-      </div>
-    )}
-  }
+      return (
+        <div className={styles.formdiv}>
+          {prompts.map((p: Prompt, index: number) => {
+            return (
+              <div style={{ padding: "5px" }} key={index}>
+                <button
+                  className={styles.promptButton}
+                  onClick={() => selectPrompt(index)}
+                >
+                  {p.description}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  };
 
   const queryInput = (selectedPrompt: Prompt) => {
     return (
       <div className={styles.formdiv}>
-          <form onSubmit={handleSubmit}>
-            <label></label>
-            <p>{selectedPrompt.description}</p>
-            <p className={styles.charCount}>
-              {charCount} / {selectedPrompt.charLimit} Characters
-            </p>
-            <textarea
-              rows={10}
-              placeholder={selectedPrompt.placeholder}
-              className={styles.input}
-              onChange={handleQueryChange}
-              value={query}
-              maxLength={selectedPrompt.charLimit}
-            />
-            <div className={styles.buttondiv}>
-              <button type="submit" className={styles.submit}>
-                {" "}
-                Submit{" "}
-              </button>
-              <button
-                className={styles.clear}
-                onClick={() => setSelectedPrompt(null)}
-              >
-                {" "}
-                Change Prompt{" "}
-              </button>
-            </div>
-          </form>
+        <form onSubmit={handleSubmit}>
+          <label></label>
+          <p>{selectedPrompt.description}</p>
+          <p className={styles.charCount}>
+            {charCount} / {selectedPrompt.charLimit} Characters
+          </p>
+          <textarea
+            rows={10}
+            placeholder={selectedPrompt.placeholder}
+            className={styles.input}
+            onChange={handleQueryChange}
+            value={query}
+            maxLength={selectedPrompt.charLimit}
+          />
+          <div className={styles.buttondiv}>
+            <button type="submit" className={styles.submit}>
+              {" "}
+              Submit{" "}
+            </button>
+            <button
+              className={styles.clear}
+              onClick={() => setSelectedPrompt(null)}
+            >
+              {" "}
+              Change Prompt{" "}
+            </button>
+          </div>
+        </form>
       </div>
-    )
-  }
+    );
+  };
 
   const queryInterface = () => {
-    return (selectedPrompt ? queryInput(selectedPrompt) : promptGenerator())
-  }
+    return selectedPrompt ? queryInput(selectedPrompt) : promptGenerator();
+  };
 
   const SubjectSelectedOutput = () => {
     return (
       <div>
-        <div>
-          {historyGenerator()}
+        <div>{historyGenerator()}</div>
+        <div style={{ display: "inline-block" }}>
+          {selectedSubject ? (
+            <button
+              className={styles.subjectLabel}
+              onClick={() => setSelectedSubject(null)}
+            >
+              Subject: {selectedSubject.name} (Click to change)
+            </button>
+          ) : null}
         </div>
-        <div style={{display: "inline-block"}}>
-        {selectedSubject ? 
-          <button className={styles.subjectLabel} onClick={() => setSelectedSubject(null)}> 
-            Subject: {selectedSubject.name} (Click to change) 
-          </button> : null}
-        </div>
-        <div>
-          {queryInterface()}
-        </div>
+        <div>{queryInterface()}</div>
         <button className={styles.clear} onClick={handleClear}>
           {" "}
           Clear History{" "}
         </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className={styles.container}>
