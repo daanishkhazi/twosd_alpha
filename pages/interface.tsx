@@ -7,14 +7,21 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { createImportSpecifier } from "typescript";
 
+import LoadingSymbol from "../components/LoadingSymbol";
+import SubjectSelector from "../components/SubjectSelector";
+import HistoryGenerator from "../components/HistoryGenerator";
+import PromptGenerator from "../components/PromptGenerator";
+import QueryInput from "../components/QueryInput";
+import SubjectSelectedInterface from "../components/SubjectSelectedInterface";
+
 export default function Interface() {
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [history, setHistory] = useState([["", "XYZ"]]);
-  const [prompts, setPrompts] = useState<Array<Prompt> | null>();
-  const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>();
-  const [subjects, setSubjects] = useState<Array<Subject> | null>();
-  const [selectedSubject, setSelectedSubject] = useState<Subject | null>();
+  const [prompts, setPrompts] = useState<Array<Prompt> | null>(null);
+  const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
+  const [subjects, setSubjects] = useState<Array<Subject> | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
   // TODO - initialize from DB and write back to DB on session close
   const [tokensUsed, setTokensUsed] = useState(0);
 
@@ -87,153 +94,19 @@ export default function Interface() {
     setHistory([]);
   };
 
-  const selectPrompt = (index: number) => {
-    if (prompts) {
-      setSelectedPrompt(prompts[index]);
-    }
-  };
-
-  const loadingSymbol = () => {
-    return (
-      <div style={{ justifyContent: "center" }}>
-        <div className={styles.loader}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    );
-  };
-
-  const subjectSelector = () => {
-    if (subjects) {
-      return (
-        <div className={styles.squareContainer}>
-          {subjects.map((subject: Subject, index: number) => {
-            return (
-              <button
-                className={styles.square}
-                key={index}
-                onClick={() => setSelectedSubject(subject)}
-              >
-                {subject.name}
-              </button>
-            );
-          })}
-        </div>
-      );
-    } else {
-      return loadingSymbol();
-    }
-  };
-
-  const historyGenerator = () => {
-    return (
-      <div>
-        {history.map((past_query_output: Array<string>, index: number) => {
-          if (past_query_output[0] != "") {
-            return (
-              <div className={styles.historyEntry} key={index}>
-                <p className={styles.historyLabel}> Query </p>
-                <div className={styles.query}>{past_query_output[0]}</div>
-                <div>
-                  <p className={styles.charCount}> Output </p>
-                  {past_query_output[1] != "" ? (
-                    <div className={styles.output}>{past_query_output[1]}</div>
-                  ) : (
-                    <div className={styles.output}>{loadingSymbol()}</div>
-                  )}
-                </div>
-              </div>
-            );
-          }
-        })}
-      </div>
-    );
-  };
-
-  const promptGenerator = () => {
-    if (prompts) {
-      return (
-        <div className={styles.formdiv}>
-          {prompts.map((p: Prompt, index: number) => {
-            return (
-              <div style={{ padding: "5px" }} key={index}>
-                <button
-                  className={styles.promptButton}
-                  onClick={() => selectPrompt(index)}
-                >
-                  {p.description}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-  };
-
-  const queryInput = (selectedPrompt: Prompt) => {
-    return (
-      <div className={styles.formdiv}>
-        <form onSubmit={handleSubmit}>
-          <label></label>
-          <p>{selectedPrompt.description}</p>
-          <p className={styles.charCount}>
-            {charCount} / {selectedPrompt.charLimit} Characters
-          </p>
-          <textarea
-            rows={10}
-            placeholder={selectedPrompt.placeholder}
-            className={styles.input}
-            onChange={handleQueryChange}
-            value={query}
-            maxLength={selectedPrompt.charLimit}
-          />
-          <div className={styles.buttondiv}>
-            <button type="submit" className={styles.submit}>
-              {" "}
-              Submit{" "}
-            </button>
-            <button
-              className={styles.clear}
-              onClick={() => setSelectedPrompt(null)}
-            >
-              {" "}
-              Change Prompt{" "}
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  };
-
-  const queryInterface = () => {
-    return selectedPrompt ? queryInput(selectedPrompt) : promptGenerator();
-  };
-
-  const SubjectSelectedOutput = () => {
-    return (
-      <div>
-        <div>{historyGenerator()}</div>
-        <div style={{ display: "inline-block" }}>
-          {selectedSubject ? (
-            <button
-              className={styles.subjectLabel}
-              onClick={() => setSelectedSubject(null)}
-            >
-              Subject: {selectedSubject.name} (Click to change)
-            </button>
-          ) : null}
-        </div>
-        <div>{queryInterface()}</div>
-        <button className={styles.clear} onClick={handleClear}>
-          {" "}
-          Clear History{" "}
-        </button>
-      </div>
-    );
-  };
+  const subjectSelectedProps = {
+    handleSubmit: handleSubmit,
+    handleQueryChange: handleQueryChange,
+    setSelectedPrompt: setSelectedPrompt,
+    selectedPrompt: selectedPrompt,
+    charCount: charCount,
+    query: query,
+    prompts: prompts,
+    history: history,
+    selectedSubject: selectedSubject,
+    setSelectedSubject: setSelectedSubject,
+    handleClear: handleClear
+  }
 
   return (
     <div className={styles.container}>
@@ -247,7 +120,7 @@ export default function Interface() {
       </Head>
       {/* TODO - somehow fix this alignment... */}
       <div style={{ alignContent: "center" }}>
-        {selectedSubject ? SubjectSelectedOutput() : subjectSelector()}
+        {selectedSubject ? <SubjectSelectedInterface {...subjectSelectedProps}/> : <SubjectSelector subjects={subjects} setSelectedSubject={setSelectedSubject}/>}
         <br />
         {session ? (
           <button onClick={() => signOut()}>

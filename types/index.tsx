@@ -14,3 +14,34 @@ export interface Subject {
     name: string;
     subjectPrefix: string;
 }
+
+export interface SubjectSelectorProps {
+    subjects: Array<Subject> | null;
+    setSelectedSubject: React.Dispatch<React.SetStateAction<Subject | null>>;
+}
+
+export interface PromptGeneratorProps {
+    prompts: Array<Prompt> | null;
+    setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
+}
+
+export interface QueryInputProps {
+    query: string;
+    charCount: number;
+    selectedPrompt: Prompt;
+    handleSubmit: (e: React.FormEvent) => Promise<void>;
+    handleQueryChange: (e: React.FormEvent<HTMLTextAreaElement>) => void;
+    setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
+}
+
+interface SubjectedSelectedAdditionalProps {
+    history: Array<Array<string>>;
+    selectedSubject: Subject | null;
+    setSelectedSubject: React.Dispatch<React.SetStateAction<Subject | null>>;
+    handleClear: (e: React.FormEvent) => void
+}
+
+export type SubjectSelectedInterfaceProps = Omit<QueryInputProps, 'selectedPrompt'> 
+                                            & PromptGeneratorProps 
+                                            & SubjectedSelectedAdditionalProps 
+                                            & {selectedPrompt: Prompt | null}
