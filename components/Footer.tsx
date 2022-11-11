@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               href="#"
               className="text-base text-gray-700 hover:text-gray-800"
             >
-              Careers (We're Hiring!)
+              Careers (We&apos;re Hiring!)
             </Link>
           </div>
         </nav>
