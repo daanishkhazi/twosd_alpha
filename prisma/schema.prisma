@@ -80,8 +80,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  tokensUsed    Int       @default(0)
-  tokenQuota    Int
+  tokensUsed    Int?       @default(0)
+  tokenQuota    Int?
   history       QueryOutputPair[]
   accounts      Account[]
   sessions      Session[]
