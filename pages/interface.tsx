@@ -31,6 +31,8 @@ export default function Interface() {
   };
 
   // Fetch prompt list and subject list from database on first render
+  // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
+  // If you want to do CSR - use something called SWR 
   useEffect(() => {
     async function fetchData() {
       const {result: PromptsAndSubjects} = await getPromptsAndSubjects() 
