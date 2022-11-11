@@ -8,6 +8,10 @@ import Link from "next/link";
 import { createImportSpecifier } from "typescript";
 
 export default function Interface() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [history, setHistory] = useState([["", "XYZ"]]);
@@ -16,7 +20,11 @@ export default function Interface() {
   const [subjects, setSubjects] = useState<Array<Subject> | null>();
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>();
   // TODO - initialize from DB and write back to DB on session close
+<<<<<<< HEAD
   const [tokensUsed, setTokensUsed] = useState(0);
+=======
+  const [tokensUsed, setTokensUsed] = useState(0)
+>>>>>>> main
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
@@ -26,11 +34,16 @@ export default function Interface() {
       method: "GET",
     });
     const data = await res.json();
+<<<<<<< HEAD
     return data;
+=======
+    return data
+>>>>>>> main
   };
 
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
+<<<<<<< HEAD
   // If you want to do CSR - use something called SWR
   useEffect(() => {
     async function fetchData() {
@@ -40,6 +53,17 @@ export default function Interface() {
     }
     fetchData();
   }, []);
+=======
+  // If you want to do CSR - use something called SWR 
+  useEffect(() => {
+    async function fetchData() {
+      const {result: PromptsAndSubjects} = await getPromptsAndSubjects() 
+      setPrompts(PromptsAndSubjects.promptList)
+      setSubjects(PromptsAndSubjects.subjectList)
+    }
+    fetchData()
+  }, [])
+>>>>>>> main
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
@@ -47,14 +71,21 @@ export default function Interface() {
   }, [history]);
 
   const sendPrompt = async () => {
+<<<<<<< HEAD
     const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500;
     const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
     const subjectPrefix = selectedSubject ? selectedSubject.subjectPrefix : "";
+=======
+    const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : ""
+    const subjectPrefix = selectedSubject ? selectedSubject.subjectPrefix : ""
+>>>>>>> main
     const res = await fetch("/api/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+<<<<<<< HEAD
       body: JSON.stringify({
         query: subjectPrefix + prefix + query,
         outputLimit: outputLimit,
@@ -63,6 +94,16 @@ export default function Interface() {
     const data = await res.json();
     console.log(outputLimit, data);
     return data;
+=======
+      body: JSON.stringify({ 
+        query: subjectPrefix + prefix + query,
+        outputLimit: outputLimit
+      }),
+    });
+    const data = await res.json();
+    console.log(outputLimit, data)
+    return data
+>>>>>>> main
   };
 
   const handleQueryChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -71,12 +112,20 @@ export default function Interface() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+<<<<<<< HEAD
     const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
+=======
+    const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : ""
+>>>>>>> main
     e.preventDefault();
     setHistory([...history, [prefix + query, ""]]);
     const data = await sendPrompt();
     setHistory([...history, [prefix + query, data.result]]);
+<<<<<<< HEAD
     setTokensUsed(tokensUsed + data.usage.total_tokens);
+=======
+    setTokensUsed(tokensUsed + data.usage.total_tokens)
+>>>>>>> main
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
@@ -88,9 +137,13 @@ export default function Interface() {
   };
 
   const selectPrompt = (index: number) => {
+<<<<<<< HEAD
     if (prompts) {
       setSelectedPrompt(prompts[index]);
     }
+=======
+    if (prompts) {setSelectedPrompt(prompts[index])}
+>>>>>>> main
   };
 
   const loadingSymbol = () => {
@@ -106,8 +159,12 @@ export default function Interface() {
   };
 
   const subjectSelector = () => {
+<<<<<<< HEAD
     if (subjects) {
       return (
+=======
+      if (subjects) {return (
+>>>>>>> main
         <div className={styles.squareContainer}>
           {subjects.map((subject: Subject, index: number) => {
             return (
@@ -121,11 +178,18 @@ export default function Interface() {
             );
           })}
         </div>
+<<<<<<< HEAD
       );
     } else {
       return loadingSymbol();
     }
   };
+=======
+      )} else {
+        return loadingSymbol()
+      }
+  }
+>>>>>>> main
 
   const historyGenerator = () => {
     return (
@@ -154,6 +218,7 @@ export default function Interface() {
 
   const promptGenerator = () => {
     if (prompts) {
+<<<<<<< HEAD
       return (
         <div className={styles.formdiv}>
           {prompts.map((p: Prompt, index: number) => {
@@ -172,10 +237,30 @@ export default function Interface() {
       );
     }
   };
+=======
+      return(
+      <div className={styles.formdiv}>
+            {prompts.map((p: Prompt, index: number) => {
+              return (
+                <div style={{ padding: "5px" }} key={index}>
+                  <button
+                    className={styles.promptButton}
+                    onClick={() => selectPrompt(index)}
+                  >
+                    {p.description}
+                  </button>
+                </div>
+              );
+            })}
+      </div>
+    )}
+  }
+>>>>>>> main
 
   const queryInput = (selectedPrompt: Prompt) => {
     return (
       <div className={styles.formdiv}>
+<<<<<<< HEAD
         <form onSubmit={handleSubmit}>
           <label></label>
           <p>{selectedPrompt.description}</p>
@@ -204,6 +289,36 @@ export default function Interface() {
             </button>
           </div>
         </form>
+=======
+          <form onSubmit={handleSubmit}>
+            <label></label>
+            <p>{selectedPrompt.description}</p>
+            <p className={styles.charCount}>
+              {charCount} / {selectedPrompt.charLimit} Characters
+            </p>
+            <textarea
+              rows={10}
+              placeholder={selectedPrompt.placeholder}
+              className={styles.input}
+              onChange={handleQueryChange}
+              value={query}
+              maxLength={selectedPrompt.charLimit}
+            />
+            <div className={styles.buttondiv}>
+              <button type="submit" className={styles.submit}>
+                {" "}
+                Submit{" "}
+              </button>
+              <button
+                className={styles.clear}
+                onClick={() => setSelectedPrompt(null)}
+              >
+                {" "}
+                Change Prompt{" "}
+              </button>
+            </div>
+          </form>
+>>>>>>> main
       </div>
     );
   };
