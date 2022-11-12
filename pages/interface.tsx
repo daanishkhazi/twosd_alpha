@@ -13,6 +13,7 @@ import HistoryGenerator from "../components/HistoryGenerator";
 import PromptGenerator from "../components/PromptGenerator";
 import QueryInput from "../components/QueryInput";
 import SubjectSelectedInterface from "../components/SubjectSelectedInterface";
+import Layout from "../components/Layout";
 
 export default function Interface() {
   const [query, setQuery] = useState("");
@@ -28,7 +29,7 @@ export default function Interface() {
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
-  
+
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
       method: "GET",
@@ -39,11 +40,14 @@ export default function Interface() {
 
   const getTokenCountAndQuota = async () => {
     if (session && session.user && session.user.email) {
-      const url = "/api/tokenBalance?" + ( new URLSearchParams( {email: session.user.email} ) ).toString()
+      const url =
+        "/api/tokenBalance?" +
+        new URLSearchParams({ email: session.user.email }).toString();
       const res = await fetch(url);
-      const data = await res.json()
-      return data;}
-  }
+      const data = await res.json();
+      return data;
+    }
+  };
 
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
@@ -59,12 +63,19 @@ export default function Interface() {
 
   useEffect(() => {
     async function fetchData() {
-      const { result: {tokenBalance: tokenBalanceFromDB, tokenQuota: tokenQuotaFromDB} } = await getTokenCountAndQuota();
+      const {
+        result: {
+          tokenBalance: tokenBalanceFromDB,
+          tokenQuota: tokenQuotaFromDB,
+        },
+      } = await getTokenCountAndQuota();
       setTokensUsed(tokenBalanceFromDB);
       setTokenQuota(tokenQuotaFromDB);
     }
-    if (session) {fetchData();}
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (session) {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   useEffect(() => {
@@ -106,8 +117,13 @@ export default function Interface() {
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
-    const historyWriteComplete = await writeUserActivityToDB([prefix + query, data.result], data.usage.total_tokens);
-    const tokenCountComplete = await updateUserTokensInDB(tokensUsed + data.usage.total_tokens);
+    const historyWriteComplete = await writeUserActivityToDB(
+      [prefix + query, data.result],
+      data.usage.total_tokens
+    );
+    const tokenCountComplete = await updateUserTokensInDB(
+      tokensUsed + data.usage.total_tokens
+    );
   };
 
   const handleClear = (e: React.FormEvent) => {
@@ -115,46 +131,50 @@ export default function Interface() {
     setHistory([]);
   };
 
-
-  const writeUserActivityToDB = async (historyItem: Array<string>, queryTokens: number) => {
+  const writeUserActivityToDB = async (
+    historyItem: Array<string>,
+    queryTokens: number
+  ) => {
     try {
-      if (session && session.user && selectedPrompt && selectedSubject)
-      {const res = await fetch("/api/writeUserActivity", {
+      if (session && session.user && selectedPrompt && selectedSubject) {
+        const res = await fetch("/api/writeUserActivity", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: session.user.email,
+            prompt: selectedPrompt.description,
+            subject: selectedSubject.name,
+            // TODO - make this write the entire history array on close?
+            history: historyItem,
+            tokens: queryTokens,
+          }),
+        });
+        const data = await res.json();
+        return data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const updateUserTokensInDB = async (tokenBalance: number) => {
+    if (session && session.user && session.user.email && selectedPrompt) {
+      const res = await fetch("/api/updateUserTokens", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: session.user.email,
-          prompt: selectedPrompt.description,
-          subject: selectedSubject.name,
-          // TODO - make this write the entire history array on close?
-          history: historyItem,
-          tokens: queryTokens
-        })
-      })
-      const data = await res.json()
-      return data}} catch (e) {
-        console.error(e)
+          tokens: tokenBalance,
+        }),
+      });
+      const data = await res.json();
+      return data;
     }
-  }
-
-  const updateUserTokensInDB = async (tokenBalance: number) => {
-    if (session && session.user && session.user.email && selectedPrompt)
-    {const res = await fetch("/api/updateUserTokens", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: session.user.email,
-        tokens: tokenBalance
-      })
-    })
-    const data = await res.json()
-    return data
-    }
-  }
+  };
 
   const subjectSelectedProps = {
     handleSubmit: handleSubmit,
@@ -167,32 +187,33 @@ export default function Interface() {
     history: history,
     selectedSubject: selectedSubject,
     setSelectedSubject: setSelectedSubject,
-    handleClear: handleClear
-  }
+    handleClear: handleClear,
+  };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>AI Tutor</title>
-        <meta
-          name="Personalized AI-enabled Tutoring"
-          content="Personalized AI-enabled Tutoring"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {/* TODO - somehow fix this alignment... */}
-      <div style={{ alignContent: "center" }}>
-        {selectedSubject ? <SubjectSelectedInterface {...subjectSelectedProps}/> : <SubjectSelector subjects={subjects} setSelectedSubject={setSelectedSubject}/>}
-        <br />
-        {session ? (
-          <button onClick={() => signOut()}>
-            Sign out {session?.user?.name}
-          </button>
-        ) : (
-          <Link href="/api/auth/signin">Sign in</Link>
-        )}
+    <Layout>
+      <div>
+        <Head>
+          <title>AI Tutor</title>
+          <meta
+            name="Personalized AI-enabled Tutoring"
+            content="Personalized AI-enabled Tutoring"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {/* TODO - somehow fix this alignment... */}
+        <div style={{ alignContent: "center" }}>
+          {selectedSubject ? (
+            <SubjectSelectedInterface {...subjectSelectedProps} />
+          ) : (
+            <SubjectSelector
+              subjects={subjects}
+              setSelectedSubject={setSelectedSubject}
+            />
+          )}
+        </div>
+        <div ref={bottomRef} />
       </div>
-      <div ref={bottomRef} />
-    </div>
+    </Layout>
   );
 }
