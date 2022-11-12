@@ -192,7 +192,7 @@ export default function Interface() {
 
   return (
     <Layout>
-      <div>
+      <div className="min-h-screen">
         <Head>
           <title>AI Tutor</title>
           <meta
