@@ -24,10 +24,11 @@ export default function Interface() {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
   // TODO - initialize from DB and write back to DB on session close
   const [tokensUsed, setTokensUsed] = useState(0);
+  const [tokenQuota, setTokenQuota] = useState(0);
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
-
+  
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
       method: "GET",
@@ -35,6 +36,14 @@ export default function Interface() {
     const data = await res.json();
     return data;
   };
+
+  const getTokenCountAndQuota = async () => {
+    if (session && session.user && session.user.email) {
+      const url = "/api/tokenBalance?" + ( new URLSearchParams( {email: session.user.email} ) ).toString()
+      const res = await fetch(url);
+      const data = await res.json()
+      return data;}
+  }
 
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
@@ -47,6 +56,16 @@ export default function Interface() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { result: {tokenBalance: tokenBalanceFromDB, tokenQuota: tokenQuotaFromDB} } = await getTokenCountAndQuota();
+      setTokensUsed(tokenBalanceFromDB);
+      setTokenQuota(tokenQuotaFromDB);
+    }
+    if (session) {fetchData();}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
@@ -87,12 +106,55 @@ export default function Interface() {
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
+    const historyWriteComplete = await writeUserActivityToDB([prefix + query, data.result], data.usage.total_tokens);
+    const tokenCountComplete = await updateUserTokensInDB(tokensUsed + data.usage.total_tokens);
   };
 
   const handleClear = (e: React.FormEvent) => {
     e.preventDefault();
     setHistory([]);
   };
+
+
+  const writeUserActivityToDB = async (historyItem: Array<string>, queryTokens: number) => {
+    try {
+      if (session && session.user && selectedPrompt && selectedSubject)
+      {const res = await fetch("/api/writeUserActivity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: session.user.email,
+          prompt: selectedPrompt.description,
+          subject: selectedSubject.name,
+          // TODO - make this write the entire history array on close?
+          history: historyItem,
+          tokens: queryTokens
+        })
+      })
+      const data = await res.json()
+      return data}} catch (e) {
+        console.error(e)
+    }
+  }
+
+  const updateUserTokensInDB = async (tokenBalance: number) => {
+    if (session && session.user && session.user.email && selectedPrompt)
+    {const res = await fetch("/api/updateUserTokens", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: session.user.email,
+        tokens: tokenBalance
+      })
+    })
+    const data = await res.json()
+    return data
+    }
+  }
 
   const subjectSelectedProps = {
     handleSubmit: handleSubmit,
