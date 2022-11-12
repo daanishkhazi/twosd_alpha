@@ -12,7 +12,7 @@ datasource db {
 
 model Prompt {
   id            Int       @id @default(autoincrement())
-  description   String
+  description   String    @unique
   gpt3Prefix    String?
   placeholder   String
   outputLimit   Int
@@ -23,7 +23,7 @@ model Prompt {
 
 model Subject {
   id            Int       @id @default(autoincrement())
-  name          String
+  name          String    @unique
   subjectPrefix String
   history       QueryOutputPair[]
   createdAt     DateTime  @default(now())
@@ -31,12 +31,15 @@ model Subject {
 
 model QueryOutputPair {
   id            Int       @id @default(autoincrement())
-  subject       Subject   @relation(fields: [subjectID], references:[id])
-  subjectID     Int       @unique
-  prompt        Prompt    @relation(fields: [promptID], references:[id])
-  promptID      Int       @unique
-  author        User      @relation(fields: [authorId], references:[id])
-  authorId      String       @unique
+  subjectName   String
+  subject       Subject   @relation(fields: [subjectName], references:[name])
+  // subjectID     Int
+  promptDescription String       
+  prompt        Prompt    @relation(fields: [promptDescription], references:[description])
+  // promptID      Int    
+  authorEmail   String   
+  author        User      @relation(fields: [authorEmail], references:[email])
+  // authorId      String    
   query         String
   output        String
   tokens        Int
@@ -83,6 +86,7 @@ model User {
   tokensUsed    Int?       @default(0)
   tokenQuota    Int?
   history       QueryOutputPair[]
+
   accounts      Account[]
   sessions      Session[]
 }
