@@ -64,7 +64,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   };
 
   return (
-    <div className="min-h-full px-24 py-12">
+    <div className="min-h-full mx-32 py-12">
       <div className="inline-block">
         {selectedSubject ? (
           <button
@@ -78,14 +78,16 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
       <div>
         <HistoryGenerator history={history} />
       </div>
+      {history.length ? (
+        <button
+          className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
+          onClick={handleClear}
+        >
+          {" "}
+          Clear History{" "}
+        </button>
+      ) : null}
       <div>{queryInterface()}</div>
-      <button
-        className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-200 rounded-full hover:bg-red-300 mt-4 lg:mt-6"
-        onClick={handleClear}
-      >
-        {" "}
-        Clear History{" "}
-      </button>
     </div>
   );
 };
