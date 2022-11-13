@@ -1,3 +1,5 @@
+import { DefaultSession } from "next-auth"
+
 export interface Prompt {
     description: string;
     gpt3Prefix: string;
