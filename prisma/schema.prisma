@@ -11,39 +11,39 @@ datasource db {
 }
 
 model Prompt {
-  id            Int       @id @default(autoincrement())
-  description   String    @unique
-  gpt3Prefix    String?
-  placeholder   String
-  outputLimit   Int
-  charLimit     Int
-  history       QueryOutputPair[]
-  createdAt     DateTime  @default(now())
+  id          Int               @id @default(autoincrement())
+  description String            @unique
+  gpt3Prefix  String?
+  placeholder String
+  outputLimit Int
+  charLimit   Int
+  history     QueryOutputPair[]
+  createdAt   DateTime          @default(now())
 }
 
 model Subject {
-  id            Int       @id @default(autoincrement())
-  name          String    @unique
+  id            Int               @id @default(autoincrement())
+  name          String            @unique
   subjectPrefix String
   history       QueryOutputPair[]
-  createdAt     DateTime  @default(now())
+  createdAt     DateTime          @default(now())
 }
 
 model QueryOutputPair {
-  id            Int       @id @default(autoincrement())
-  subjectName   String
-  subject       Subject   @relation(fields: [subjectName], references:[name])
+  id                Int      @id @default(autoincrement())
+  subjectName       String
+  subject           Subject  @relation(fields: [subjectName], references: [name])
   // subjectID     Int
-  promptDescription String       
-  prompt        Prompt    @relation(fields: [promptDescription], references:[description])
+  promptDescription String
+  prompt            Prompt   @relation(fields: [promptDescription], references: [description])
   // promptID      Int    
-  authorEmail   String   
-  author        User      @relation(fields: [authorEmail], references:[email])
+  authorEmail       String
+  author            User     @relation(fields: [authorEmail], references: [email])
   // authorId      String    
-  query         String
-  output        String
-  tokens        Int
-  createdAt     DateTime  @default(now())
+  query             String
+  output            String
+  tokens            Int
+  createdAt         DateTime @default(now())
 }
 
 // Below is Next Auth configuration (boilerplate)
@@ -78,17 +78,19 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  tokensUsed    Int?       @default(0)
-  tokenQuota    Int?
-  history       QueryOutputPair[]
+  id               String            @id @default(cuid())
+  name             String?
+  email            String?           @unique
+  emailVerified    DateTime?
+  image            String?
+  tokensUsed       Int?              @default(0)
+  tokenQuota       Int?
+  history          QueryOutputPair[]
+  stripeCustomerId String?           @unique
+  isActive         Boolean           @default(false)
 
-  accounts      Account[]
-  sessions      Session[]
+  accounts Account[]
+  sessions Session[]
 }
 
 model VerificationToken {
