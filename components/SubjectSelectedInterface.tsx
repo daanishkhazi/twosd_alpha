@@ -78,7 +78,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
       <div>
         <HistoryGenerator history={history} />
       </div>
-      {history.length ? (
+      {history.length > 2 ? (
         <button
           className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
           onClick={handleClear}

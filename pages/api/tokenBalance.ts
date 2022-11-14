@@ -6,12 +6,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
     try {
+        console.log('t1', req.query.email)
         const user = await prisma.user.findUnique({
             where: {
                 email: req.query.email as string,
               },
         })
-        // const subjectList = await prisma.subject.findMany({})
         res.status(200).json({ result: {tokenBalance: user?.tokensUsed, tokenQuota: user?.tokenQuota} });
     } catch(e) {
         console.error(e)

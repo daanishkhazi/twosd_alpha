@@ -4,6 +4,7 @@ import styles from "../styles/Interface.module.css";
 import { useState, useEffect, useRef } from "react";
 import { Prompt, Subject } from "../types/index";
 import { signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
 import Link from "next/link";
 import { createImportSpecifier } from "typescript";
 
@@ -38,17 +39,6 @@ export default function Interface() {
     return data;
   };
 
-  const getTokenCountAndQuota = async () => {
-    if (session && session.user && session.user.email) {
-      const url =
-        "/api/tokenBalance?" +
-        new URLSearchParams({ email: session.user.email }).toString();
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
-    }
-  };
-
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
   // If you want to do CSR - use something called SWR
@@ -62,18 +52,9 @@ export default function Interface() {
   }, []);
 
   useEffect(() => {
-    async function fetchData() {
-      const {
-        result: {
-          tokenBalance: tokenBalanceFromDB,
-          tokenQuota: tokenQuotaFromDB,
-        },
-      } = await getTokenCountAndQuota();
-      setTokensUsed(tokenBalanceFromDB);
-      setTokenQuota(tokenQuotaFromDB);
-    }
     if (session) {
-      fetchData();
+      setTokensUsed(session.user.tokensUsed);
+      setTokenQuota(session.user.tokenQuota);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -199,7 +180,7 @@ export default function Interface() {
             name="Personalized AI-enabled Tutoring"
             content="Personalized AI-enabled Tutoring"
           />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.png" />
         </Head>
         {/* TODO - somehow fix this alignment... */}
         <div style={{ alignContent: "center" }}>
