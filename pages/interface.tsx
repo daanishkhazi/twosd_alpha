@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import styles from "../styles/Interface.module.css";
 import { useState, useEffect, useRef } from "react";
-import { Prompt, Subject} from "../types/index";
+import { Prompt, Subject } from "../types/index";
 import { signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export default function Interface() {
     const data = await res.json();
     return data;
   };
-  
+
   // Fetch prompt list and subject list from database on first render
   // TODO: getServerSideProps and getStaticProps -> get props from API route without blocking && SSR
   // If you want to do CSR - use something called SWR
@@ -53,8 +53,8 @@ export default function Interface() {
 
   useEffect(() => {
     if (session) {
-      setTokensUsed(session.user.tokensUsed)
-      setTokenQuota(session.user.tokenQuota)
+      setTokensUsed(session.user.tokensUsed);
+      setTokenQuota(session.user.tokenQuota);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -180,7 +180,7 @@ export default function Interface() {
             name="Personalized AI-enabled Tutoring"
             content="Personalized AI-enabled Tutoring"
           />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.png" />
         </Head>
         {/* TODO - somehow fix this alignment... */}
         <div style={{ alignContent: "center" }}>
