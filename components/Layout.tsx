@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Head from "next/head";
 
 type Props = {
   children?: ReactNode;
@@ -13,6 +14,16 @@ type Props = {
 const Layout: React.FC<Props> = ({ children }: Props) => {
   return (
     <div>
+      <Head>
+        <title>
+          Bream — Your personalized AI tutor for Biology, History and more
+        </title>
+        <meta
+          name="description"
+          content="Bream AI Tutor: Biology, History, Computer Science, SAT, ACT, Medicine, Mathematics"
+        />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
       <Navbar />
       {children}
       <Footer />

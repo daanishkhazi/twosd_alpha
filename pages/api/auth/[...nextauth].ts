@@ -41,6 +41,16 @@ const options = {
       const { tokenBalance: tokenBalanceFromDB, tokenQuota: tokenQuotaFromDB } =
         await getTokenCountAndQuota(session, user);
       session.user.id = user.id;
+      session.user.stripeCustomerId = user.stripeCustomerId;
+
+      const dbUser = await prisma.user.findUnique({
+        where: {
+          id: user.id,
+        },
+      });
+
+      session.user.isActive = dbUser!.isActive;
+
       session.user.tokensUsed = tokenBalanceFromDB;
       session.user.tokenQuota = tokenQuotaFromDB;
       console.log("sess", session);
@@ -48,7 +58,7 @@ const options = {
     },
   },
   events: {
-    createUser: async ({ user }: { user: any }) => {
+    createUser: async ({ user }: { user: User }) => {
       // Create stripe API client using the secret key env variable
       const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
         apiVersion: "2022-08-01",

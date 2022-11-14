@@ -86,7 +86,7 @@ model User {
   tokensUsed       Int?              @default(0)
   tokenQuota       Int?
   history          QueryOutputPair[]
-  stripeCustomerId String?
+  stripeCustomerId String?           @unique
   isActive         Boolean           @default(false)
 
   accounts Account[]
