@@ -23,10 +23,10 @@ export default function Home() {
           <link rel="icon" href="/favicon.png" />
         </Head>
         <Hero></Hero>
-        <Features></Features>
-        <Testimonials></Testimonials>
-        <Faqs></Faqs>
-        <Pricing></Pricing>
+        <Features id="features"></Features>
+        <Testimonials id="testimonials"></Testimonials>
+        <Faqs id="faqs"></Faqs>
+        <Pricing id="pricing"></Pricing>
       </div>
     </Layout>
   );
