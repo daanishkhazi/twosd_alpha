@@ -12,7 +12,7 @@ export default async function handler(
                 email: req.query.email as string,
               },
         })
-        res.status(200).json({ result: {tokenBalance: user?.tokensUsed, tokenQuota: user?.tokenQuota} });
+        res.status(200).json({ result: {tokenBalance: user?.tokensUsed, promptQuota: user?.promptsQuota, promptsUsed: user?.promptsUsed} });
     } catch(e) {
         console.error(e)
     }
