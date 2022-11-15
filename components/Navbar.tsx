@@ -6,6 +6,7 @@ import Image from "next/image";
 import SignOut from "./icons/signOut";
 import Settings from "./icons/settings";
 import { useBalance } from "../Context/balance-context";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -51,6 +52,57 @@ const Navbar: React.FC = () => {
           >
             Guide
           </Link>
+          {isActive("/") ? 
+            (<div className="block mt-4 lg:inline-block lg:mt-0 mr-4">
+              <ScrollLink
+                activeClass="activeScrollElement"
+                to="features"
+                spy={true}
+                smooth={true}
+                duration={500}
+                className={
+                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 active:border-b-4 active:border-primary-400 mr-4"
+                }
+              >
+                Features
+              </ScrollLink>
+              <ScrollLink
+                activeClass="activeScrollElement"
+                to="testimonials"
+                spy={true}
+                smooth={true}
+                duration={500}
+                className={
+                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
+                }
+              >
+                Testimonials
+              </ScrollLink>
+              <ScrollLink
+                activeClass="activeScrollElement"
+                to="faqs"
+                spy={true}
+                smooth={true}
+                duration={500}
+                className={
+                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
+                }
+              >
+                FAQs
+              </ScrollLink>
+              <ScrollLink
+                activeClass="activeScrollElement"
+                to="pricing"
+                spy={true}
+                smooth={true}
+                duration={500}
+                className={
+                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
+                }
+              >
+                Pricing
+              </ScrollLink>
+            </div>) : null}
         </div>
         <div>
           {status === "loading" && <div>Loading...</div>}
