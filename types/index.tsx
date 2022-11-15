@@ -48,7 +48,7 @@ export type SubjectSelectedInterfaceProps = Omit<QueryInputProps, 'selectedPromp
                                             & SubjectedSelectedAdditionalProps 
                                             & {selectedPrompt: Prompt | null}
 
-export interface promptBalance {
+export interface promptContextValue {
     balance: number;
     quota: number;
 }
