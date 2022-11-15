@@ -1,7 +1,6 @@
 // static about page
 import React from "react";
 import Layout from "../components/Layout";
-import Payment from "../components/Payment";
 
 export default function About() {
   return (
@@ -11,9 +10,7 @@ export default function About() {
           <h1 className="text-6xl font-bold">Guide</h1>
           <p className="mt-3 text-2xl">
             placeholder content to be filled in later
-          </p>
-          {/* Slapping in the payment test here */}
-          <Payment></Payment>
+          </p>          
         </main>
       </div>
     </Layout>
