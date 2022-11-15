@@ -9,7 +9,7 @@ export default async function handler(
         // console.log(req.body)
         const tokenBalance = await prisma.user.update({
             where: {email: req.body.email},
-            data: {tokensUsed: req.body.tokens}
+            data: {tokensUsed: req.body.tokens, promptsUsed: req.body.prompts}
         })        
 
         res.status(200).json({ result: {tokenBalance: tokenBalance} });} catch (e) {

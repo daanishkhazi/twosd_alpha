@@ -6,7 +6,8 @@ declare module "next-auth" {
     id: string;
     stripeCustomerId: string;
     tokensUsed: number;
-    tokenQuota: number;
+    promptsUsed: number;
+    promptsQuota: number;
   }
   interface Session {
     user: {
@@ -14,7 +15,8 @@ declare module "next-auth" {
       id: string;
       stripeCustomerId: string;
       tokensUsed: number;
-      tokenQuota: number;
+      promptsUsed: number;
+      promptsQuota: number;
     } & DefaultSession["user"];
   }
 }

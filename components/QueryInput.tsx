@@ -1,6 +1,8 @@
 import { QueryInputProps } from "../types";
 import styles from "../styles/Interface.module.css";
 import LoadingSymbol from "./LoadingSymbol";
+import UsageBar from "./UsageBar";
+import { useBalance } from "../Context/balance-context";
 
 const icon = (
   <svg
@@ -27,6 +29,8 @@ const QueryInput = (props: QueryInputProps) => {
   const charCount = props.charCount;
   const query = props.query;
 
+  const {promptBalance, setPromptBalance} = useBalance();
+
   return (
     <div className="flex flex-col justify-center align-center margin">
       <form onSubmit={handleSubmit}>
@@ -49,17 +53,22 @@ const QueryInput = (props: QueryInputProps) => {
           value={query}
           maxLength={selectedPrompt.charLimit}
         />
-        <p className="flex justify-right text-sm text-gray-500 italic">
-          {charCount} / {selectedPrompt.charLimit} Characters
-        </p>
-        <div className="flex flex-row justify-between">
-          <button
-            type="submit"
-            className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 mt-3 leading-none bg-green-300 rounded-md hover:bg-green-400"
-          >
-            {" "}
-            Submit{" "}
-          </button>
+        <div className="grid grid-cols-6 gap-4 p-4">
+          <div className="col-span-2 col-start-1 text-sm text-gray-500 italic">
+            <div>{charCount} / {selectedPrompt.charLimit} Characters</div>
+            <div>
+              <button
+                type="submit"
+                className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 mt-3 leading-none bg-green-300 rounded-md hover:bg-green-400 disabled:bg-slate-400"
+                disabled={promptBalance.balance>=promptBalance.quota}
+              >
+                {promptBalance.balance<promptBalance.quota ? "Submit" : "Monthly Quota Exceeded"}
+              </button>
+            </div>
+          </div>
+          <div className="col-span-4 col-end-7" >
+            <UsageBar/>
+          </div>
         </div>
       </form>
     </div>

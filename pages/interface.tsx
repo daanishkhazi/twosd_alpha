@@ -15,6 +15,7 @@ import PromptGenerator from "../components/PromptGenerator";
 import QueryInput from "../components/QueryInput";
 import SubjectSelectedInterface from "../components/SubjectSelectedInterface";
 import Layout from "../components/Layout";
+import { useBalance } from "../Context/balance-context";
 
 export default function Interface() {
   const [query, setQuery] = useState("");
@@ -30,6 +31,7 @@ export default function Interface() {
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
+  const {promptBalance, setPromptBalance} = useBalance();
 
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
@@ -54,7 +56,6 @@ export default function Interface() {
   useEffect(() => {
     if (session) {
       setTokensUsed(session.user.tokensUsed);
-      setTokenQuota(session.user.tokenQuota);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -95,6 +96,7 @@ export default function Interface() {
     const data = await sendPrompt();
     setHistory([...history, [prefix + query, data.result]]);
     setTokensUsed(tokensUsed + data.usage.total_tokens);
+    setPromptBalance({...promptBalance, balance: promptBalance.balance + 1})
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
@@ -103,7 +105,8 @@ export default function Interface() {
       data.usage.total_tokens
     );
     const tokenCountComplete = await updateUserTokensInDB(
-      tokensUsed + data.usage.total_tokens
+      tokensUsed + data.usage.total_tokens,
+      promptBalance.balance + 1
     );
   };
 
@@ -140,7 +143,7 @@ export default function Interface() {
     }
   };
 
-  const updateUserTokensInDB = async (tokenBalance: number) => {
+  const updateUserTokensInDB = async (tokenBalance: number, promptBalance: number) => {
     if (session && session.user && session.user.email && selectedPrompt) {
       const res = await fetch("/api/updateUserTokens", {
         method: "POST",
@@ -150,6 +153,7 @@ export default function Interface() {
         body: JSON.stringify({
           email: session.user.email,
           tokens: tokenBalance,
+          prompts: promptBalance
         }),
       });
       const data = await res.json();
