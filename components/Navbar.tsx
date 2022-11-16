@@ -60,7 +60,6 @@ const Navbar: React.FC = () => {
                 spy={true}
                 smooth={true}
                 duration={500}
-
                 className={
                   "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 active:border-b-4 active:border-primary-400 mr-4"
                 }
