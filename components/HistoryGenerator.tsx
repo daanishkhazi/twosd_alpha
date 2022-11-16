@@ -9,7 +9,7 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
         if (past_query_output[0] != "") {
           return (
             <div
-              className="flex flex-col items-start space-y-6 px-12 py-8 my-6 rounded-lg shadow-lg bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline"
+              className="animate-fade-in flex flex-col items-start space-y-6 px-12 py-8 my-6 rounded-lg shadow-lg bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline"
               key={index}
             >
               <div className="break-words font-medium text-xl">

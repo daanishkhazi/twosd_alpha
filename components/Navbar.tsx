@@ -60,6 +60,7 @@ const Navbar: React.FC = () => {
                 spy={true}
                 smooth={true}
                 duration={500}
+
                 className={
                   "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 active:border-b-4 active:border-primary-400 mr-4"
                 }
@@ -117,15 +118,24 @@ const Navbar: React.FC = () => {
             </div>
           )}
           {status === "authenticated" && (
-            <div>
+            <div className="flex items-center">
               <p className="inline-block text-sm px-4 py-2 leading-none text-gray-900 mt-4 lg:mt-0">
                 {session.user?.name}
               </p>
-              <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn m-1">Account</label>
+              <div className="dropdown dropdown-end space-y-2">
+                <div tabIndex={0} className="w-10 h-10 border-4 border-black rounded-full">
+                {session.user.image ? <div> 
+                                        <Image
+                                          src={session.user.image}
+                                          layout='fill'
+                                          objectFit='cover'
+                                          alt=""
+                                        /> 
+                                      </div> : <div>{session.user.name}</div>}
+                </div>
                 <ul tabIndex={0} className="dropdown-content menu p-2 border-4 border-primary-400 shadow-2xl bg-base-100 rounded-box w-52">
                   <li>
-                    <div className="lg:mt-0 text-sm text-gray-700 hover:text-primary-500">
+                    <div className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700 hover:text-primary-500 flex items-center" data-tip="Prompt usage out of monthly balance">
                       <progress className="progress justify-right h-4" value={(promptBalance.balance/promptBalance.quota)*100} max="100">{`${Math.round((promptBalance.balance/promptBalance.quota)*100)}%`}</progress>
                       <a className="text-xs">{`${Math.round(100*(promptBalance.balance/promptBalance.quota))}%`}</a>
                     </div>
