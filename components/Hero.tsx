@@ -26,25 +26,25 @@ const Hero: React.FC = () => {
           {status === "loading" && (
             <Link
               href="/api/auth/signin"
-              className="inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg hover:bg-primary-600 mt-4 lg:mt-0"
+              className="hover:scale-105 transition ease-in-out delay-50 inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg mt-4 lg:mt-0"
             >
-              Sign In
+              Sign Up
             </Link>
           )}
           {status === "unauthenticated" && (
             <Link
               href="/api/auth/signin"
-              className="inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg hover:bg-primary-600 mt-4 lg:mt-0"
+              className="hover:scale-105 transition ease-in-out delay-50 inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg mt-4 lg:mt-0"
             >
-              Sign In
+              Sign Up
             </Link>
           )}
           {status === "authenticated" && (
             <Link
               href="/interface"
-              className="inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg hover:bg-primary-600 mt-4 lg:mt-0"
+              className="hover:scale-105 transition ease-in-out delay-50 inline-block text-lg shadow-md font-semibold text-white px-6 py-4 leading-none bg-primary-500 rounded-lg mt-4 lg:mt-0"
             >
-              Get Started
+              Speak With A Tutor
             </Link>
           )}
           <ScrollLink
@@ -53,9 +53,9 @@ const Hero: React.FC = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className="inline-block text-lg shadow-md font-semibold text-gray-900 mx-4 px-6 py-4 leading-none bg-slate-200 rounded-lg hover:bg-slate-300 mt-4 lg:mt-0"
+            className="hover:scale-105 transition ease-in-out delay-50 inline-block cursor-pointer text-lg shadow-md font-semibold text-gray-900 mx-4 px-6 py-4 leading-none bg-slate-200 rounded-lg  mt-4 lg:mt-0"
           >
-            Learn more
+            Learn More ↓
           </ScrollLink>
         </div>
       </div>

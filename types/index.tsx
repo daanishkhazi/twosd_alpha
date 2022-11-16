@@ -55,3 +55,7 @@ export interface promptContextValue {
   quota: number;
   name: string;
 }
+
+export interface NavbarProps {
+  route: string;
+}

@@ -5,6 +5,8 @@ declare module "next-auth" {
     isActive: boolean;
     id: string;
     stripeCustomerId: string;
+    stripeSubscriptionId: string | null;
+    cancelRequested: boolean;
     tokensUsed: number;
     promptsUsed: number;
     promptsQuota: number;
@@ -14,6 +16,8 @@ declare module "next-auth" {
       isActive: boolean;
       id: string;
       stripeCustomerId: string;
+      stripeSubscriptionId: string | null;
+      cancelRequested: boolean;
       tokensUsed: number;
       promptsUsed: number;
       promptsQuota: number;

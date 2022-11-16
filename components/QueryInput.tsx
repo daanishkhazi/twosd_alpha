@@ -3,6 +3,7 @@ import styles from "../styles/Interface.module.css";
 import LoadingSymbol from "./LoadingSymbol";
 import UsageBar from "./UsageBar";
 import { useBalance } from "../Context/balance-context";
+import { useSession } from "next-auth/react";
 
 const icon = (
   <svg
@@ -29,7 +30,10 @@ const QueryInput = (props: QueryInputProps) => {
   const charCount = props.charCount;
   const query = props.query;
 
-  const {promptBalance, setPromptBalance} = useBalance();
+  const { data, status } = useSession();
+  const isActive = data?.user?.isActive;
+
+  const { promptBalance, setPromptBalance } = useBalance();
 
   return (
     <div className="flex flex-col justify-center align-center margin">
@@ -55,19 +59,23 @@ const QueryInput = (props: QueryInputProps) => {
         />
         <div className="grid grid-cols-6 gap-4 p-4">
           <div className="col-span-2 col-start-1 text-sm text-gray-500 italic">
-            <div>{charCount} / {selectedPrompt.charLimit} Characters</div>
+            <div>
+              {charCount} / {selectedPrompt.charLimit} Characters
+            </div>
             <div>
               <button
                 type="submit"
-                className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 mt-3 leading-none bg-green-300 rounded-md hover:bg-green-400 disabled:bg-slate-400"
-                disabled={promptBalance.balance>=promptBalance.quota}
+                className="hover:scale-105 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 mt-3 leading-none bg-green-300 rounded-md disabled:bg-slate-400"
+                disabled={promptBalance.balance >= promptBalance.quota}
               >
-                {promptBalance.balance<promptBalance.quota ? "Submit" : "Monthly Quota Exceeded"}
+                {promptBalance.balance < promptBalance.quota
+                  ? "Submit"
+                  : "Monthly Quota Exceeded"}
               </button>
             </div>
           </div>
-          <div className="col-span-3 col-end-7" >
-            <UsageBar/>
+          <div className="col-span-3 col-end-7">
+            {!isActive && <UsageBar />}
           </div>
         </div>
       </form>

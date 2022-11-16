@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
@@ -7,15 +7,34 @@ import SignOut from "./icons/signOut";
 import Settings from "./icons/settings";
 import { useBalance } from "../Context/balance-context";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { NavbarProps } from "../types";
 
-const Navbar: React.FC = () => {
+const Navbar = (props: NavbarProps) => {
+  const route = props.route;
   const router = useRouter();
+
   const isActive: (pathname: string) => boolean = (pathname) => {
     return router.pathname === pathname;
   };
 
   const { data: session, status } = useSession();
   const { promptBalance, setPromptBalance } = useBalance();
+
+  // Can hide navbar if at top of page
+  // const [visible, setVisible] = useState(false);
+  // const handleScroll = () => {
+  //   if (window.scrollY > 25) {
+  //     setVisible(true);
+  //   } else {
+  //     setVisible(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+  const visible = true;
 
   useEffect(() => {
     if (session && promptBalance.balance === -1) {
@@ -29,15 +48,23 @@ const Navbar: React.FC = () => {
   }, [session]);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2">
+    <nav
+      className={
+        route === "/"
+          ? `flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2 ${
+              visible ? "" : "hidden"
+            }`
+          : "flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
+      }
+    >
       <div className="flex items-center mr-6">
         <Link href="/">
           <Image src="/bream.svg" alt="logo" height={150} width={150} />
         </Link>
       </div>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm font-semibold lg:flex-grow">
-          <Link
+      <div className="w-auto flex flex-grow justify-end">
+        <div className="">
+          {/* <Link
             href="/interface"
             className={
               "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
@@ -96,7 +123,7 @@ const Navbar: React.FC = () => {
                 Pricing
               </ScrollLink>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
         <div>
           {status === "loading" && <div>Loading...</div>}
@@ -112,10 +139,6 @@ const Navbar: React.FC = () => {
           )}
           {status === "authenticated" && (
             <div className="flex items-center">
-              <p className="inline-block text-sm px-4 py-2 leading-none text-gray-900 mt-4 lg:mt-0">
-                {promptBalance.name}
-              </p>
-
               <div className="dropdown dropdown-end space-y-2">
                 <div
                   tabIndex={0}
@@ -128,6 +151,7 @@ const Navbar: React.FC = () => {
                         layout="fill"
                         objectFit="cover"
                         alt=""
+                        className="shadow-md cursor-pointer"
                       />
                     </div>
                   ) : (
@@ -136,12 +160,13 @@ const Navbar: React.FC = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu p-2 border-4 border-primary-400 shadow-2xl bg-base-100 rounded-box w-52"
+                  className="dropdown-content menu p-2 shadow-2xl border bg-base-100 rounded-box w-52"
                 >
+                  <li className="mx-4 my-2">{promptBalance.name}</li>
                   <li>
                     <div
                       className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700 hover:text-primary-500 flex items-center"
-                      data-tip="Prompt usage out of monthly balance"
+                      data-tip="Your monthly usage so far"
                     >
                       <progress
                         className="progress justify-right h-4"
@@ -158,22 +183,29 @@ const Navbar: React.FC = () => {
                     </div>
                   </li>
                   <li>
-                    <Link href="/settings">
-                      <div className="items-center flex lg:mt-0 text-sm text-gray-700 hover:text-primary-500">
+                    <Link
+                      href="/settings"
+                      className="hover:text-primary-500 text-sm text-gray-700 flex flex-row mt-1"
+                    >
+                      <div className="flex flex-col w-1/4">
                         <Settings />
-                        Account Settings
                       </div>
+                      <div className="flex flex-col w-3/4">Settings</div>
                     </Link>
                   </li>
                   <li>
                     <button
                       onClick={() => signOut()}
-                      className="items-center justify-left px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300"
+                      className="flex flex-row bg-slate-200 hover:bg-slate-300 mt-1"
                     >
-                      <SignOut />
-                      <a className="text-sm font-semibold text-gray-700">
-                        Sign out
-                      </a>
+                      <div className="flex flex-col w-1/4">
+                        <SignOut />
+                      </div>
+                      <div className="flex flex-col w-3/4">
+                        <a className="text-sm font-semibold text-gray-700 text-left">
+                          Sign out
+                        </a>
+                      </div>
                     </button>
                   </li>
                 </ul>
