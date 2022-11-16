@@ -49,6 +49,7 @@ const stripeHook = async (
           data: {
             isActive: true,
             promptsQuota: 500,
+            stripeSubscriptionId: subscription.id as string,
           },
         });
         break;
@@ -63,6 +64,7 @@ const stripeHook = async (
           data: {
             isActive: true,
             promptsQuota: 500,
+            stripeSubscriptionId: subscription.id as string,
           },
         });
         break;

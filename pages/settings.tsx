@@ -48,8 +48,8 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Account"
-                    ? "bg-gray-300 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "bg-gray-100 hover:bg-gray-200 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
                 }
                 onClick={() => setSelectedTab("Account")}
               >
@@ -58,8 +58,8 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Billing"
-                    ? "bg-gray-300 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "bg-gray-100 hover:bg-gray-200 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
                 }
                 onClick={() => setSelectedTab("Billing")}
               >
@@ -68,8 +68,8 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Help"
-                    ? "bg-gray-300 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "bg-gray-100 hover:bg-gray-200 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
                 }
                 onClick={() => setSelectedTab("Help")}
               >
@@ -110,7 +110,7 @@ export default function Settings() {
                     <p className="text-lg ml-4">{session?.user?.email}</p>
                   </div>
                   <button
-                    className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-4 max-w-fit"
+                    className="hover:translate-x-1 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md mt-4 max-w-fit"
                     onClick={() => signOut()}
                   >
                     Sign Out
