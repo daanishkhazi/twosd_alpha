@@ -75,7 +75,9 @@ export default function Interface() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        query: subjectPrefix + prefix + query,
+        subject: selectedSubject?.name,
+        prompt: selectedPrompt?.gpt3Prefix,
+        query: query,
         outputLimit: outputLimit,
       }),
     });
@@ -92,9 +94,14 @@ export default function Interface() {
   const handleSubmit = async (e: React.FormEvent) => {
     const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
     e.preventDefault();
-    setHistory([...history, [prefix + query, ""]]);
+    let sentQuery = query;
+    sentQuery = query[0].toLowerCase() + query.substring(1);
+    if (query.slice(-1) != "?") {
+      sentQuery = query + "?";
+    }
+    setHistory([...history, [prefix + " " + sentQuery, ""]]);
     const data = await sendPrompt();
-    setHistory([...history, [prefix + query, data.result]]);
+    setHistory([...history, [prefix + " " + sentQuery, data.result]]);
     setTokensUsed(tokensUsed + data.usage.total_tokens);
     setPromptBalance({ ...promptBalance, balance: promptBalance.balance + 1 });
     setQuery("");
