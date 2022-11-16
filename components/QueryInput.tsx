@@ -66,7 +66,7 @@ const QueryInput = (props: QueryInputProps) => {
               </button>
             </div>
           </div>
-          <div className="col-span-4 col-end-7" >
+          <div className="col-span-3 col-end-7" >
             <UsageBar/>
           </div>
         </div>
