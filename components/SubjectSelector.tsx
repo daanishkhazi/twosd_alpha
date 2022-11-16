@@ -11,8 +11,7 @@ const subjectDescriptions: { [key: string]: string } = {
     "Ross is an advanced Artifical Intelligence well versed in History. Ask him for explanations, advice, or just to chat!",
   "Computer Science":
     "Monica is an advanced Artifical Intelligence well versed in Computer Science. Ask her for explanations, advice, or just to chat!",
-  "SAT / ACT":
-    "Phoebe is an advanced Artifical Intelligence well versed in SAT / ACT. Ask her for explanations, advice, or just to chat!",
+  Law: "Phoebe is an advanced Artifical Intelligence well versed in Law. Ask her for explanations, advice, or just to chat!",
   Medicine:
     "Chandler is an advanced Artifical Intelligence well versed in Medicine. Ask him for explanations, advice, or just to chat!",
 };
@@ -21,8 +20,16 @@ const subjectNames: { [key: string]: string } = {
   Biology: "Rachel (Biology)",
   History: "Ross (History)",
   "Computer Science": "Monica (Computer Science)",
-  "SAT / ACT": "Phoebe (SAT / ACT)",
+  Law: "Phoebe (Law)",
   Medicine: "Chandler (Medicine)",
+};
+
+const subjectImages: { [key: string]: string } = {
+  Biology: "/rachel.png",
+  History: "/ross.png",
+  "Computer Science": "/monica.png",
+  Law: "/phoebe.png",
+  Medicine: "/chandler.png",
 };
 
 const SubjectSelector = (props: SubjectSelectorProps) => {
@@ -34,13 +41,13 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
         {subjects.map((subject: Subject, index: number) => {
           return (
             <button
-              className="flex flex-row items-center justify-start space-x-8 px-8 py-6 rounded-lg shadow-lg bg-white hover:bg-gray-100 focus:outline-none focus:shadow-outline"
+              className="hover:scale-105 transition ease-in-out delay-50 flex flex-row items-center justify-start space-x-8 px-8 py-6 rounded-box shadow-lg bg-white  focus:outline-none focus:shadow-outline"
               key={index}
               onClick={() => setSelectedSubject(subject)}
             >
               <Image
                 className="rounded-full"
-                src="/hero.png"
+                src={subjectImages[subject.name]}
                 alt={subject.name}
                 width={96}
                 height={96}
@@ -59,7 +66,11 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
       </div>
     );
   } else {
-    return <LoadingSymbol />;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <LoadingSymbol />
+      </div>
+    );
   }
 };
 

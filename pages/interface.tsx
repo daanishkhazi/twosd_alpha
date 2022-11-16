@@ -31,7 +31,7 @@ export default function Interface() {
 
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
-  const {promptBalance, setPromptBalance} = useBalance();
+  const { promptBalance, setPromptBalance } = useBalance();
 
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
@@ -60,10 +60,10 @@ export default function Interface() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  useEffect(() => {
-    // 👇️ scroll to bottom every time messages change
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [history]);
+  // useEffect(() => {
+  //   // 👇️ scroll to bottom every time messages change
+  //   bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  // }, [history]);
 
   const sendPrompt = async () => {
     const outputLimit = selectedPrompt ? selectedPrompt.outputLimit : 500;
@@ -75,7 +75,9 @@ export default function Interface() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        query: subjectPrefix + prefix + query,
+        subject: selectedSubject?.name,
+        prompt: selectedPrompt?.gpt3Prefix,
+        query: query,
         outputLimit: outputLimit,
       }),
     });
@@ -92,11 +94,16 @@ export default function Interface() {
   const handleSubmit = async (e: React.FormEvent) => {
     const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
     e.preventDefault();
-    setHistory([...history, [prefix + query, ""]]);
+    let sentQuery = query;
+    sentQuery = query[0].toLowerCase() + query.substring(1);
+    if (query.slice(-1) != "?") {
+      sentQuery = query + "?";
+    }
+    setHistory([...history, [prefix + " " + sentQuery, ""]]);
     const data = await sendPrompt();
-    setHistory([...history, [prefix + query, data.result]]);
+    setHistory([...history, [prefix + " " + sentQuery, data.result]]);
     setTokensUsed(tokensUsed + data.usage.total_tokens);
-    setPromptBalance({...promptBalance, balance: promptBalance.balance + 1})
+    setPromptBalance({ ...promptBalance, balance: promptBalance.balance + 1 });
     setQuery("");
     setSelectedPrompt(null);
     setCharCount(0);
@@ -143,7 +150,10 @@ export default function Interface() {
     }
   };
 
-  const updateUserTokensInDB = async (tokenBalance: number, promptBalance: number) => {
+  const updateUserTokensInDB = async (
+    tokenBalance: number,
+    promptBalance: number
+  ) => {
     if (session && session.user && session.user.email && selectedPrompt) {
       const res = await fetch("/api/updateUserTokens", {
         method: "POST",
@@ -153,7 +163,7 @@ export default function Interface() {
         body: JSON.stringify({
           email: session.user.email,
           tokens: tokenBalance,
-          prompts: promptBalance
+          prompts: promptBalance,
         }),
       });
       const data = await res.json();
@@ -174,6 +184,16 @@ export default function Interface() {
     setSelectedSubject: setSelectedSubject,
     handleClear: handleClear,
   };
+
+  if (status === "unauthenticated") {
+    return (
+      <Layout>
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+          <p className="text-2xl font-bold">Sign in to use Bream!</p>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

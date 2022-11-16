@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 type Props = {
   children?: ReactNode;
@@ -12,6 +13,7 @@ type Props = {
 // when you are writing components in React with TypeScript.
 
 const Layout: React.FC<Props> = ({ children }: Props) => {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -24,7 +26,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <Navbar />
+      <Navbar route={router.pathname} />
       {children}
       <Footer />
     </div>

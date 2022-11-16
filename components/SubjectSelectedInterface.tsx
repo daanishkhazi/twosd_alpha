@@ -6,13 +6,22 @@ import LoadingSymbol from "./LoadingSymbol";
 import QueryInput from "./QueryInput";
 import PromptGenerator from "./PromptGenerator";
 import HistoryGenerator from "./HistoryGenerator";
+import Image from "next/image";
 
 const subjectNames: { [key: string]: string } = {
   Biology: "Rachel (Biology)",
   History: "Ross (History)",
   "Computer Science": "Monica (Computer Science)",
-  "SAT / ACT": "Phoebe (SAT / ACT)",
+  Law: "Phoebe (SAT / ACT)",
   Medicine: "Chandler (Medicine)",
+};
+
+const subjectImages: { [key: string]: string } = {
+  Biology: "/rachel.png",
+  History: "/ross.png",
+  "Computer Science": "/monica.png",
+  Law: "/phoebe.png",
+  Medicine: "/chandler.png",
 };
 
 const icon = (
@@ -20,7 +29,7 @@ const icon = (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
+    strokeWidth={2}
     stroke="currentColor"
     className="w-6 h-6 inline-block align-top"
   >
@@ -68,10 +77,19 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
       <div className="inline-block">
         {selectedSubject ? (
           <button
-            className="text-md text-gray-900 px-4 py-2 bg-slate-100 rounded-full hover:bg-slate-200"
+            className="flex flex-col text-md font-bold text-gray-900 px-6 py-4 bg-white border rounded-box"
             onClick={() => setSelectedSubject(null)}
           >
-            {subjectNames[selectedSubject.name]} {"   "} {icon}
+            <Image
+              className="rounded-full self-center mb-2"
+              src={subjectImages[selectedSubject.name]}
+              alt={selectedSubject.name}
+              width={96}
+              height={96}
+            />
+            <span>
+              {subjectNames[selectedSubject.name]} {"   "} {icon}
+            </span>
           </button>
         ) : null}
       </div>

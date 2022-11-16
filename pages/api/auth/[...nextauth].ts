@@ -17,7 +17,11 @@ const getTokenCountAndQuota = async (session: Session, user: User) => {
       email: user.email as string,
     },
   });
-  return { tokenBalance: user.tokensUsed, promptQuota: user.promptsQuota, promptBalance: user.promptsUsed };
+  return {
+    tokenBalance: user.tokensUsed,
+    promptQuota: user.promptsQuota,
+    promptBalance: user.promptsUsed,
+  };
 };
 
 const options = {
@@ -38,8 +42,11 @@ const options = {
   callbacks: {
     // "any" typing used since Next Auth module augmentation not working properly - see issue #5576 on NextAuth GitHub
     async session({ session, user }: { session: Session; user: User }) {
-      const { tokenBalance: tokenBalanceFromDB, promptQuota: promptsQuotaFromDB, promptBalance: promptsBalanceFromDB } =
-        await getTokenCountAndQuota(session, user);
+      const {
+        tokenBalance: tokenBalanceFromDB,
+        promptQuota: promptsQuotaFromDB,
+        promptBalance: promptsBalanceFromDB,
+      } = await getTokenCountAndQuota(session, user);
       session.user.id = user.id;
       session.user.stripeCustomerId = user.stripeCustomerId;
 
@@ -50,6 +57,8 @@ const options = {
       });
 
       session.user.isActive = dbUser!.isActive;
+      session.user.stripeSubscriptionId = dbUser!.stripeSubscriptionId;
+      session.user.cancelRequested = dbUser!.cancelRequested;
 
       session.user.tokensUsed = tokenBalanceFromDB;
       session.user.promptsQuota = promptsQuotaFromDB;
@@ -84,4 +93,8 @@ const options = {
   },
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+  theme: {
+    brandColor: "#e8798a",
+    logo: "https://twosd-alpha.vercel.app/bream.svg",
+  },
 };
