@@ -57,6 +57,15 @@ module.exports = {
           "Noto Color Emoji",
         ],
       },
+      keyframes: {
+        fadeIn: {
+          '0%': {opacity: '0.2'},
+          '100%': {opacity: '1'}
+        }
+      },
+      animation: {
+        'fade-in': 'fadeIn 1s linear'
+      }
     },
   },
   daisyui: {
