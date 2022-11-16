@@ -24,7 +24,7 @@ a.activeScrollElement {
   padding-bottom: 0.15em; 
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -32,4 +32,4 @@ a.activeScrollElement {
     color: white;
     background: black;
   }
-}
+} */

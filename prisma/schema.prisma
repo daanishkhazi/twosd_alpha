@@ -85,12 +85,15 @@ model User {
   image            String?
   tokensUsed       Int?              @default(0)
   promptsUsed      Int?              @default(0)
-  promptsQuota     Int?
+  promptsQuota     Int?              @default(100)
   history          QueryOutputPair[]
   stripeCustomerId String?           @unique
   isActive         Boolean           @default(false)
-  accounts Account[]
-  sessions Session[]
+  // Converting isActive from a simple boolean to be a date, validTill, that is set to the end of the month
+  // default is set to the end of the current month, and is updated when the user pays for the next month to the be infinite
+  // validTill        DateTime          @default(now() + "1 month" + "-1 day")
+  accounts         Account[]
+  sessions         Session[]
 }
 
 model VerificationToken {
