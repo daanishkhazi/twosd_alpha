@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
@@ -15,14 +15,15 @@ const Navbar: React.FC = () => {
   };
 
   const { data: session, status } = useSession();
-  const {promptBalance, setPromptBalance} = useBalance();
+  const { promptBalance, setPromptBalance } = useBalance();
 
   useEffect(() => {
     if (session && promptBalance.balance === -1) {
       setPromptBalance({
         balance: session.user.promptsUsed,
-        quota: session.user.promptsQuota
-      })
+        quota: session.user.promptsQuota,
+        name: session.user.name,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -44,16 +45,8 @@ const Navbar: React.FC = () => {
           >
             Tutor
           </Link>
-          <Link
-            href="/about"
-            className={
-              "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
-            }
-          >
-            Guide
-          </Link>
-          {isActive("/") ? 
-            (<div className="block mt-4 lg:inline-block lg:mt-0 mr-4">
+          {isActive("/") ? (
+            <div className="block mt-4 lg:inline-block lg:mt-0 mr-4">
               <ScrollLink
                 activeClass="activeScrollElement"
                 to="features"
@@ -102,7 +95,8 @@ const Navbar: React.FC = () => {
               >
                 Pricing
               </ScrollLink>
-            </div>) : null}
+            </div>
+          ) : null}
         </div>
         <div>
           {status === "loading" && <div>Loading...</div>}
@@ -119,45 +113,70 @@ const Navbar: React.FC = () => {
           {status === "authenticated" && (
             <div className="flex items-center">
               <p className="inline-block text-sm px-4 py-2 leading-none text-gray-900 mt-4 lg:mt-0">
-                {session.user?.name}
+                {promptBalance.name}
               </p>
+
               <div className="dropdown dropdown-end space-y-2">
-                <div tabIndex={0} className="w-10 h-10 border-4 border-black rounded-full">
-                {session.user.image ? <div> 
-                                        <Image
-                                          src={session.user.image}
-                                          layout='fill'
-                                          objectFit='cover'
-                                          alt=""
-                                        /> 
-                                      </div> : <div>{session.user.name}</div>}
+                <div
+                  tabIndex={0}
+                  className="w-10 h-10 border-4 border-black rounded-full"
+                >
+                  {session.user.image ? (
+                    <div>
+                      <Image
+                        src={session.user.image}
+                        layout="fill"
+                        objectFit="cover"
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    <div>{session.user.name}</div>
+                  )}
                 </div>
-                <ul tabIndex={0} className="dropdown-content menu p-2 border-4 border-primary-400 shadow-2xl bg-base-100 rounded-box w-52">
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-2 border-4 border-primary-400 shadow-2xl bg-base-100 rounded-box w-52"
+                >
                   <li>
-                    <div className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700 hover:text-primary-500 flex items-center" data-tip="Prompt usage out of monthly balance">
-                      <progress className="progress justify-right h-4" value={(promptBalance.balance/promptBalance.quota)*100} max="100">{`${Math.round((promptBalance.balance/promptBalance.quota)*100)}%`}</progress>
-                      <a className="text-xs">{`${Math.round(100*(promptBalance.balance/promptBalance.quota))}%`}</a>
+                    <div
+                      className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700 hover:text-primary-500 flex items-center"
+                      data-tip="Prompt usage out of monthly balance"
+                    >
+                      <progress
+                        className="progress justify-right h-4"
+                        value={
+                          (promptBalance.balance / promptBalance.quota) * 100
+                        }
+                        max="100"
+                      >{`${Math.round(
+                        (promptBalance.balance / promptBalance.quota) * 100
+                      )}%`}</progress>
+                      <a className="text-xs">{`${Math.round(
+                        100 * (promptBalance.balance / promptBalance.quota)
+                      )}%`}</a>
                     </div>
                   </li>
                   <li>
                     <Link href="/settings">
                       <div className="items-center flex lg:mt-0 text-sm text-gray-700 hover:text-primary-500">
-                        <Settings/>
+                        <Settings />
                         Account Settings
                       </div>
                     </Link>
                   </li>
-                  <li>  
+                  <li>
                     <button
                       onClick={() => signOut()}
                       className="items-center justify-left px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300"
                     >
-                        <SignOut/>
-                        <a className="text-sm font-semibold text-gray-700">Sign out</a>
+                      <SignOut />
+                      <a className="text-sm font-semibold text-gray-700">
+                        Sign out
+                      </a>
                     </button>
                   </li>
-                </ul> 
-
+                </ul>
               </div>
             </div>
           )}

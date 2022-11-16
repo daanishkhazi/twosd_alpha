@@ -5,16 +5,16 @@ import { BalanceCtx } from "../Context/balance-context";
 import { useState } from "react";
 import { promptContextValue } from "../types";
 
-
 export default function App({ Component, pageProps }: AppProps) {
   const [promptBalance, setPromptBalance] = useState<promptContextValue>({
     balance: -1,
-    quota: 100 
-  })
+    quota: 25,
+    name: "",
+  });
 
   return (
     <SessionProvider session={pageProps.session}>
-      <BalanceCtx.Provider value={{promptBalance, setPromptBalance}}>
+      <BalanceCtx.Provider value={{ promptBalance, setPromptBalance }}>
         <Component {...pageProps} />
       </BalanceCtx.Provider>
     </SessionProvider>

@@ -85,12 +85,13 @@ model User {
   image            String?
   tokensUsed       Int?              @default(0)
   promptsUsed      Int?              @default(0)
-  promptsQuota     Int?
+  promptsQuota     Int?              @default(25)
   history          QueryOutputPair[]
   stripeCustomerId String?           @unique
   isActive         Boolean           @default(false)
-  accounts Account[]
-  sessions Session[]
+  // To-do convert isActive from Boolean to date
+  accounts         Account[]
+  sessions         Session[]
 }
 
 model VerificationToken {

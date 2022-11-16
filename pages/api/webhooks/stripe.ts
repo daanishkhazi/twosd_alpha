@@ -35,19 +35,48 @@ const stripeHook = async (
       console.log(`Webhook signature verification failed.`, err.message);
       return res.status(400).send(`Webhook signature verification failed.`);
     }
-
     // Handle the event
+    // All the types are here: https://stripe.com/docs/api/events/types
     switch (event.type) {
       // Handle successful subscription creation
       case "customer.subscription.created": {
         const subscription = event.data.object as Stripe.Subscription;
-        console.log("subscription", subscription);
+        console.log("created", subscription);
         await prisma.user.update({
           where: {
             stripeCustomerId: subscription.customer as string,
           },
           data: {
             isActive: true,
+            promptsQuota: 500,
+          },
+        });
+        break;
+      }
+      case "customer.subscription.updated": {
+        const subscription = event.data.object as Stripe.Subscription;
+        console.log("updated", subscription);
+        await prisma.user.update({
+          where: {
+            stripeCustomerId: subscription.customer as string,
+          },
+          data: {
+            isActive: true,
+            promptsQuota: 500,
+          },
+        });
+        break;
+      }
+      case "customer.subscription.deleted": {
+        const subscription = event.data.object as Stripe.Subscription;
+        console.log("deleted", subscription);
+        await prisma.user.update({
+          where: {
+            stripeCustomerId: subscription.customer as string,
+          },
+          data: {
+            isActive: false,
+            promptsQuota: 25,
           },
         });
         break;
