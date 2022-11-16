@@ -9,7 +9,7 @@ interface BalanceContextInterface {
 export const BalanceCtx = React.createContext<BalanceContextInterface>({
   promptBalance: {
     balance: 0,
-    quota: 100,
+    quota: 25,
     name: "",
   },
   setPromptBalance: () => null,

@@ -8,7 +8,7 @@ import { promptContextValue } from "../types";
 export default function App({ Component, pageProps }: AppProps) {
   const [promptBalance, setPromptBalance] = useState<promptContextValue>({
     balance: -1,
-    quota: 100,
+    quota: 25,
     name: "",
   });
 

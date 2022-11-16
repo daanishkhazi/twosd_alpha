@@ -12,6 +12,7 @@ import { useBalance } from "../Context/balance-context";
 import Edit from "../components/icons/edit";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Cancel from "../components/Cancel";
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState("Account");
@@ -75,11 +76,11 @@ export default function Settings() {
                 Help
               </button>
             </div>
-            <div className="flex flex-col w-4/5 px-6">
+            <div className="flex flex-col w-4/5 px-24 py-12 bg-base-100 border min-h-[50vh] border-gray-300 mx-6 rounded-lg shadow-lg">
               {selectedTab === "Account" && (
                 // Account menu with simple features. Allow user to edit their name and view their email
                 <div className="flex flex-col w-full">
-                  <h1 className="text-2xl font-bold">Account</h1>
+                  <h1 className="text-4xl font-bold mb-12">Account</h1>
                   <div className="flex flex-row w-full">
                     <p className="text-lg font-bold">Name</p>
                     {isEditing ? (
@@ -118,11 +119,11 @@ export default function Settings() {
               )}
               {selectedTab === "Billing" && (
                 <div className="flex flex-col w-full">
-                  <h1 className="text-2xl font-bold">Billing</h1>
-                  <div className="flex flex-row w-full">
-                    <p className="text-lg font-bold">Balance</p>
+                  <h1 className="text-4xl font-bold mb-12">Billing</h1>
+                  <div className="flex flex-row w-full mb-4">
+                    <p className="text-lg font-bold align-top ">Balance</p>
                     <progress
-                      className="progress justify-right h-4"
+                      className="progress justify-right h-6 mx-12"
                       value={
                         (promptBalance.balance / promptBalance.quota) * 100
                       }
@@ -130,22 +131,36 @@ export default function Settings() {
                     >{`${Math.round(
                       (promptBalance.balance / promptBalance.quota) * 100
                     )}%`}</progress>
-                    <a className="text-xs">{`${Math.round(
+                    <a className="text">{`${Math.round(
                       100 * (promptBalance.balance / promptBalance.quota)
                     )}%`}</a>
                   </div>
                   <div className="flex flex-row w-full">
-                    <p className="text-lg font-bold">Upgrade to Premium</p>
-                    <Payment />
+                    <div className="flex flex-col self-start">
+                      <p className="text-lg text-left italic">
+                        You have {promptBalance.quota - promptBalance.balance}{" "}
+                        prompts remaining. Upgrade to premium to increase your
+                        monthly quote to 500. Premium users also get access to
+                        our prompt library!
+                      </p>
+                      <div className="self-start">
+                        {promptBalance.quota == 25 ? <Payment /> : <Cancel />}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
               {selectedTab === "Help" && (
                 <div className="flex flex-col w-full">
-                  <h1 className="text-2xl font-bold">Help</h1>
+                  <h1 className="text-4xl font-bold mb-12">Help</h1>
                   <div className="flex flex-row justify-center w-full">
-                    <p className="text-lg mt-4">
+                    <p className="text-lg mt-4 italic">
                       Bream is currently in beta and under active development.
+                      We aim to provide the best personalized education services
+                      in the world. Learn more about how to use Bream on our{" "}
+                      <Link href="/" className="text-primary-500">
+                        home page.
+                      </Link>{" "}
                       If you have any specific questions, please contact us at
                       <Link
                         href="mailto:hello@bream.ai"
