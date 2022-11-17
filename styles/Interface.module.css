@@ -221,4 +221,113 @@ Animation classes.
     }
 }
 
+@keyframes slideme {
+  from {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(0%, 22%);
+  }
+  50% {
+    transform: translate(22%, 22%);
+  }
+  75% {
+    transform: translate(22%, 0%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
 
+@keyframes slideme2 {
+  from {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(0%, -22%);
+  }
+  50% {
+    transform: translate(-22%, -22%);
+  }
+  75% {
+    transform: translate(-22%, 0%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes slideme3 {
+  from {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(22%, 0%);
+  }
+  50% {
+    transform: translate(22%, -22%);
+  }
+  75% {
+    transform: translate(0%, -22%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes slideme4 {
+  from {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-22%, 0%);
+  }
+  50% {
+    transform: translate(-22%, 22%);
+  }
+  75% {
+    transform: translate(0%, 22%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+
+.iconElement1 {
+  position: relative;
+  animation-name: slideme;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* animation-direction: reverse; */
+}
+
+.iconElement2 {
+  position: relative;
+  animation-name: slideme2;
+  animation-duration: 3.5s;
+  /* animation-delay: -1s; */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* animation-direction: reverse; */
+}
+
+.iconElement3 {
+  position: relative;
+  animation: slideme3;
+  animation-duration: 3.5s;
+  /* animation-delay: -2s; */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* animation-direction: reverse; */
+}
+
+.iconElement4 {
+  position: relative;
+  animation: slideme4;
+  animation-duration: 3.5s;
+  /* animation-delay: -3s; */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* animation-direction: reverse; */
+}
