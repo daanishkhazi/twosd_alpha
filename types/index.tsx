@@ -24,13 +24,14 @@ export interface SubjectSelectorProps {
 
 export interface PromptGeneratorProps {
   prompts: Array<Prompt> | null;
+  selectedPrompt: Prompt | null;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
 }
 
 export interface QueryInputProps {
   query: string;
   charCount: number;
-  selectedPrompt: Prompt;
+  selectedPrompt: Prompt | null;
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   handleQueryChange: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;

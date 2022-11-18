@@ -68,7 +68,7 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
   } else {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <LoadingSymbol />
+        <LoadingSymbol color={"#EE909C"} />
       </div>
     );
   }

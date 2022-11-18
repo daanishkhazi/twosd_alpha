@@ -151,7 +151,7 @@ const Navbar = (props: NavbarProps) => {
                         layout="fill"
                         objectFit="cover"
                         alt=""
-                        className="shadow-md cursor-pointer"
+                        className="shadow-md rounded-full cursor-pointer"
                       />
                     </div>
                   ) : (

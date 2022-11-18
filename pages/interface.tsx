@@ -197,27 +197,30 @@ export default function Interface() {
 
   return (
     <Layout>
-      <div className="min-h-screen">
-        <Head>
-          <title>AI Tutor</title>
-          <meta
-            name="Personalized AI-enabled Tutoring"
-            content="Personalized AI-enabled Tutoring"
-          />
-          <link rel="icon" href="/favicon.png" />
-        </Head>
-        {/* TODO - somehow fix this alignment... */}
-        <div style={{ alignContent: "center" }}>
-          {selectedSubject ? (
-            <SubjectSelectedInterface {...subjectSelectedProps} />
-          ) : (
-            <SubjectSelector
-              subjects={subjects}
-              setSelectedSubject={setSelectedSubject}
-            />
-          )}
+      <div className="flex justify-center">
+        <div className="flex justify-center min-h-screen sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
+            <Head>
+              <title>AI Tutor</title>
+              <meta
+                name="Personalized AI-enabled Tutoring"
+                content="Personalized AI-enabled Tutoring"
+              />
+              <link rel="icon" href="/favicon.png" />
+            </Head>
+            {/* TODO - somehow fix this alignment... */}
+            <div className="grow">
+              {selectedSubject ? (
+                <SubjectSelectedInterface {...subjectSelectedProps} />
+              ) : (
+                <SubjectSelector
+                  subjects={subjects}
+                  setSelectedSubject={setSelectedSubject}
+                />
+              )}
+            </div>
+            <div ref={bottomRef} />
+          
         </div>
-        <div ref={bottomRef} />
       </div>
     </Layout>
   );

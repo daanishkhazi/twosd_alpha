@@ -2,8 +2,10 @@ import { QueryInputProps } from "../types";
 import styles from "../styles/Interface.module.css";
 import LoadingSymbol from "./LoadingSymbol";
 import UsageBar from "./UsageBar";
+import Image from "next/image";
 import { useBalance } from "../Context/balance-context";
 import { useSession } from "next-auth/react";
+import React, {useRef} from "react";
 
 const icon = (
   <svg
@@ -29,17 +31,25 @@ const QueryInput = (props: QueryInputProps) => {
   const selectedPrompt = props.selectedPrompt;
   const charCount = props.charCount;
   const query = props.query;
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { data, status } = useSession();
   const isActive = data?.user?.isActive;
 
   const { promptBalance, setPromptBalance } = useBalance();
 
+  const enterSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.code && e.code === "Enter" && !e.shiftKey) {
+      // console.log('troo')
+      if (buttonRef && buttonRef.current) {buttonRef.current.click()};
+    }
+  }
+
   return (
     <div className="flex flex-col justify-center align-center margin">
       <form onSubmit={handleSubmit}>
         <label></label>
-        <h2 className="mt-8 font-semibold text-2xl text-gray-900">
+        {/* <h2 className="mt-8 font-semibold text-2xl text-gray-900">
           <button
             className="inline-block text-4xl font-bold text-gray-900"
             onClick={() => setSelectedPrompt(null)}
@@ -47,32 +57,47 @@ const QueryInput = (props: QueryInputProps) => {
             {icon}
           </button>{" "}
           {selectedPrompt.description}
-        </h2>
-
-        <textarea
-          rows={10}
-          placeholder={selectedPrompt.placeholder}
-          className="bg-white focus:outline-none resize-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal mt-3"
-          onChange={handleQueryChange}
-          value={query}
-          maxLength={selectedPrompt.charLimit}
-        />
+        </h2> */}
+        <div className="bg-white resize-none border-4 border-secondary-400 rounded-3xl block w-full appearance-none leading-normal mt-3">
+          <textarea
+            rows={10}
+            placeholder={selectedPrompt ? selectedPrompt.placeholder : "Please select prompt"}
+            className="bg-white ring-transparent focus:outline-none resize-none rounded-3xl p-5 block w-full appearance-none leading-normal"
+            onChange={handleQueryChange}
+            disabled = {selectedPrompt === null}
+            value={query}
+            maxLength={selectedPrompt ? selectedPrompt.charLimit : 0}
+            onKeyDown={enterSubmit}
+          />
+          <div className="flex justify-end">
+              <button
+                type="submit"
+                className="hover:scale-125 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-nonerounded-md disabled:bg-slate-400"
+                disabled={promptBalance.balance >= promptBalance.quota}
+                ref={buttonRef}
+              >
+                {promptBalance.balance < promptBalance.quota
+                  ? <div><Image src="/send.svg" alt="logo" height={40} width={40}/></div>
+                  : "Monthly Quota Exceeded"}
+                </button>
+          </div>
+        </div>
         <div className="grid grid-cols-6 gap-4 p-4">
           <div className="col-span-2 col-start-1 text-sm text-gray-500 italic">
             <div>
-              {charCount} / {selectedPrompt.charLimit} Characters
+              {selectedPrompt ? `${charCount} / ${selectedPrompt.charLimit} Characters` : ""}
             </div>
-            <div>
+            {/* <div>
               <button
                 type="submit"
                 className="hover:scale-105 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 mt-3 leading-none bg-green-300 rounded-md disabled:bg-slate-400"
                 disabled={promptBalance.balance >= promptBalance.quota}
               >
                 {promptBalance.balance < promptBalance.quota
-                  ? "Submit"
+                  ? <div><Image src="/send.svg" alt="logo" height={150} width={150}/></div>
                   : "Monthly Quota Exceeded"}
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="col-span-3 col-end-7">
             {!isActive && <UsageBar />}
