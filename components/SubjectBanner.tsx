@@ -113,7 +113,6 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                         </button>
                     </div>
                 </div>}
-            
             </div>
             );
 };
