@@ -76,9 +76,8 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
 
   return (
     <div className="flex-col min-h-full">
-      <div className="flex sticky h-10 top-22 z-10 bg-white items-start"></div>
       {selectedSubject && <SubjectBanner selectedSubject={selectedSubject} setSelectedSubject={setSelectedSubject} subjectNames={subjectNames}/>}
-        
+      <div className="flex sticky h-10 z-10 bg-white items-start"></div>
         <div className="flex sticky h-16 z-10 top-36 justify-start bg-gradient-to-b from-white via-white"></div>
         <div>
           <HistoryGenerator history={history} />
