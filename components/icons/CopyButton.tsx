@@ -1,0 +1,14 @@
+import styles from "../styles/Interface.module.css";
+
+const CopyButton = () => {
+    return (
+      <div className="flex fill-current">
+        <svg className="h-full" viewBox="0 0 169 183" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6.5" y="47.5" width="129" height="129" rx="15.5" stroke="black" stroke-width="13"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M49 13H147C151.971 13 156 17.0294 156 22V120C156 124.971 151.971 129 147 129H142V142H147C159.15 142 169 132.15 169 120V22C169 9.84974 159.15 0 147 0H49C36.8497 0 27 9.84974 27 22V41H40V22C40 17.0294 44.0294 13 49 13Z" fill="black"/>
+        </svg>
+      </div>
+    )
+  };
+  
+  export default CopyButton;

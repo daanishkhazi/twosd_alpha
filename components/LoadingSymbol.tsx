@@ -1,22 +1,14 @@
 import styles from "../styles/Interface.module.css";
 
-const LoadingSymbol: React.FC = () => {
-    // return (
-    //     <div style={{ justifyContent: "center" }}>
-    //       <div className={styles.loader}>
-    //         <div></div>
-    //         <div></div>
-    //         <div></div>
-    //       </div>
-    //     </div>
-    //   );
+const LoadingSymbol = (props: { color: string }) => {
+  const color = props.color;        
     return (
-      <div>
-        <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect className={styles.iconElement1} x="106" y="90" width="63.0455" height="63.0455" fill="#E8798A"/>
-          <rect className={styles.iconElement2} x="175.955" y="159.955" width="63.0455" height="63.0455" fill="#E8798A"/>
-          <rect className={styles.iconElement3} x="106" y="159.955" width="63.0455" height="63.0455" rx="31.5227" fill="#E8798A"/>
-          <rect className={styles.iconElement4} x="175.955" y="90" width="63.0455" height="63.0455" fill="#E8798A"/>
+      <div className="flex fill-current">
+        <svg className="h-full" viewBox="0 0 488 488" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect className={styles.iconElement1} width="231.325" height="231.325" fill={color}/>
+          <rect className={styles.iconElement2} x="256.675" y="256.675" width="231.325" height="231.325" fill={color}/>
+          <rect className={styles.iconElement3} y="256.675" width="231.325" height="231.325" rx="115.662" fill={color}/>
+          <rect className={styles.iconElement4} x="256.675" width="231.325" height="231.325" fill={color}/>
         </svg>
       </div>
     )

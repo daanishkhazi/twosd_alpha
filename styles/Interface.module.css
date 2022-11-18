@@ -27,7 +27,7 @@
   }
 
   .submit:hover {
-    background-color: rgb(0, 255, 170);
+    background-color: rgb(0, 250.8, 170);
   }
 
   .clear {
@@ -226,13 +226,13 @@ Animation classes.
     transform: translate(0);
   }
   25% {
-    transform: translate(0%, 22%);
+    transform: translate(0%, 50.8%);
   }
   50% {
-    transform: translate(22%, 22%);
+    transform: translate(50.8%, 50.8%);
   }
   75% {
-    transform: translate(22%, 0%);
+    transform: translate(50.8%, 0%);
   }
   to {
     transform: translate(0);
@@ -244,13 +244,13 @@ Animation classes.
     transform: translate(0);
   }
   25% {
-    transform: translate(0%, -22%);
+    transform: translate(0%, -50.8%);
   }
   50% {
-    transform: translate(-22%, -22%);
+    transform: translate(-50.8%, -50.8%);
   }
   75% {
-    transform: translate(-22%, 0%);
+    transform: translate(-50.8%, 0%);
   }
   to {
     transform: translate(0);
@@ -262,13 +262,13 @@ Animation classes.
     transform: translate(0);
   }
   25% {
-    transform: translate(22%, 0%);
+    transform: translate(50.8%, 0%);
   }
   50% {
-    transform: translate(22%, -22%);
+    transform: translate(50.8%, -50.8%);
   }
   75% {
-    transform: translate(0%, -22%);
+    transform: translate(0%, -50.8%);
   }
   to {
     transform: translate(0);
@@ -280,13 +280,13 @@ Animation classes.
     transform: translate(0);
   }
   25% {
-    transform: translate(-22%, 0%);
+    transform: translate(-50.8%, 0%);
   }
   50% {
-    transform: translate(-22%, 22%);
+    transform: translate(-50.8%, 50.8%);
   }
   75% {
-    transform: translate(0%, 22%);
+    transform: translate(0%, 50.8%);
   }
   to {
     transform: translate(0);
