@@ -222,51 +222,129 @@ Animation classes.
 }
 
 @keyframes slideme {
+  from { 
+    transform: translate(0)
+  }
+  20% {
+    transform: rotate(45deg) scale(0.7069, 0.7069);
+    transform-origin: 50% 50%;
+  }
+  /* 40% {
+    transform: rotate(405deg) scale(0.7069, 0.7069);
+    transform-origin: 50% 50%;
+  } */
+  /* 37.5% {
+    transform: rotate(135deg) scale(0.7069, 0.7069);
+    transform-origin: 50% 50%;
+  } */
+  /* 55% {
+    transform: rotate(180deg);
+    transform-origin: 50% 50%;
+  } */
+  /* 85% {
+    transform: rotate(1395deg) scale(0.7069, 0.7069);
+    transfomr-origin: 50% 50%;
+  } */
+  90% {
+    transform: rotate(1440deg);
+    transform-origin: 50% 50%;
+  }
+  to {
+    transform: rotate(1440deg);
+    transform-origin: 50% 50%;
+  }
+}
+
+@keyframes slideme1 {
   from {
     transform: translate(0);
   }
+  /* 12.5% {
+    transform: translate(0%, 25.9%) scale(0.9, 0.9)
+  } */
   25% {
     transform: translate(0%, 50.8%);
   }
+  /* 32.5% {
+    transform: translate(25.9%, 55.8%) scale(0.9, 0.9)
+  } */
   50% {
     transform: translate(50.8%, 50.8%);
   }
+  /* 62.5% {
+    transform: translate(55.8%, 25.9%) scale(0.9, 0.9)
+  } */
   75% {
     transform: translate(50.8%, 0%);
   }
+  /* 87.5% {
+    transform: translate(25.9%, 0%) scale(0.9, 0.9)
+  } */
   to {
     transform: translate(0);
   }
 }
 
 @keyframes slideme2 {
-  from {
+  /* from {
     transform: translate(0);
   }
-  25% {
-    transform: translate(0%, -50.8%);
+  to { */
+    /* transform: translateX(-50%) rotate(45deg); */
+    /* transform-origin: -40% -40%; */
+    /* top: -25.9%;
+    left: 40%; */
   }
-  50% {
-    transform: translate(-50.8%, -50.8%);
+  /* 25% {
+    transform: translate(0%, -50%) rotate(90deg);
+    transform-origin: 25% 75%;
+    top: -50.8%
+  } */
+  /* 32.5% {
+    transform: translate(0%, 50%) rotate(135deg);
+    transform-origin: 25% 75%;
+    transform: translate(-25.9%, -55.8%) scale(0.7069, 0.7069) rotate(45deg);
+    top: -55.8%;
+    left: -25.9%;
+  } */
+  /* 50% {
+    transform: translate(-50.8%, -50.8%) rotate(45deg);
+    top: -50.8%;
+    left: -50.8%;
+  }
+  62.5% {
+    transform: translate(-55.8%, -25.9%) scale(0.7069, 0.7069) rotate(45deg);
+    left: -55.8%;
+    top: -25.9%;
   }
   75% {
-    transform: translate(-50.8%, 0%);
-  }
-  to {
+    transform: translate(-50.8%, 0%) rotate(45deg);
+    left: -50.8%;
+  } */
+  /* to {
     transform: translate(0);
   }
-}
+} */
 
 @keyframes slideme3 {
   from {
     transform: translate(0);
   }
+  /* 12.5% {
+    transform: translate(25.9%, 0%) scale(0.9, 0.9)
+  } */
   25% {
     transform: translate(50.8%, 0%);
   }
+  /* 32.5% {
+    transform: translate(55.8%, 25.9%) scale(0.9, 0.9)
+  } */
   50% {
     transform: translate(50.8%, -50.8%);
   }
+  /* 62.5% {
+    transform: translate(55.8%, -25.9%) scale(0.9, 0.9)
+  } */
   75% {
     transform: translate(0%, -50.8%);
   }
@@ -279,12 +357,21 @@ Animation classes.
   from {
     transform: translate(0);
   }
+  /* 12.5% {
+    transform: translate(-25.9%, 0%) scale(0.9, 0.9)
+  } */
   25% {
     transform: translate(-50.8%, 0%);
   }
+  /* 32.5% {
+    transform: translate(-55.8%, 25.9%) scale(0.9, 0.9)
+  } */
   50% {
     transform: translate(-50.8%, 50.8%);
   }
+  /* 62.5% {
+    transform: translate(-55.8%, 25.9%) scale(0.9, 0.9)
+  } */
   75% {
     transform: translate(0%, 50.8%);
   }
@@ -293,9 +380,32 @@ Animation classes.
   }
 }
 
+
+@keyframes flipme {
+  from {
+    transform: rotateY( 0deg );
+  }
+  to {
+    transform: rotateY( 180deg );
+  }
+}
+
+.iconfull {
+  position: relative;
+  /* transform-style: preserve-3d; */
+  /* transform-origin: 23.5% 25%; */
+  animation-name: slideme;
+  animation-duration: 2.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* animation-direction: reverse; */
+}
+
 .iconElement1 {
   position: relative;
-  animation-name: slideme;
+  /* transform-style: preserve-3d; */
+  /* transform-origin: 23.5% 25%; */
+  animation-name: slideme1;
   animation-duration: 3.5s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -304,9 +414,11 @@ Animation classes.
 
 .iconElement2 {
   position: relative;
+  /* transform-style: preserve-3d; */
+  /* transform-origin: 77% 77%; */
   animation-name: slideme2;
   animation-duration: 3.5s;
-  /* animation-delay: -1s; */
+  /* animation-delay: 0.5s; */
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   /* animation-direction: reverse; */
@@ -314,9 +426,11 @@ Animation classes.
 
 .iconElement3 {
   position: relative;
-  animation: slideme3;
+  /* transform-style: preserve-3d; */
+  /* transform-origin: 23.5% 25%; */
+  animation-name: slideme3;
   animation-duration: 3.5s;
-  /* animation-delay: -2s; */
+  /* animation-delay: 0.75s; */
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   /* animation-direction: reverse; */
@@ -324,10 +438,61 @@ Animation classes.
 
 .iconElement4 {
   position: relative;
-  animation: slideme4;
+  /* transform-style: preserve-3d;
+  transform-origin: 77% 25%; */
+  animation-name: slideme4;
   animation-duration: 3.5s;
-  /* animation-delay: -3s; */
+  /* animation-delay: 0.25s; */
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   /* animation-direction: reverse; */
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1.0);
+  }
+}
+
+.copyIconVisible {
+  /* position: relative; */
+  animation: shrink;
+  animation-duration: 0.4s;
+  /* animation-delay: 0.8s; */
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+}
+
+.copyIconInvisible {
+  /* position: relative; */
+  animation: shrink;
+  animation-duration: 0.4s;
+  animation-direction: reverse;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+}
+
+.checkIconVisible {
+  /* position: relative; */
+  animation: shrink;
+  animation-duration: 0.4s;
+  /* animation-delay: 0.8s; */
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+}
+
+.checkIconInvisible {
+  /* position: relative; */
+  animation: shrink;
+  animation-duration: 0.4s;
+  animation-direction: reverse;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
 }
