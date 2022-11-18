@@ -49,6 +49,7 @@ export default function Interface() {
       const { result: PromptsAndSubjects } = await getPromptsAndSubjects();
       setPrompts(PromptsAndSubjects.promptList);
       setSubjects(PromptsAndSubjects.subjectList);
+      setSelectedPrompt(PromptsAndSubjects.promptList[PromptsAndSubjects.promptList.length-1])
     }
     fetchData();
   }, []);
@@ -105,7 +106,7 @@ export default function Interface() {
     setTokensUsed(tokensUsed + data.usage.total_tokens);
     setPromptBalance({ ...promptBalance, balance: promptBalance.balance + 1 });
     setQuery("");
-    setSelectedPrompt(null);
+    if (prompts) {setSelectedPrompt(prompts[prompts.length-1])};
     setCharCount(0);
     const historyWriteComplete = await writeUserActivityToDB(
       [prefix + query, data.result],
@@ -198,7 +199,7 @@ export default function Interface() {
   return (
     <Layout>
       <div className="flex justify-center">
-        <div className="flex justify-center min-h-screen sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
+        <div className="flex justify-center items-center min-h-[calc(100vh-194px)] sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
             <Head>
               <title>AI Tutor</title>
               <meta
@@ -208,7 +209,7 @@ export default function Interface() {
               <link rel="icon" href="/favicon.png" />
             </Head>
             {/* TODO - somehow fix this alignment... */}
-            <div className="grow">
+            <div className="flex">
               {selectedSubject ? (
                 <SubjectSelectedInterface {...subjectSelectedProps} />
               ) : (

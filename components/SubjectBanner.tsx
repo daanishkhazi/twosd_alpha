@@ -62,10 +62,13 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
 
 
     return (
-            <div>
+            <div className="flex-row sticky top-16 z-20 items-start">
+            <div className="flex sticky h-10 z-10 bg-white items-start"></div>
             {!collapsed ? 
-                <div className="flex items-center relative">
-                    <div className="flex z-10 absolute">
+                <div className="flex-row sticky top-28 z-20 bg-white items-end">
+                
+                <div className="flex items-center">
+                    <div className="flex z-30 absolute">
                             <Image
                                 className="rounded-full self-center border-secondary-400 border-4"
                                 src={subjectImages[selectedSubject.name]}
@@ -76,7 +79,7 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                     </div>
                     {/* <div className="flex items-center w-full"> */}
                         
-                    <div className="flex w-full z-0 items-center bg-secondary-400 font-bold text-lg rounded-full rounded-r-none py-3 pl-24 justify-center">
+                    <div className="flex w-full z-20 items-center bg-secondary-400 font-bold text-lg rounded-full rounded-r-none py-3 pl-24 justify-center">
                         <div>
                         {`Now learning from: ${subjectNames[selectedSubject.name]}`}
                         </div>
@@ -98,8 +101,9 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                         </button>
                     </div>
                     {/* </div> */}
+                </div>
                 </div> :
-                <div className="fixed left-0">
+                <div className="fixed left-0 top-28">
                     <div className="flex rotate-180 justify-center w-16 py-0.5 h-full items-center rounded-lg rounded-r-none bg-secondary-400 align-end">
                         <button
                             onClick={() => setCollapsed(!collapsed)}
@@ -108,8 +112,8 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                             {collapse}
                         </button>
                     </div>
-                </div>
-            }
+                </div>}
+            
             </div>
             );
 };

@@ -75,33 +75,16 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   };
 
   return (
-    <div className="min-h-full py-7">
-      
+    <div className="flex-col min-h-full">
+      <div className="flex sticky h-10 top-22 z-10 bg-white items-start"></div>
       {selectedSubject && <SubjectBanner selectedSubject={selectedSubject} setSelectedSubject={setSelectedSubject} subjectNames={subjectNames}/>}
-        {/* <div className="inline-block">
-          {selectedSubject ? (
-            <button
-              className="flex flex-col text-md font-bold text-gray-900 px-6 py-4 bg-white border rounded-box"
-              onClick={() => setSelectedSubject(null)}
-            >
-              <Image
-                className="rounded-full self-center mb-2"
-                src={subjectImages[selectedSubject.name]}
-                alt={selectedSubject.name}
-                width={96}
-                height={96}
-              />
-              <span>
-                {subjectNames[selectedSubject.name]} {"   "} {icon}
-              </span>
-            </button>
-          ) : null}
-        </div> */}
+        
+        <div className="flex sticky h-16 z-10 top-36 justify-start bg-gradient-to-b from-white via-white"></div>
         <div>
           <HistoryGenerator history={history} />
         </div>
         <div>{queryInterface()}</div>
-        {history.length > 2 ? (
+        {history.length > 1 ? (
           <button
             className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
             onClick={handleClear}

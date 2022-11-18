@@ -7,7 +7,7 @@ const PromptGenerator = (props: PromptGeneratorProps) => {
   const selectedPrompt = props.selectedPrompt;
   if (prompts) {
     return (
-      <div className="flex flex-row flex-wrap justify-center mt-3">
+      <div className="flex flex-row flex-wrap justify-center pt-7">
         {prompts.map((p: Prompt, index: number) => {
           if (p!=selectedPrompt) {return (
             <div className="flex justify-center items-center px-3 py-1" key={index}>
