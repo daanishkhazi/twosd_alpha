@@ -1,5 +1,5 @@
 import { SubjectSelectedInterfaceProps } from "../types";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from "../styles/Interface.module.css";
 import LoadingSymbol from "./LoadingSymbol";
 
@@ -8,21 +8,23 @@ import PromptGenerator from "./PromptGenerator";
 import HistoryGenerator from "./HistoryGenerator";
 import SubjectBanner from "./SubjectBanner";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import UsageBar from "./UsageBar";
 
 const subjectNames: { [key: string]: string } = {
   Biology: "Rachel (Biology)",
-  History: "Ross (History)",
+  "US History": "Ross (US History)",
   "Computer Science": "Monica (Computer Science)",
-  Law: "Phoebe (SAT / ACT)",
-  Medicine: "Chandler (Medicine)",
+  Law: "Phoebe (Law)",
+  "World History": "Chandler (World History)",
 };
 
 const subjectImages: { [key: string]: string } = {
   Biology: "/rachel.png",
-  History: "/ross.png",
+  "US History": "/ross.png",
   "Computer Science": "/monica.png",
   Law: "/phoebe.png",
-  Medicine: "/chandler.png",
+  "World History": "/chandler.png",
 };
 
 const icon = (
@@ -55,6 +57,15 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   const setSelectedSubject = props.setSelectedSubject;
   const handleClear = props.handleClear;
 
+  const [collapsed, setCollapsed] = useState(false);
+
+  const { data, status } = useSession();
+  const isActive = data?.user?.isActive;
+
+  useEffect(() => {
+    window.scrollTo({top: document.body.scrollHeight - 1200, behavior: 'smooth'})
+  }, [history]);
+
   const queryInterface = () => {
     return (
       <div>
@@ -70,28 +81,30 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
         selectedPrompt={selectedPrompt}
         charCount={charCount}
         query={query}
+        history={history}
+        handleClear = {handleClear}
       />
     </div>)
   };
 
   return (
-    <div className="flex-col min-h-full">
-      {selectedSubject && <SubjectBanner selectedSubject={selectedSubject} setSelectedSubject={setSelectedSubject} subjectNames={subjectNames}/>}
-      <div className="flex sticky h-10 z-10 bg-white items-start"></div>
-        <div className="flex sticky h-16 z-10 top-36 justify-start bg-gradient-to-b from-white via-white"></div>
-        <div>
-          <HistoryGenerator history={history} />
+    <div className="flex-col min-h-full justify-center">
+      {collapsed ? 
+        <div className="flex fixed pointer-events-none h-[4rem] w-full z-10 bg-gradient-to-b from-white top-[4.5rem] justify-start"></div>
+        : <div className="flex fixed pointer-events-none h-[11rem] w-full z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>}
+      {selectedSubject && <SubjectBanner 
+                              selectedSubject={selectedSubject} 
+                              setSelectedSubject={setSelectedSubject} 
+                              subjectNames={subjectNames}
+                              collapsed={collapsed}
+                              setCollapsed={setCollapsed}/>}
+        <div className={(history.length > 1) ?
+                            (collapsed ? "pt-2" : "pt-14") : "pt-3"  
+                            }>
+          {(history.length > 1) && <HistoryGenerator history={history} />}
         </div>
         <div>{queryInterface()}</div>
-        {history.length > 1 ? (
-          <button
-            className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
-            onClick={handleClear}
-          >
-            {" "}
-            Clear History{" "}
-          </button>
-        ) : null}
+        {!isActive && <div className="flex justify-center"><UsageBar /></div>}
     </div>
   );
 };
