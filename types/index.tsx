@@ -35,6 +35,8 @@ export interface QueryInputProps {
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   handleQueryChange: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
+  handleClear: (e: React.FormEvent) => void;
+  history: Array<Array<string>>;
 }
 
 interface SubjectedSelectedAdditionalProps {
