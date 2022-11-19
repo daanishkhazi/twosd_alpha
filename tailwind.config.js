@@ -20,6 +20,9 @@ module.exports = {
           800: "#a94155",
           900: "#8b243d",
         },
+        secondary: {
+          400: "#8b99ff"
+        }
       },
       fontFamily: {
         body: [

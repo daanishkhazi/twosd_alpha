@@ -6,6 +6,7 @@ import LoadingSymbol from "./LoadingSymbol";
 import QueryInput from "./QueryInput";
 import PromptGenerator from "./PromptGenerator";
 import HistoryGenerator from "./HistoryGenerator";
+import SubjectBanner from "./SubjectBanner";
 import Image from "next/image";
 
 const subjectNames: { [key: string]: string } = {
@@ -55,7 +56,13 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   const handleClear = props.handleClear;
 
   const queryInterface = () => {
-    return selectedPrompt ? (
+    return (
+      <div>
+      <PromptGenerator
+        prompts={prompts}
+        setSelectedPrompt={setSelectedPrompt}
+        selectedPrompt={selectedPrompt}
+      />
       <QueryInput
         handleSubmit={handleSubmit}
         handleQueryChange={handleQueryChange}
@@ -64,48 +71,27 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
         charCount={charCount}
         query={query}
       />
-    ) : (
-      <PromptGenerator
-        prompts={prompts}
-        setSelectedPrompt={setSelectedPrompt}
-      />
-    );
+    </div>)
   };
 
   return (
-    <div className="min-h-full mx-32 py-12">
-      <div className="inline-block">
-        {selectedSubject ? (
+    <div className="flex-col min-h-full">
+      {selectedSubject && <SubjectBanner selectedSubject={selectedSubject} setSelectedSubject={setSelectedSubject} subjectNames={subjectNames}/>}
+      <div className="flex sticky h-10 z-10 bg-white items-start"></div>
+        <div className="flex sticky h-16 z-10 top-36 justify-start bg-gradient-to-b from-white via-white"></div>
+        <div>
+          <HistoryGenerator history={history} />
+        </div>
+        <div>{queryInterface()}</div>
+        {history.length > 1 ? (
           <button
-            className="flex flex-col text-md font-bold text-gray-900 px-6 py-4 bg-white border rounded-box"
-            onClick={() => setSelectedSubject(null)}
+            className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
+            onClick={handleClear}
           >
-            <Image
-              className="rounded-full self-center mb-2"
-              src={subjectImages[selectedSubject.name]}
-              alt={selectedSubject.name}
-              width={96}
-              height={96}
-            />
-            <span>
-              {subjectNames[selectedSubject.name]} {"   "} {icon}
-            </span>
+            {" "}
+            Clear History{" "}
           </button>
         ) : null}
-      </div>
-      <div>
-        <HistoryGenerator history={history} />
-      </div>
-      {history.length > 2 ? (
-        <button
-          className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md hover:bg-red-500 mt-2"
-          onClick={handleClear}
-        >
-          {" "}
-          Clear History{" "}
-        </button>
-      ) : null}
-      <div>{queryInterface()}</div>
     </div>
   );
 };

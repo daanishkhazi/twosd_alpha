@@ -9,7 +9,7 @@ import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useBalance } from "../Context/balance-context";
-import Edit from "../components/icons/edit";
+import EditIcon from "../components/icons/editIcon";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Cancel from "../components/Cancel";
@@ -100,7 +100,7 @@ export default function Settings() {
                       <>
                         <p className="text-lg ml-4">{promptBalance.name} </p>
                         <button onClick={handleEditName} className="ml-2">
-                          <Edit />
+                          <EditIcon />
                         </button>
                       </>
                     )}
