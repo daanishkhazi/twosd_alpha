@@ -19,6 +19,11 @@ const Cancel = () => {
       }),
     });
     const result = await res.json();
+    if (result.error) {
+      console.log(result.error);
+    } else {
+      setJustCancelled(true);
+    }
     return result;
   };
 
