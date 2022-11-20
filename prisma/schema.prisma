@@ -32,7 +32,7 @@ model Subject {
 model QueryOutputPair {
   id                Int      @id @default(autoincrement())
   subjectName       String
-  subject           Subject  @relation(fields: [subjectName], references: [name])
+  subject           Subject  @relation(fields: [subjectName], references: [name], onDelete: Cascade)
   // subjectID     Int
   promptDescription String
   prompt            Prompt   @relation(fields: [promptDescription], references: [description])
@@ -91,6 +91,7 @@ model User {
   stripeSubscriptionId String?           @unique
   cancelRequested      Boolean           @default(false)
   isActive             Boolean           @default(false)
+  offWaitlist          Boolean           @default(false)
   accounts             Account[]
   sessions             Session[]
 }

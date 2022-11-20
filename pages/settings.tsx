@@ -48,8 +48,8 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Account"
-                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-primary-300 font-semibold py-1 px-4 mb-2 text-left shadow rounded-r-full min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-1 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-full  min-w-max"
                 }
                 onClick={() => setSelectedTab("Account")}
               >
@@ -58,8 +58,8 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Billing"
-                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-primary-300 font-semibold py-1 px-4 mb-2 text-left shadow rounded-r-full min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-1 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-full  min-w-max"
                 }
                 onClick={() => setSelectedTab("Billing")}
               >
@@ -68,15 +68,15 @@ export default function Settings() {
               <button
                 className={
                   selectedTab === "Help"
-                    ? "translate-x-1 transition ease-in-out delay-50 bg-gray-200 font-semibold py-2 px-4 mb-2 text-left shadow rounded-r-lg min-w-max"
-                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-2 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-lg  min-w-max"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-primary-300 font-semibold py-1 px-4 mb-2 text-left shadow rounded-r-full min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-1 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-full  min-w-max"
                 }
                 onClick={() => setSelectedTab("Help")}
               >
                 Help
               </button>
             </div>
-            <div className="flex flex-col w-4/5 px-24 py-12 bg-base-100 border min-h-[50vh] border-gray-300 mx-6 rounded-lg shadow-lg">
+            <div className="flex flex-col w-4/5 px-24 py-12 bg-base-100 border-4 min-h-[50vh] border-primary-400 mx-6 rounded-box shadow-lg">
               {selectedTab === "Account" && (
                 // Account menu with simple features. Allow user to edit their name and view their email
                 <div className="flex flex-col w-full">
@@ -137,12 +137,21 @@ export default function Settings() {
                   </div>
                   <div className="flex flex-row w-full">
                     <div className="flex flex-col self-start">
-                      <p className="text-lg text-left italic">
-                        You have {promptBalance.quota - promptBalance.balance}{" "}
-                        prompts remaining. Upgrade to premium to increase your
-                        monthly quote to 500. Premium users also get access to
-                        our prompt library!
-                      </p>
+                      {promptBalance.quota == 25 ? (
+                        <p className="text-lg text-left italic">
+                          You have {promptBalance.quota - promptBalance.balance}{" "}
+                          prompts remaining. Upgrade to premium to increase your
+                          monthly quote to 500. Premium users also get access to
+                          our prompt library!
+                        </p>
+                      ) : (
+                        <p className="text-lg text-left italic">
+                          {" "}
+                          You have {promptBalance.quota -
+                            promptBalance.balance}{" "}
+                          prompts remaining. Thanks for being a premium user!
+                        </p>
+                      )}
                       <div className="self-start">
                         {promptBalance.quota == 25 ? <Payment /> : <Cancel />}
                       </div>

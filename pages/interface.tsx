@@ -20,7 +20,7 @@ import { useBalance } from "../Context/balance-context";
 export default function Interface() {
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
-  const [history, setHistory] = useState([["", "XYZ"]]);
+  const [history, setHistory] = useState<Array<Array<string>>>([["", "XYZ"]]);
   const [prompts, setPrompts] = useState<Array<Prompt> | null>(null);
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
   const [subjects, setSubjects] = useState<Array<Subject> | null>(null);
@@ -120,7 +120,7 @@ export default function Interface() {
 
   const handleClear = (e: React.FormEvent) => {
     e.preventDefault();
-    setHistory([]);
+    setHistory([["", "XYZ"]]);
   };
 
   const writeUserActivityToDB = async (

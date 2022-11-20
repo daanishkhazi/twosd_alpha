@@ -7,29 +7,29 @@ import Image from "next/image";
 const subjectDescriptions: { [key: string]: string } = {
   Biology:
     "Rachel is an advanced Artifical Intelligence well versed in Biology. Ask her for explanations, advice, or just to chat!",
-  History:
-    "Ross is an advanced Artifical Intelligence well versed in History. Ask him for explanations, advice, or just to chat!",
+  "US History":
+    "Ross is an advanced Artifical Intelligence well versed in US History. Ask him for explanations, advice, or just to chat!",
   "Computer Science":
     "Monica is an advanced Artifical Intelligence well versed in Computer Science. Ask her for explanations, advice, or just to chat!",
   Law: "Phoebe is an advanced Artifical Intelligence well versed in Law. Ask her for explanations, advice, or just to chat!",
-  Medicine:
-    "Chandler is an advanced Artifical Intelligence well versed in Medicine. Ask him for explanations, advice, or just to chat!",
+  "World History":
+    "Chandler is an advanced Artifical Intelligence well versed in World History. Ask him for explanations, advice, or just to chat!",
 };
 
 const subjectNames: { [key: string]: string } = {
   Biology: "Rachel (Biology)",
-  History: "Ross (History)",
+  "US History": "Ross (US History)",
   "Computer Science": "Monica (Computer Science)",
   Law: "Phoebe (Law)",
-  Medicine: "Chandler (Medicine)",
+  "World History": "Chandler (World History)",
 };
 
 const subjectImages: { [key: string]: string } = {
   Biology: "/rachel.png",
-  History: "/ross.png",
+  "US History": "/ross.png",
   "Computer Science": "/monica.png",
   Law: "/phoebe.png",
-  Medicine: "/chandler.png",
+  "World History": "/chandler.png",
 };
 
 const SubjectSelector = (props: SubjectSelectorProps) => {
@@ -37,30 +37,38 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
   const setSelectedSubject = props.setSelectedSubject;
   if (subjects) {
     return (
-      <div className="flex flex-col space-y-8 mx-80 my-20">
+      <div className="flex flex-wrap justify-around items-center">
         {subjects.map((subject: Subject, index: number) => {
           return (
-            <button
-              className="hover:scale-105 transition ease-in-out delay-50 flex flex-row items-center justify-start space-x-8 px-8 py-6 rounded-box shadow-lg bg-white  focus:outline-none focus:shadow-outline"
+            <div
               key={index}
-              onClick={() => setSelectedSubject(subject)}
+              className="flex-col xl:w-[45%] lg:w-full mb-8 items-center justify-center"
             >
-              <Image
-                className="rounded-full"
-                src={subjectImages[subject.name]}
-                alt={subject.name}
-                width={96}
-                height={96}
-              />
-              <div>
-                <h2 className="text-left font-semibold text-xl">
-                  {subjectNames[subject.name]}
-                </h2>
-                <p className="text-gray-600 text-left">
-                  {subjectDescriptions[subject.name]}
-                </p>
-              </div>
-            </button>
+              <button
+                className="flex-row justify-center items-center hover:scale-105 border-4 border-primary-300 transition ease-in-out delay-50 justify-center px-8 py-6 rounded-box shadow-2xl bg-white  focus:outline-none focus:shadow-outline"
+                onClick={() => setSelectedSubject(subject)}
+              >
+                <div className="flex-row justify-center">
+                  <div className="flex justify-center">
+                    <Image
+                      className="justify-center rounded-full"
+                      src={subjectImages[subject.name]}
+                      alt={subject.name}
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <div>
+                    <h2 className="flex justify-center text-left font-semibold text-xl pt-4 pb-2">
+                      {subjectNames[subject.name]}
+                    </h2>
+                    <p className="text-gray-600 text-center text-md">
+                      {subjectDescriptions[subject.name]}
+                    </p>
+                  </div>
+                </div>
+              </button>
+            </div>
           );
         })}
       </div>

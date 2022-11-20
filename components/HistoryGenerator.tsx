@@ -8,7 +8,7 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
   const history = props.history;
 
   // TODO - check whether this is going to blow up memory
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(history.length+2)
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(-1)
 
   const handleCopy = (index: number, text: string) => {
     setCopiedIndex(index);
@@ -16,7 +16,7 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
   }
 
   return (
-    <div>
+    <div className="pt-10 z-10">
       {history.map((past_query_output: Array<string>, index: number) => {
         if (past_query_output[0] != "") {
           return (
@@ -31,7 +31,7 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
                     </div>
                   </div>
                   {past_query_output[1] == "" ?
-                    <div className="flex justify-end w-1/6 max-h-14 py-3">
+                    <div className="flex justify-end w-1/6 max-h-12 pt-2 pl-2">
                       <LoadingSymbol color={"#FFFFFF"} />
                     </div> 
                    : <div className="flex justify-end w-1/6 max-h-14 py-3">

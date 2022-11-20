@@ -9,22 +9,24 @@ type SubjectBannerProps = {
     selectedSubject: Subject;
     setSelectedSubject: React.Dispatch<React.SetStateAction<Subject | null>>;
     subjectNames: {[key: string]: string}
+    collapsed: boolean;
+    setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const subjectNames: { [key: string]: string } = {
     Biology: "Rachel (Biology)",
-    History: "Ross (History)",
+    "US History": "Ross (US History)",
     "Computer Science": "Monica (Computer Science)",
-    Law: "Phoebe (SAT / ACT)",
-    Medicine: "Chandler (Medicine)",
+    Law: "Phoebe (Law)",
+    "World History": "Chandler (World History)",
   };
   
 const subjectImages: { [key: string]: string } = {
     Biology: "/rachel.png",
-    History: "/ross.png",
+    "US History": "/ross.png",
     "Computer Science": "/monica.png",
     Law: "/phoebe.png",
-    Medicine: "/chandler.png",
+    "World History": "/chandler.png",
 };
 
 
@@ -57,15 +59,18 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
     const setSelectedSubject = props.setSelectedSubject;
     const selectedSubject = props.selectedSubject;
     const subjectNames = props.subjectNames;
+    const collapsed = props.collapsed;
+    const setCollapsed = props.setCollapsed;
 
-    const [collapsed, setCollapsed] = useState(false);
+    // const [collapsed, setCollapsed] = useState(false);
 
+    console.log(selectedSubject, subjectNames)
 
     return (
-            <div className="flex-row sticky top-16 z-20 items-start">
-            <div className="flex sticky h-10 z-10 bg-white items-start"></div>
-            {!collapsed ? 
-                <div className="flex-row sticky top-28 z-20 bg-white items-end">
+            // <div className="flex-row sticky top-28 z-20 items-start">
+            /* <div className="flex sticky h-10 z-10 bg-white items-start"></div> */
+            (!collapsed ? 
+                <div className="flex-row sticky top-28 z-20 items-end">
                 
                 <div className="flex items-center">
                     <div className="flex z-30 absolute">
@@ -92,7 +97,7 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                             </button>
                         </div>
                     </div>
-                    <div className="flex justify-center w-16 py-0.5 h-full items-center rounded-lg rounded-l-none bg-secondary-400 align-end">
+                    <div className="flex justify-center w-16 py-0.5 pr-3 h-full items-center rounded-lg rounded-l-none bg-secondary-400 align-end">
                         <button
                             onClick={() => setCollapsed(!collapsed)}
                             className="hover:scale-110 hover:-translate-x-2 transition ease-in-out delay-50"
@@ -103,7 +108,7 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                     {/* </div> */}
                 </div>
                 </div> :
-                <div className="fixed left-0 top-28">
+                <div className="fixed left-0 top-32">
                     <div className="flex rotate-180 justify-center w-16 py-0.5 h-full items-center rounded-lg rounded-r-none bg-secondary-400 align-end">
                         <button
                             onClick={() => setCollapsed(!collapsed)}
@@ -112,9 +117,9 @@ const SubjectBanner: React.FC<SubjectBannerProps> = (props: SubjectBannerProps) 
                             {collapse}
                         </button>
                     </div>
-                </div>}
+                </div>)
             
-            </div>
+            // </div>
             );
 };
 
