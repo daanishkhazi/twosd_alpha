@@ -21,8 +21,10 @@ module.exports = {
           900: "#8b243d",
         },
         secondary: {
-          400: "#8b99ff"
-        }
+          400: "#8b99ff",
+          600: "#3451ad",
+          900: "#001561",
+        },
       },
       fontFamily: {
         body: [
@@ -42,6 +44,7 @@ module.exports = {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
+        heading: ["Poppins"],
         sans: [
           "Inter",
           "ui-sans-serif",
@@ -62,13 +65,28 @@ module.exports = {
       },
       keyframes: {
         fadeIn: {
-          '0%': {opacity: '0.2'},
-          '100%': {opacity: '1'}
-        }
+          "0%": { opacity: "0.2" },
+          "100%": { opacity: "1" },
+        },
+        bottom: {
+          "0%": { transform: "translateY(20%)" },
+          "20%": { transform: "translateY(0)" },
+        },
+        left: {
+          "0%": { transform: "translateX(20%)" },
+          "20%": { transform: "translateX(0)" },
+        },
+        right: {
+          "0%": { transform: "translateX(-20%)" },
+          "20%": { transform: "translateX(0)" },
+        },
       },
       animation: {
-        'fade-in': 'fadeIn 1s linear'
-      }
+        "fade-in": "fadeIn 1s linear",
+        bottom: "bottom 2s ease-in-out",
+        left: "left 2s ease-in-out",
+        right: "right 2s ease-in-out",
+      },
     },
   },
   daisyui: {

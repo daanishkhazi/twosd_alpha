@@ -40,12 +40,15 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
       <div className="flex flex-wrap justify-around items-center">
         {subjects.map((subject: Subject, index: number) => {
           return (
-            <div key={index} className="flex-col xl:w-[45%] lg:w-full mb-8 items-center justify-center">
+            <div
+              key={index}
+              className="flex-col xl:w-[45%] lg:w-full mb-8 items-center justify-center"
+            >
               <button
                 className="flex-row justify-center items-center hover:scale-105 border-4 border-primary-300 transition ease-in-out delay-50 justify-center px-8 py-6 rounded-box shadow-2xl bg-white  focus:outline-none focus:shadow-outline"
                 onClick={() => setSelectedSubject(subject)}
               >
-                <div className= "flex-row justify-center">
+                <div className="flex-row justify-center">
                   <div className="flex justify-center">
                     <Image
                       className="justify-center rounded-full"

@@ -17,16 +17,14 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   return (
     <div>
       <Head>
-        <title>
-          Bream — Your personalized AI tutor for Biology, History and more
-        </title>
+        <title>Laera — Your personalized AI tutor for AP, IB and more</title>
         <meta
           name="description"
-          content="Bream AI Tutor: Biology, History, Computer Science, SAT, ACT, Medicine, Mathematics"
+          content="Laera — Your personalized AI tutor for AP, IB and more. History, Biology, Computer Science."
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <Navbar route={router.pathname} />
+      {router.pathname != "/" && <Navbar route={router.pathname} />}
       {children}
       <Footer />
     </div>
