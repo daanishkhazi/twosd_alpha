@@ -91,6 +91,7 @@ model User {
   stripeSubscriptionId String?           @unique
   cancelRequested      Boolean           @default(false)
   isActive             Boolean           @default(false)
+  offWaitlist          Boolean           @default(false)
   accounts             Account[]
   sessions             Session[]
 }
