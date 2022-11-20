@@ -95,6 +95,6 @@ const options = {
   secret: process.env.SECRET,
   theme: {
     brandColor: "#e8798a",
-    logo: "https://twosd-alpha.vercel.app/bream.svg",
+    logo: "https://twosd-alpha.vercel.app/laera.svg",
   },
 };

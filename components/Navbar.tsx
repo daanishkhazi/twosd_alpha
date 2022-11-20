@@ -59,7 +59,7 @@ const Navbar = (props: NavbarProps) => {
     >
       <div className="flex items-center mr-6">
         <Link href="/">
-          <Image src="/bream.svg" alt="logo" height={150} width={150} />
+          <Image src="/laera.svg" alt="logo" height={150} width={150} />
         </Link>
       </div>
       <div className="w-auto flex flex-grow justify-end">

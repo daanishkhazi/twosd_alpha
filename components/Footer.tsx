@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="px-5 py-2">
             <Link
-              href="mailto:hello@gettala.com"
+              href="mailto:hello@laera.xyz"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Contact
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="px-5 py-2">
             <Link
-              href="https://www.greenhouse.io/"
+              href="mailto:jobs@laera.xyz"
               className="text-base text-gray-700 hover:text-gray-800"
             >
               Careers (We&apos;re Hiring!)
