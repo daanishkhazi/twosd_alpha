@@ -4,9 +4,21 @@ import Layout from "../components/Layout";
 import Catch from "../components/Catch";
 import View from "../components/View";
 import { useSession } from "next-auth/react";
+import ScrollingBloom from "../components/scrollingBloom";
+import { useEffect } from "react";
+
+
 
 export default function Home() {
   const { data: session, status } = useSession();
+  
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      document.body.style.setProperty('--scroll', `${(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5))}`);
+    }, false);
+  }, [])
+  
+
   return (
     <Layout>
       <div>
@@ -18,7 +30,7 @@ export default function Home() {
             alt="Home Background"
           />
         </div>
-        <div className="w-full h-full flex flex-col pt-48 px-12 items-center z-10">
+        <div className="w-full h-full min-h-screen flex flex-col pt-48 px-12 items-center z-10">
           <h1 className="text-7xl font-heading font-bold text-gray-800 text-center mb-12">
             AI Tutors That Don&apos;t Suck
           </h1>
@@ -46,7 +58,7 @@ export default function Home() {
             className="flex flex-col items-start rounded-box shadow-2xl border-4 border-secondary-400 my-2 "
           />
         </div>
-        <div className="flex flex-col items-center w-full my-12">
+        <div className="flex flex-col items-center justify-items-center w-full min-h-screen my-12">
           <h1 className="text-5xl font-heading font-bold text-gray-800 text-center mt-12 mb-6 px-12">
             Ok what is an AI tutor?
           </h1>
@@ -70,15 +82,18 @@ export default function Home() {
             education accessible to any student on the planet.
           </p>
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <View direction="bottom">
-            <Image
-              src="/bloom.png"
-              width={500}
-              height={500}
+          {/* <View direction="bottom"> */}
+            {/* <Image
+              src="/bloom2sig.svg"
+              width={900}
+              height={546}
               alt="Home Image"
-              className="flex flex-col items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
-            />
-          </View>
+              className="flex flex-col p-6 items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
+            /> */}
+            <div className="flex w-7/12 my-24">
+            <ScrollingBloom/>
+            </div>
+          {/* </View> */}
         </div>
       </div>
       <div className="mask-it">
