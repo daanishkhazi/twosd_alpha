@@ -31,7 +31,7 @@ const Cancel = () => {
     return (
       <div className="text-left  mt-4">
         <p className="text-lg italic">
-          Thanks for being a Bream Premium subscriber! Your subscription will be
+          Thanks for being a Laera Premium subscriber! Your subscription will be
           cancelled at the end of your current billing period.
         </p>
       </div>
