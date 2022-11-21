@@ -5,19 +5,38 @@ import Catch from "../components/Catch";
 import View from "../components/View";
 import { useSession } from "next-auth/react";
 import ScrollingBloom from "../components/scrollingBloom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 
 
 export default function Home() {
   const { data: session, status } = useSession();
+
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
+  // const [scrolling, setScrolling] = useState(false);
   
+  // useEffect(() => {
+  //   setScrollProgress(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5))
+  // }, [])
+
+  
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      document.body.style.setProperty('--scroll', `${(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5))}`);
-    }, false);
-  }, [])
-  
+    const onScroll = (e: any) => {
+      // const target: EventTarget = e.target;
+      // const targetDiv: HTMLDivElement = target as HTMLDivElement;
+      setScrollTop(e.target.documentElement.scrollTop);
+      setScrollProgress(Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1))
+      document.body.style.setProperty('--scroll', `${Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1)}`);
+
+      // setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollTop]);
+  console.log('parent', scrollProgress)
 
   return (
     <Layout>
@@ -63,7 +82,7 @@ export default function Home() {
             Ok what is an AI tutor?
           </h1>
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <p className="text-lg text-gray-600 text-left items-center w-3/5">
+          <p className="text-lg text-gray-600 text-left items-center w-3/5 mb-18">
             Laera is what you get if your smart friend and Google had a baby. It
             is a personalized AI tutor backed by an enormous body of knowledge
             across Biology, History, Computer Science, Medicine, Law and more.
@@ -91,7 +110,7 @@ export default function Home() {
               className="flex flex-col p-6 items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
             /> */}
             <div className="flex w-7/12 my-24">
-            <ScrollingBloom/>
+            <ScrollingBloom scrollProgress={scrollProgress}/>
             </div>
           {/* </View> */}
         </div>
