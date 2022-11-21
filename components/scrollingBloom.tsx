@@ -1,19 +1,33 @@
 import styles from "../styles/Interface.module.css"
 import { useState } from "react";
 
-const ScrollingBloom = () => {
+const ScrollingBloom = (props: { scrollProgress: number }) => {
+
+    const scrollProgress = props.scrollProgress;
+    console.log(scrollProgress)
     
     return (
         <div className="flex w-full items-center justify-end bg-white">
         <svg className="h-full" viewBox="0 0 1761 943" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g className={styles.movingCurve}>
-            <path d="M39 898C417 898 475 448 808 448" strokeWidth="18"/>
-            <path d="M1577 898C1199 898 1141 448 808 448" strokeWidth="18"/>
+        {/* <g> */}
+            <path 
+                d={`
+                    M ${39 + (928-39)*scrollProgress} 898
+                    C ${417 + (1182.5-417)*scrollProgress} 898 ${475 + (1145.5-475)*scrollProgress} ${448 + (54-448)*scrollProgress} ${808 + (1303-808)*scrollProgress} ${448 + (54-448)*scrollProgress}`}
+                strokeWidth="18"
+                />
+            <path d={`M ${1577 + (1678-1577)*scrollProgress} 898 
+                    C ${1199 + (1423.5-1199)*scrollProgress} 898 ${1141 + (1460.5-1141)*scrollProgress} ${448 + (54-448)*scrollProgress} ${808 + (1303-808)*scrollProgress} ${448 + (54-448)*scrollProgress}`}
+                    strokeWidth="18"
+                    />
         </g>
         <path d="M39 898C417 898 475 448 808 448" stroke="#8D8282" strokeWidth="12" strokeDasharray="24 24"/>
         <path d="M1577 898C1199 898 1141 448 808 448" stroke="#8D8282" strokeWidth="12" strokeDasharray="24 24"/>
-        {/* <path d="M928 897.999C1182.5 897.999 1145.5 54.0002 1302.99 54.0002" stroke="#FF8B20" strokeWidth="12"/>
-        <path d="M1677.99 897.999C1423.49 897.999 1460.49 54 1303 54" stroke="#FF8B20" strokeWidth="12"/> */}
+
+        {/* <path d="M 928 897.999 C 1182.5 897.999 1145.5 54.0002 1302.99 54.0002" stroke="#FF8B20" strokeWidth="12"/> */}
+        {/* <path d="M 1677.99 897.999 C 1423.49 897.999 1460.49 54 1303 54" stroke="#FF8B20" strokeWidth="12"/> */}
+        
         <g filter="url(#filter0_d_31_71)">
         <path d="M39 900H33V906H39V900ZM39 0L4.35898 60H73.641L39 0ZM1757 900L1697 865.359V934.641L1757 900ZM45 900V54H33V900H45ZM39 906H1703V894H39V906Z" fill="black"/>
         </g>

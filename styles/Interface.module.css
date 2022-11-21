@@ -513,13 +513,13 @@ Animation classes.
 
 @keyframes slideme {
   from { 
-    transform: translate(0, 0);
+    /* transform: translate(0, 0); */
     stroke:#8D8282;
     /* transform-origin: 100%, 0%; */
   }
   to {
-    transform-origin: bottom;
-    transform: translateX(27%) translateY(3.5%) scaleX(0.5) scaleY(1.7);
+    /* transform-origin: bottom;
+    transform: translateX(27%) translateY(3.5%) scaleX(0.5) scaleY(1.7); */
     stroke: #FF8B20;
     /* transform-origin: center bottom;
     transform: scaleY(1.8); */
