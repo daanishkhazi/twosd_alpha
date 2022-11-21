@@ -41,7 +41,7 @@ export default function Settings() {
   console.log(promptBalance);
   return (
     <Layout>
-      <div className="flex flex-col min-h-screen py-2">
+      <div className="flex flex-col min-h-screen py-2 bg-primary-50 mask-head">
         <main className="flex flex-col w-full flex-1 px-24 py-20 text-center">
           <div className="flex flex-row w-full">
             <div className="flex flex-col w-1/5">
@@ -164,19 +164,19 @@ export default function Settings() {
                   <h1 className="text-4xl font-bold mb-12">Help</h1>
                   <div className="flex flex-row justify-center w-full">
                     <p className="text-lg mt-4 italic">
-                      Bream is currently in beta and under active development.
+                      Laera is currently in beta and under active development.
                       We aim to provide the best personalized education services
-                      in the world. Learn more about how to use Bream on our{" "}
+                      in the world. Learn more about how to use Laera on our{" "}
                       <Link href="/" className="text-primary-500">
                         home page.
                       </Link>{" "}
                       If you have any specific questions, please contact us at
                       <Link
-                        href="mailto:hello@bream.ai"
+                        href="mailto:hello@laera.xyz"
                         className="text-primary-500"
                       >
                         {" "}
-                        hello@bream.ai
+                        hello@laera.xyz
                       </Link>
                     </p>
                   </div>
