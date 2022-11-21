@@ -16,6 +16,8 @@ import QueryInput from "../components/QueryInput";
 import SubjectSelectedInterface from "../components/SubjectSelectedInterface";
 import Layout from "../components/Layout";
 import { useBalance } from "../Context/balance-context";
+import OnWaitlist from "../components/OnWaitlist";
+import Image from "next/image";
 
 export default function Interface() {
   const [query, setQuery] = useState("");
@@ -49,7 +51,9 @@ export default function Interface() {
       const { result: PromptsAndSubjects } = await getPromptsAndSubjects();
       setPrompts(PromptsAndSubjects.promptList);
       setSubjects(PromptsAndSubjects.subjectList);
-      setSelectedPrompt(PromptsAndSubjects.promptList[PromptsAndSubjects.promptList.length-1])
+      setSelectedPrompt(
+        PromptsAndSubjects.promptList[PromptsAndSubjects.promptList.length - 1]
+      );
     }
     fetchData();
   }, []);
@@ -94,19 +98,24 @@ export default function Interface() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     const prefix = selectedPrompt ? selectedPrompt.gpt3Prefix : "";
+    const description = selectedPrompt ? selectedPrompt.description : "";
     e.preventDefault();
     let sentQuery = query;
-    sentQuery = query[0].toLowerCase() + query.substring(1);
+    if (query.slice(0, 2) !== query.slice(0, 2).toUpperCase()) {
+      sentQuery = query[0].toLowerCase() + query.substring(1);
+    }
     if (query.slice(-1) != "?") {
       sentQuery = query + "?";
     }
-    setHistory([...history, [prefix + " " + sentQuery, ""]]);
+    setHistory([...history, [description + " " + sentQuery, ""]]);
     const data = await sendPrompt();
-    setHistory([...history, [prefix + " " + sentQuery, data.result]]);
+    setHistory([...history, [description + " " + sentQuery, data.result]]);
     setTokensUsed(tokensUsed + data.usage.total_tokens);
     setPromptBalance({ ...promptBalance, balance: promptBalance.balance + 1 });
     setQuery("");
-    if (prompts) {setSelectedPrompt(prompts[prompts.length-1])};
+    if (prompts) {
+      setSelectedPrompt(prompts[prompts.length - 1]);
+    }
     setCharCount(0);
     const historyWriteComplete = await writeUserActivityToDB(
       [prefix + query, data.result],
@@ -195,32 +204,35 @@ export default function Interface() {
       </Layout>
     );
   }
+  if (session?.user.offWaitlist === false) {
+    return <OnWaitlist />;
+  }
 
   return (
     <Layout>
-      <div className="flex justify-center">
+      <div className="flex justify-center mask-it">
+        <div className="absolute top-0 left-0 w-full h-screen -z-10 ">
+          <Image
+            src="/meshbg.svg"
+            width={2560}
+            height={1920}
+            alt="Home Background"
+            className="opacity-30"
+          />
+        </div>
         <div className="flex justify-center items-center min-h-[calc(100vh-194px)] sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
-            <Head>
-              <title>AI Tutor</title>
-              <meta
-                name="Personalized AI-enabled Tutoring"
-                content="Personalized AI-enabled Tutoring"
+          {/* TODO - somehow fix this alignment... */}
+          <div className="flex">
+            {selectedSubject ? (
+              <SubjectSelectedInterface {...subjectSelectedProps} />
+            ) : (
+              <SubjectSelector
+                subjects={subjects}
+                setSelectedSubject={setSelectedSubject}
               />
-              <link rel="icon" href="/favicon.png" />
-            </Head>
-            {/* TODO - somehow fix this alignment... */}
-            <div className="flex">
-              {selectedSubject ? (
-                <SubjectSelectedInterface {...subjectSelectedProps} />
-              ) : (
-                <SubjectSelector
-                  subjects={subjects}
-                  setSelectedSubject={setSelectedSubject}
-                />
-              )}
-            </div>
-            <div ref={bottomRef} />
-          
+            )}
+          </div>
+          <div ref={bottomRef} />
         </div>
       </div>
     </Layout>
