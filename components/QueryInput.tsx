@@ -5,7 +5,7 @@ import UsageBar from "./UsageBar";
 import Image from "next/image";
 import { useBalance } from "../Context/balance-context";
 import { useSession } from "next-auth/react";
-import React, {useRef, useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 
 const icon = (
   <svg
@@ -23,8 +23,6 @@ const icon = (
     />
   </svg>
 );
-
-
 
 const QueryInput = (props: QueryInputProps) => {
   const handleSubmit = props.handleSubmit;
@@ -45,52 +43,64 @@ const QueryInput = (props: QueryInputProps) => {
 
   const enterSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.code && e.code === "Enter" && !e.shiftKey) {
-      if (buttonRef && buttonRef.current) {buttonRef.current.click()};
+      if (buttonRef && buttonRef.current) {
+        buttonRef.current.click();
+      }
     }
-  }
+  };
 
   return (
     <div className="flex flex-col justify-center align-center margin">
       <form onSubmit={handleSubmit}>
         <label></label>
-        <div className="bg-white resize-none border-4 border-secondary-400 rounded-3xl block w-full appearance-none leading-normal mt-3">
+        <div className="bg-white resize-none border-4 border-secondary-400 rounded-2xl block w-full appearance-none leading-normal mt-3">
           <textarea
             rows={6}
-            placeholder={selectedPrompt ? selectedPrompt.placeholder : "Please select prompt"}
-            className="bg-white ring-transparent focus:outline-none resize-none rounded-3xl p-5 block w-full appearance-none leading-normal"
+            placeholder={
+              selectedPrompt
+                ? selectedPrompt.placeholder
+                : "Please select prompt"
+            }
+            className="bg-white ring-transparent focus:outline-none resize-none rounded-2xl p-5 block w-full appearance-none leading-normal"
             onChange={handleQueryChange}
-            disabled = {selectedPrompt === null}
+            disabled={selectedPrompt === null}
             value={query}
             maxLength={selectedPrompt ? selectedPrompt.charLimit : 0}
             onKeyDown={enterSubmit}
           />
           <div className="flex justify-end">
-              <button
-                type="submit"
-                className="hover:scale-125 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-nonerounded-md disabled:bg-slate-400"
-                disabled={promptBalance.balance >= promptBalance.quota}
-                ref={buttonRef}
-              >
-                {promptBalance.balance < promptBalance.quota
-                  ? <div><Image src="/send.svg" alt="logo" height={40} width={40}/></div>
-                  : "Monthly Quota Exceeded"}
-                </button>
+            <button
+              type="submit"
+              className="hover:scale-125 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none rounded-md disabled:bg-slate-400"
+              disabled={promptBalance.balance >= promptBalance.quota}
+              ref={buttonRef}
+            >
+              {promptBalance.balance < promptBalance.quota ? (
+                <div>
+                  <Image src="/send.svg" alt="logo" height={30} width={30} />
+                </div>
+              ) : (
+                "Monthly Quota Exceeded"
+              )}
+            </button>
           </div>
         </div>
-          <div className="flex justify-between items-top pt-3 px-6 text-sm text-gray-500 italic">
-            <div ref={bottomRef}>
-              {selectedPrompt ? `${charCount} / ${selectedPrompt.charLimit} Characters` : ""}
-            </div>
-            {history.length > 1 ? (
-              <button
-                className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-primary-400 rounded-md hover:bg-red-500"
-                onClick={handleClear}
-              >
-                {" "}
-                Clear History{" "}
-              </button>
-            ) : null}
+        <div className="flex justify-between items-top pt-3 px-6 text-sm text-gray-500 italic">
+          <div ref={bottomRef}>
+            {selectedPrompt
+              ? `${charCount} / ${selectedPrompt.charLimit} Characters`
+              : ""}
           </div>
+          {history.length > 1 ? (
+            <button
+              className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-primary-400 rounded-md hover:bg-red-500"
+              onClick={handleClear}
+            >
+              {" "}
+              Clear History{" "}
+            </button>
+          ) : null}
+        </div>
       </form>
     </div>
   );

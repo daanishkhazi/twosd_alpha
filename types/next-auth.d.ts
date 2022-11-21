@@ -7,6 +7,7 @@ declare module "next-auth" {
     stripeCustomerId: string;
     stripeSubscriptionId: string | null;
     cancelRequested: boolean;
+    offWaitlist: boolean;
     tokensUsed: number;
     promptsUsed: number;
     promptsQuota: number;
@@ -18,6 +19,7 @@ declare module "next-auth" {
       stripeCustomerId: string;
       stripeSubscriptionId: string | null;
       cancelRequested: boolean;
+      offWaitlist: boolean;
       tokensUsed: number;
       promptsUsed: number;
       promptsQuota: number;

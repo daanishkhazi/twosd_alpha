@@ -4,9 +4,40 @@ import Layout from "../components/Layout";
 import Catch from "../components/Catch";
 import View from "../components/View";
 import { useSession } from "next-auth/react";
+import ScrollingBloom from "../components/scrollingBloom";
+import { useState, useEffect } from "react";
+
+
 
 export default function Home() {
   const { data: session, status } = useSession();
+
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
+  // const [scrolling, setScrolling] = useState(false);
+  
+  // useEffect(() => {
+  //   setScrollProgress(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5))
+  // }, [])
+
+  
+
+  useEffect(() => {
+    const onScroll = (e: any) => {
+      // const target: EventTarget = e.target;
+      // const targetDiv: HTMLDivElement = target as HTMLDivElement;
+      setScrollTop(e.target.documentElement.scrollTop);
+      setScrollProgress(Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1))
+      document.body.style.setProperty('--scroll', `${Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1)}`);
+
+      // setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollTop]);
+  console.log('parent', scrollProgress)
+
   return (
     <Layout>
       <div>
@@ -18,7 +49,7 @@ export default function Home() {
             alt="Home Background"
           />
         </div>
-        <div className="w-full h-full flex flex-col pt-48 px-12 items-center z-10">
+        <div className="w-full h-full min-h-screen flex flex-col pt-48 px-12 items-center z-10">
           <h1 className="text-7xl font-heading font-bold text-gray-800 text-center mb-12">
             AI Tutors That Don&apos;t Suck
           </h1>
@@ -46,12 +77,12 @@ export default function Home() {
             className="flex flex-col items-start rounded-box shadow-2xl border-4 border-secondary-400 my-2 "
           />
         </div>
-        <div className="flex flex-col items-center w-full my-12">
+        <div className="flex flex-col items-center justify-items-center w-full min-h-screen my-12">
           <h1 className="text-5xl font-heading font-bold text-gray-800 text-center mt-12 mb-6 px-12">
             Ok what is an AI tutor?
           </h1>
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <p className="text-lg text-gray-600 text-left items-center w-3/5">
+          <p className="text-lg text-gray-600 text-left items-center w-3/5 mb-18">
             Laera is what you get if your smart friend and Google had a baby. It
             is a personalized AI tutor backed by an enormous body of knowledge
             across Biology, History, Computer Science, Medicine, Law and more.
@@ -70,15 +101,18 @@ export default function Home() {
             education accessible to any student on the planet.
           </p>
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <View direction="bottom">
-            <Image
-              src="/bloom.png"
-              width={500}
-              height={500}
+          {/* <View direction="bottom"> */}
+            {/* <Image
+              src="/bloom2sig.svg"
+              width={900}
+              height={546}
               alt="Home Image"
-              className="flex flex-col items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
-            />
-          </View>
+              className="flex flex-col p-6 items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
+            /> */}
+            <div className="flex w-7/12 my-24">
+            <ScrollingBloom scrollProgress={scrollProgress}/>
+            </div>
+          {/* </View> */}
         </div>
       </div>
       <div className="mask-it">

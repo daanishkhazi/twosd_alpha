@@ -59,12 +59,11 @@ const options = {
       session.user.isActive = dbUser!.isActive;
       session.user.stripeSubscriptionId = dbUser!.stripeSubscriptionId;
       session.user.cancelRequested = dbUser!.cancelRequested;
-
+      session.user.offWaitlist = dbUser!.offWaitlist;
       session.user.tokensUsed = tokenBalanceFromDB;
       session.user.promptsQuota = promptsQuotaFromDB;
       session.user.promptsUsed = promptsBalanceFromDB;
       // session.user.tokenQuota = tokenQuotaFromDB;
-      console.log("sess", session);
       return session;
     },
   },
