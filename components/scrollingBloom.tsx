@@ -1,6 +1,7 @@
 import styles from "../styles/Interface.module.css"
 import { useState } from "react";
 
+
 const ScrollingBloom = (props: { scrollProgress: number }) => {
 
     const scrollProgress = props.scrollProgress;

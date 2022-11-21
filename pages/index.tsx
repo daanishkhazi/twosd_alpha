@@ -37,7 +37,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
   console.log('parent', scrollProgress)
-  
 
   return (
     <Layout>
