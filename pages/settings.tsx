@@ -42,16 +42,7 @@ export default function Settings() {
   console.log(promptBalance);
   return (
     <Layout>
-      <div className="flex flex-col py-2 bg-primary-50 mask-it pb-32">
-        <div className="absolute top-0 left-0 w-full h-screen -z-10 ">
-          <Image
-            src="/meshbg.svg"
-            width={2560}
-            height={1920}
-            alt="Home Background"
-            className="opacity-30"
-          />
-        </div>
+      <div className="flex flex-col py-2 min-h-[75vh]">
         <main className="flex flex-col w-full flex-1 px-24 py-20 text-center">
           <div className="flex flex-row w-full">
             <div className="flex flex-col w-1/5 pt-8">

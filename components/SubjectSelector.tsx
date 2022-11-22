@@ -13,7 +13,7 @@ const subjectDescriptions: { [key: string]: string } = {
     "Monica is an advanced Artifical Intelligence well versed in CS. Ask her for explanations, advice, or just to chat!",
   Law: "Phoebe is an advanced Artifical Intelligence well versed in Law. Ask her for explanations, advice, or just to chat!",
   "World History":
-    "Chandler is an advanced Artifical Intelligence well versed in World History. Ask him for explanations, advice, or just to chat!",
+    "Phoebe is an advanced Artifical Intelligence well versed in World History. Ask her for explanations, advice, or just to chat!",
 };
 
 const subjectNames: { [key: string]: string } = {
@@ -21,7 +21,7 @@ const subjectNames: { [key: string]: string } = {
   "US History": "Ross (US History)",
   "Computer Science": "Monica (CS)",
   Law: "Phoebe (Law)",
-  "World History": "Chandler (World History)",
+  "World History": "Phoebe (World History)",
 };
 
 const subjectImages: { [key: string]: string } = {
@@ -51,7 +51,7 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
                 <div className="flex-row justify-center">
                   <div className="flex justify-center">
                     <Image
-                      className="justify-center rounded-full"
+                      className="justify-center rounded-full border shadow"
                       src={subjectImages[subject.name]}
                       alt={subject.name}
                       width={96}
