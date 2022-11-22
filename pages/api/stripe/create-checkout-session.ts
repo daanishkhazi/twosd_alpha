@@ -14,6 +14,15 @@ const createCheckout = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(401).send("Unauthorized");
   }
 
+  let success_url = `http://laera.xyz/?session_id={CHECKOUT_SESSION_ID}`;
+  let cancel_url = "http://laera.xyz/?cancelledPayment=true";
+
+  // Check if local
+  if (process.env.NODE_ENV === "development") {
+    success_url = `http://localhost:3000/?session_id={CHECKOUT_SESSION_ID}`;
+    cancel_url = "http://localhost:3000/?cancelledPayment=true";
+  }
+
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "subscription",
     customer: session.user.stripeCustomerId,
@@ -23,8 +32,8 @@ const createCheckout = async (req: NextApiRequest, res: NextApiResponse) => {
         quantity: 1,
       },
     ],
-    success_url: `http://localhost:3000/?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000/?cancelledPayment=true",
+    success_url: success_url,
+    cancel_url: cancel_url,
     subscription_data: {
       metadata: {
         payingUserId: session.user.id,
