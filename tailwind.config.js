@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         primary: {
           50: "#fee9eb",
+          75: "#fbcace",
           100: "#fcd3d6",
           200: "#f8bdc3",
           300: "#f4a7af",
@@ -28,6 +29,8 @@ module.exports = {
       },
       fontFamily: {
         body: [
+          "Noto Sans",
+          "Helvetica Neue",
           "Inter",
           "ui-sans-serif",
           "system-ui",
@@ -35,17 +38,17 @@ module.exports = {
           "system-ui",
           "Segoe UI",
           "Roboto",
-          "Helvetica Neue",
           "Arial",
-          "Noto Sans",
           "sans-serif",
           "Apple Color Emoji",
           "Segoe UI Emoji",
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
-        heading: ["Poppins"],
+        heading: ["Helvetica Neue"],
         sans: [
+          "Noto Sans",
+          "Helvetica Neue",
           "Inter",
           "ui-sans-serif",
           "system-ui",
@@ -53,9 +56,7 @@ module.exports = {
           "system-ui",
           "Segoe UI",
           "Roboto",
-          "Helvetica Neue",
           "Arial",
-          "Noto Sans",
           "sans-serif",
           "Apple Color Emoji",
           "Segoe UI Emoji",

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Head from "next/head";
 import React from "react";
 import styles from "../styles/Interface.module.css";
@@ -34,6 +35,7 @@ export default function Interface() {
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
   const { promptBalance, setPromptBalance } = useBalance();
+
 
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
@@ -199,7 +201,7 @@ export default function Interface() {
     return (
       <Layout>
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
-          <p className="text-2xl font-bold">Sign in to use Bream!</p>
+          <p className="text-2xl font-bold">Sign in to use Laera!</p>
         </div>
       </Layout>
     );
@@ -210,16 +212,16 @@ export default function Interface() {
 
   return (
     <Layout>
-      <div className="flex justify-center mask-it">
-        <div className="absolute top-0 left-0 w-full h-screen -z-10 ">
+      <div className="flex justify-center">
+        {/* <div className="fixed pointer-events-none top-0 bg-white left-0 w-full h-[13.25rem] z-20 ">
           <Image
-            src="/meshbg.svg"
+            src="/meshbgcrop.svg"
             width={2560}
             height={1920}
             alt="Home Background"
             className="opacity-30"
           />
-        </div>
+        </div> */}
         <div className="flex justify-center items-center min-h-[calc(100vh-194px)] sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
           {/* TODO - somehow fix this alignment... */}
           <div className="flex">

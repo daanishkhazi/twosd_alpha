@@ -20,26 +20,31 @@ const faqs = [
 ];
 
 const Catch: React.FC = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(-1);
   return (
     <div className="space-y-6">
       {faqs.map((faq, index) => (
         <div
           key={index}
-          onClick={() => setActive(index)}
-          className="hover:scale-105 transition ease-in-out delay-50 flex flex-col rounded-box shadow-lg border-4 border-primary-400 py-4 px-8 cursor-pointer min-w-4/5"
+          onClick={() => {index === active ? setActive(-1) : setActive(index)}}
+          className="hover:scale-105 transition ease-in-out delay-50 flex flex-col justify-between rounded-box shadow-lg border-4 border-primary-400 py-4 px-8 cursor-pointer"
         >
-          <div>
             {active == index ? (
-              <div className="flex flex-col">
-                <h1 className="font-heading font-bold text-2xl mt-2">
-                  {faq.question}
-                </h1>
-                <p className="text-gray-600 mt-1 mb-2 italic">{faq.answer}</p>
+              <div className="flex justify-between">
+                <div className="flex flex-col">
+                  <h1 className="font-heading font-bold text-2xl mt-2">
+                    {faq.question}
+                  </h1>
+                  <p className="text-gray-600 mt-1 mb-2 italic">{faq.answer}</p>
+                  
+                </div>
+                <div className="flex text-primary-500 font-extrabold text-5xl leading-7">
+                -
+                </div>
               </div>
             ) : (
-              <div className="flex flex-row justify-between">
-                <h1 className="font-heading font-bold text-2xl">
+              <div className="flex justify-between">
+                <h1 className="flex justify-start font-heading font-bold text-2xl">
                   {faq.question}
                 </h1>
                 <div className="text-primary-500 font-extrabold text-4xl leading-7">
@@ -47,7 +52,6 @@ const Catch: React.FC = () => {
                 </div>
               </div>
             )}
-          </div>
         </div>
       ))}
     </div>

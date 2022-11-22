@@ -90,8 +90,8 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   return (
     <div className="flex-col min-h-full justify-center">
       {collapsed ? 
-        <div className="flex fixed pointer-events-none h-[4rem] w-full z-10 bg-gradient-to-b from-white top-[4.5rem] justify-start"></div>
-        : <div className="flex fixed pointer-events-none h-[11rem] w-full z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>}
+        <div className="flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-white top-[4.5rem] justify-start"></div>
+        : <div className="flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>}
       {selectedSubject && <SubjectBanner 
                               selectedSubject={selectedSubject} 
                               setSelectedSubject={setSelectedSubject} 
@@ -105,6 +105,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
         </div>
         <div>{queryInterface()}</div>
         {!isActive && <div className="flex justify-center"><UsageBar /></div>}
+        <div className="h-12"></div>
     </div>
   );
 };

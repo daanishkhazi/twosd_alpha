@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
@@ -6,6 +7,7 @@ import View from "../components/View";
 import { useSession } from "next-auth/react";
 import ScrollingBloom from "../components/scrollingBloom";
 import { useState, useEffect } from "react";
+import Script from 'next/script';
 
 
 
@@ -14,23 +16,13 @@ export default function Home() {
 
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
-  // const [scrolling, setScrolling] = useState(false);
-  
-  // useEffect(() => {
-  //   setScrollProgress(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5))
-  // }, [])
-
   
 
   useEffect(() => {
     const onScroll = (e: any) => {
-      // const target: EventTarget = e.target;
-      // const targetDiv: HTMLDivElement = target as HTMLDivElement;
       setScrollTop(e.target.documentElement.scrollTop);
       setScrollProgress(Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1))
       document.body.style.setProperty('--scroll', `${Math.min(Math.max(0, ((window.pageYOffset / (document.body.offsetHeight - window.innerHeight))-0.2)*6.5),1)}`);
-
-      // setScrolling(e.target.documentElement.scrollTop > scrollTop);
     };
     window.addEventListener("scroll", onScroll);
 
@@ -39,19 +31,24 @@ export default function Home() {
   console.log('parent', scrollProgress)
 
   return (
-    <Layout>
-      <div>
-        <div className="absolute top-0 left-0 w-full h-[50vh] mask-head -z-10">
+    <Layout hideNavBar={scrollTop <= 700}>
+      <div className="min-h-screen justify-center items-center">
+        <div className="absolute top-0 left-0 w-full h-[70vh] clip-it -z-10">
           <Image
             src="/herobg.svg"
             width={2560}
             height={1920}
             alt="Home Background"
           />
+          {/* <canvas id="gradient-canvas" data-js-darken-top></canvas>
+          <Script id="show-banner">
+            {`var gradient = new Gradient();
+              gradient.initGradient("#gradient-canvas", "#ef008f","#6ec3f4", "#7038ff", "#ffba27")`}
+          </Script> */}
         </div>
-        <div className="w-full h-full min-h-screen flex flex-col pt-48 px-12 items-center z-10">
+        <div className="w-full justify-center min-h-screen flex flex-col px-12 items-center z-10">
           <h1 className="text-7xl font-heading font-bold text-gray-800 text-center mb-12">
-            AI Tutors That Don&apos;t Suck
+            AI Tutors at your fingertips
           </h1>
           {status === "authenticated" ? (
             <Link
@@ -69,50 +66,38 @@ export default function Home() {
               Sign up or log in to get started now ➞
             </Link>
           )}
-          <Image
-            src="/banner.gif"
-            width={750}
-            height={500}
-            alt="Home Image"
-            className="flex flex-col items-start rounded-box shadow-2xl border-4 border-secondary-400 my-2 "
-          />
-        </div>
-        <div className="flex flex-col items-center justify-items-center w-full min-h-screen my-12">
-          <h1 className="text-5xl font-heading font-bold text-gray-800 text-center mt-12 mb-6 px-12">
-            Ok what is an AI tutor?
-          </h1>
-          <div className="flex flex-col items-center w-1/5 px-12" />
-          <p className="text-lg text-gray-600 text-left items-center w-3/5 mb-18">
-            Laera is what you get if your smart friend and Google had a baby. It
-            is a personalized AI tutor backed by an enormous body of knowledge
-            across Biology, History, Computer Science, Medicine, Law and more.
-            <br />
-            <br />
-            In 1984, educational psychologist Benjamin Bloom famously discovered
-            what would be called{" "}
-            <Link
-              className="text-primary-500"
-              href="https://en.wikipedia.org/wiki/Bloom%27s_2_sigma_problem"
-            >
-              Bloom&apos;s 2 Sigma Problem
-            </Link>
-            : one-on-one tutors improve student performance by upwards of 2
-            standard deviations 🤯. We built Laera to make personalized
-            education accessible to any student on the planet.
-          </p>
-          <div className="flex flex-col items-center w-1/5 px-12" />
-          {/* <View direction="bottom"> */}
-            {/* <Image
-              src="/bloom2sig.svg"
-              width={900}
-              height={546}
+          <div className="max-w-screen-l md:w-full lg:max-w-1/2 flex justify-center items-center">
+            <Image
+              src="/banner.gif"
+              width={800}
+              height={500}
               alt="Home Image"
-              className="flex flex-col p-6 items-start rounded-box shadow-lg border-4 border-primary-400 my-6"
-            /> */}
-            <div className="flex w-7/12 my-24">
+              className="flex flex-col items-center justify-center rounded-box shadow-2xl border-4 border-secondary-400 my-2 "
+            />
+          </div>
+        </div>
+        <div className="w-full flex flex-col items-center my-12 p-16">
+          <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-20 px-12">
+            The teacher you&apos;ve been looking for
+          </h1>
+          <div className="flex justify-center items-center max-h-5/12 md:w-full lg:w-1/2 mb-16 p-8 rounded-2xl border-8 border-primary-400 shadow-xl border-secondary-400">
             <ScrollingBloom scrollProgress={scrollProgress}/>
+          </div>
+          <div className="flex flex-col items-center max-w-screen-lg w-1/5 px-12" />
+            <div className="text-2xl max-w-screen-lg text-gray-600 text-left justify-center items-center w-3/5">
+              The {"  "}
+              <Link
+                className="text-primary-500"
+                href="https://en.wikipedia.org/wiki/Bloom%27s_2_sigma_problem"
+              >
+                single most effective thing 
+              </Link>
+              {"  "} that you can do to improve your performance at school is to learn from a personal tutor.
+              <br></br>
+              <br></br>
+              With our AI-powered tutors and their enormous body of knowledge across Biology, History, Computer Science, and more, 
+              the full power of personalized, dedicated instruction is finally available to you - on your own terms.
             </div>
-          {/* </View> */}
         </div>
       </div>
       <div className="mask-it">
@@ -182,7 +167,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="flex flex-row items-center">
         <div className="flex flex-col items-center w-full my-12">
           <View direction="bottom">
             <h1 className="text-5xl font-heading font-bold text-gray-800 text-center mb-12 px-12">
@@ -190,7 +175,7 @@ export default function Home() {
             </h1>
           </View>
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <div className="flex flex-col items-center w-3/5">
+          <div className="flex flex-col items-center max-w-screen-lg w-3/5">
             <View direction="bottom">
               <Catch />
             </View>
