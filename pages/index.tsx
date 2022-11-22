@@ -88,7 +88,7 @@ export default function Home() {
           )}
           <div className="w-[42rem] h-[40rem] flex justify-center relative">
             <Image
-              src="/image1.gif"
+              src="/banner.gif"
               fill
               alt="Home Image"
               className="rounded-box shadow-2xl border-4 border-secondary-400 my-2 object-cover"
@@ -151,7 +151,7 @@ export default function Home() {
               <View direction="left">
                 <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
                   <Image
-                    src="/image4.gif"
+                    src="/banner.gif"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
@@ -162,7 +162,7 @@ export default function Home() {
                 <div className="flex flex-col justify-center self-start px-6 w-[20rem] h-[20rem] relative">
                   {" "}
                   <Image
-                    src="/image3.gif"
+                    src="/banner.gif"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
                   {" "}
                   <Image
-                    src="/image2.gif"
+                    src="/banner.gif"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
