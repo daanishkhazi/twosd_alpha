@@ -221,7 +221,7 @@ Animation classes.
     }
 }
 
-@keyframes slideme {
+@keyframes slidemeIcon {
   from { 
     transform: translate(0)
   }
@@ -394,7 +394,7 @@ Animation classes.
   position: relative;
   /* transform-style: preserve-3d; */
   /* transform-origin: 23.5% 25%; */
-  animation-name: slideme;
+  animation-name: slidemeIcon;
   animation-duration: 2.2s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -520,7 +520,7 @@ Animation classes.
   to {
     /* transform-origin: bottom;
     transform: translateX(27%) translateY(3.5%) scaleX(0.5) scaleY(1.7); */
-    stroke: #FF8B20;
+    stroke: #E8798A;
     /* transform-origin: center bottom;
     transform: scaleY(1.8); */
   }

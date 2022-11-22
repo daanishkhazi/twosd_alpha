@@ -43,3 +43,27 @@ a.activeScrollElement {
     mask-image: linear-gradient(to top, rgba(0, 0, 0, 1.0) 85%, transparent 100%);    
   }
 }
+
+.canvas-container {
+  overflow: hidden;
+  resize: both;
+  border: 1px solid black;
+  width: 600px;
+  height: 600px;
+  min-height: 200px;
+  min-width: 200px;
+  max-height: 800px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.canvas-container::after {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 1em solid yellow;
+  border-left: 1em solid transparent;
+}

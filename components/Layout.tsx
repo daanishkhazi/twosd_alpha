@@ -6,13 +6,14 @@ import { useRouter } from "next/router";
 
 type Props = {
   children?: ReactNode;
+  hideNavBar?: boolean;
 };
 
 // We declare a Props type here to define the type of the props object that
 // will be passed to the Layout component. This is a good practice to follow
 // when you are writing components in React with TypeScript.
 
-const Layout: React.FC<Props> = ({ children }: Props) => {
+const Layout: React.FC<Props> = ({ children, hideNavBar }: Props) => {
   const router = useRouter();
   return (
     <div>
@@ -24,7 +25,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      {router.pathname != "/" && <Navbar route={router.pathname} />}
+      {!hideNavBar && <Navbar route={router.pathname} />}
       {children}
       <Footer />
     </div>

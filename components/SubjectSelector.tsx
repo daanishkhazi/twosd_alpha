@@ -10,7 +10,7 @@ const subjectDescriptions: { [key: string]: string } = {
   "US History":
     "Ross is an advanced Artifical Intelligence well versed in US History. Ask him for explanations, advice, or just to chat!",
   "Computer Science":
-    "Monica is an advanced Artifical Intelligence well versed in Computer Science. Ask her for explanations, advice, or just to chat!",
+    "Monica is an advanced Artifical Intelligence well versed in CS. Ask her for explanations, advice, or just to chat!",
   Law: "Phoebe is an advanced Artifical Intelligence well versed in Law. Ask her for explanations, advice, or just to chat!",
   "World History":
     "Chandler is an advanced Artifical Intelligence well versed in World History. Ask him for explanations, advice, or just to chat!",
@@ -19,7 +19,7 @@ const subjectDescriptions: { [key: string]: string } = {
 const subjectNames: { [key: string]: string } = {
   Biology: "Rachel (Biology)",
   "US History": "Ross (US History)",
-  "Computer Science": "Monica (Computer Science)",
+  "Computer Science": "Monica (CS)",
   Law: "Phoebe (Law)",
   "World History": "Chandler (World History)",
 };
