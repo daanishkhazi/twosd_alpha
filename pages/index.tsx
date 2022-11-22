@@ -88,7 +88,7 @@ export default function Home() {
           )}
           <div className="w-[42rem] h-[40rem] flex justify-center relative">
             <Image
-              src="/banner.gif"
+              src="https://homegifs.s3.us-west-2.amazonaws.com/image1.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095317Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a54497e730c96398ed75fb10b309c8b247db17c4e685f0908e21c5a1fb70a2a8"
               fill
               alt="Home Image"
               className="rounded-box shadow-2xl border-4 border-secondary-400 my-2 object-cover"
@@ -151,7 +151,7 @@ export default function Home() {
               <View direction="left">
                 <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
                   <Image
-                    src="/banner.gif"
+                    src="https://homegifs.s3.us-west-2.amazonaws.com/image2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095423Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f8c78dde0ff7b498bc88ff3f045bd7ed238cba5de84ba65a16fb3368fe2a94d7"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
@@ -162,7 +162,7 @@ export default function Home() {
                 <div className="flex flex-col justify-center self-start px-6 w-[20rem] h-[20rem] relative">
                   {" "}
                   <Image
-                    src="/banner.gif"
+                    src="https://homegifs.s3.us-west-2.amazonaws.com/image3.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095446Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=95caa118ae68d009ea410510323e53e5c60501735e9f93bda3fce1855bca980b"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
                   {" "}
                   <Image
-                    src="/banner.gif"
+                    src="https://homegifs.s3.us-west-2.amazonaws.com/image4.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095525Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00a8f1c0cfdf9c5ff28a916ad13421fedd0a30a6512d7fcce001d57978f9e8f1"
                     fill
                     alt="Home Image"
                     className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
