@@ -30,7 +30,7 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
                       {past_query_output[0]}
                     </div>
                   </div>
-                  {past_query_output[1] == "" ?
+                  {past_query_output[1] === "" ?
                     <div className="flex justify-end w-1/6 max-h-12 pt-2 pl-2">
                       <LoadingSymbol color={"#FFFFFF"} />
                     </div> 
