@@ -12,12 +12,7 @@ const OnWaitlist: React.FC = () => {
         <p className="text-xl text-gray-600">
           We&apos;re currently in beta, so you&apos;ll be on the waitlist for a
           teeny bit. We&apos;ll send you an email when you&apos;re off the
-          waitlist and can start using Laera! Ping us on
-          <Link href="https://ctt.ac/74ecJ" className="text-primary-500">
-            {" "}
-            Twitter{" "}
-          </Link>
-          in the meantime :&#41;
+          waitlist and can start using Laera!
         </p>
       </div>
     </Layout>

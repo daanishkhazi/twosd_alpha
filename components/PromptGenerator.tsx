@@ -8,14 +8,16 @@ const PromptGenerator = (props: PromptGeneratorProps) => {
   const size = props.size;
   const animate = props.animate;
 
-  const textConfig = (size === "small" ? "text-xs" : "")
-  const spacingConfig = (size === "small" ? "" : "pt-7")
-  const bubbleConfig = (size === "small" ? "px-1 py-2" : "px-4 py-3")
-  const animateConfig = (animate ? "animate-pulser" : "")
+  const textConfig = size === "small" ? "text-xs" : "";
+  const spacingConfig = size === "small" ? "" : "pt-7";
+  const bubbleConfig = size === "small" ? "px-2 py-2" : "px-4 py-3";
+  const animateConfig = animate ? "animate-pulser" : "";
 
   if (prompts) {
     return (
-      <div className={`flex flex-row flex-wrap justify-center ${spacingConfig} ${textConfig}`}>
+      <div
+        className={`flex flex-row flex-wrap justify-center ${spacingConfig} ${textConfig}`}
+      >
         {prompts.map((p: Prompt, index: number) => {
           if (selectedPrompt && p.description != selectedPrompt.description) {
             return (
