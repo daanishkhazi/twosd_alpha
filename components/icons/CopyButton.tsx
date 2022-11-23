@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const CopyButton = (props: { copied: boolean }) => {
     const copied = props.copied; 
-    console.log(copied) 
     
     return (
     copied ? (<div className="flex pl- w-full h-full items-center justify-end">
