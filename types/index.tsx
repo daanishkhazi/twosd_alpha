@@ -2,10 +2,10 @@ import { DefaultSession } from "next-auth";
 
 export interface Prompt {
   description: string;
-  gpt3Prefix: string;
-  placeholder: string;
-  outputLimit: number;
-  charLimit: number;
+  gpt3Prefix?: string;
+  placeholder?: string;
+  outputLimit?: number;
+  charLimit?: number;
 }
 
 export interface PromptSet {
@@ -26,6 +26,8 @@ export interface PromptGeneratorProps {
   prompts: Array<Prompt> | null;
   selectedPrompt: Prompt | null;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
+  size: String;
+  animate: boolean;
 }
 
 export interface QueryInputProps {
