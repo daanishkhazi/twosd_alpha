@@ -25,7 +25,8 @@ const Layout: React.FC<Props> = ({ children, hideNavBar }: Props) => {
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      {!hideNavBar && <Navbar route={router.pathname} />}
+      <Navbar route={router.pathname} />
+      {/* {!hideNavBar && <Navbar route={router.pathname} />} */}
       {children}
       <Footer />
     </div>
