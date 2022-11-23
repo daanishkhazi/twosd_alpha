@@ -27,6 +27,7 @@ export interface PromptGeneratorProps {
   selectedPrompt: Prompt | null;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<Prompt | null>>;
   size: String;
+  animate: boolean;
 }
 
 export interface QueryInputProps {
