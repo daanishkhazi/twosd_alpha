@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import ScrollingBloom from "../components/scrollingBloom";
 import { useState, useEffect } from "react";
 import Script from "next/script";
+import QueryOutputAnimation from "../components/QueryOutputAnimation";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -48,7 +49,27 @@ export default function Home() {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
-  console.log("parent", scrollProgress);
+
+  const sample_query_outputs_1 = [
+    ['What is dynamic typing and what are some of its associated challenges?', 
+      'Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.'],
+    ["What is the difference between a cell and a tissue?", "GET ANSWER LATER"],
+    ["What were the main causes of the French Revolution?", "GET ANSWER LATER"],
+  ]
+
+  const sample_query_outputs_2 = [
+    ['What is dynamic typing and what are some of its associated challenges?', 
+      'Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.'],
+    ["What is the difference between a cell and a tissue?", "GET ANSWER LATER"],
+    ["What were the main causes of the French Revolution?", "GET ANSWER LATER"],
+  ]
+
+  const sample_query_outputs_3 = [
+    ['What is dynamic typing and what are some of its associated challenges?', 
+      'Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.'],
+    ["What is the difference between a cell and a tissue?", "GET ANSWER LATER"],
+    ["What were the main causes of the French Revolution?", "GET ANSWER LATER"],
+  ]
 
   return (
     <Layout hideNavBar={scrollTop <= 700}>
@@ -97,28 +118,26 @@ export default function Home() {
         </div>
         <div className="w-full flex flex-col items-center mb-12 p-16">
           <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-12 px-12">
-            Tutors Drastically Improve Outcomes
+            Get your grades up with Laera
           </h1>
           <div className="flex justify-center items-center max-h-5/12 md:w-full lg:w-1/2 mb-16 p-8 rounded-2xl border-8 border-primary-400 shadow-xl border-secondary-400">
             <ScrollingBloom scrollProgress={scrollProgress} />
           </div>
           <div className="flex flex-col items-center max-w-screen-lg w-1/5 px-12" />
           <div className="text-2xl max-w-screen-lg text-gray-600 text-left justify-center items-center w-3/5">
-            The {"  "}
+            One-on-one instruction is the {"  "}
             <Link
               className="text-primary-500"
               href="https://en.wikipedia.org/wiki/Bloom%27s_2_sigma_problem"
             >
-              single most effective thing
+              single most effective way
             </Link>
-            {"  "} that you can do to improve your grades at school is learn
-            from a personal tutor.
+            {"  "} for you to improve your performance at school.
             <br></br>
             <br></br>
-            Unfortunately, they are usually crazy expensive. Get personalized
-            instruction without breaking the bank from Laera. Our AI-powered
-            tutors boast an enormous body of knowledge across Biology, History,
-            Computer Science, and more. AP and IB courses are hard -{" "}
+            Laera gives you access to personalized tutoring on your own terms - and without breaking the bank. 
+            Our AI-powered tutors boast an enormous body of knowledge across Biology, History,
+            Computer Science, and more. Let us help you master your AP and IB coursework -{" "}
             <Link className="text-primary-500" href="/api/auth/signin">
               {" "}
               get started now for free.
@@ -127,83 +146,98 @@ export default function Home() {
         </div>
       </div>
       <div className="mask-it">
-        <div className="flex flex-col pt-32 pb-48 px-24 items-center z-10 bg-[url('/herobg2.svg')] mask-up">
-          <View direction="bottom">
+        <div className="flex flex-col pt-32 pb-48 px-24 items-center z-10 bg-[url('/herobg2.svg')]">
+          {/* <View direction="bottom">
             <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-12 px-12 z-30">
               Knowledgable and Easy to Understand
             </h1>
-          </View>
+          </View> */}
           <div className="flex flex-col items-center w-1/5 px-12" />
-          <div className="flex flex-col items-center max-w-screen-lg w-3/5">
-            <div className="grid grid-cols-2 gap-4">
-              <View direction="left">
-                <div className="flex flex-col justify-center px-6">
-                  <h1 className="text-3xl font-heading font-bold text-gray-800 text-left">
-                    Ask targeted questions
-                  </h1>
-                  <p className="text-xl mt-2 text-gray-600 text-left italic">
-                    &quot;What is the difference between a cell and a
-                    tissue?&quot;, &quot;What caused the French
-                    Revolution?&quot;, etc.
-                  </p>
-                </div>
-              </View>
-              <View direction="left">
-                <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
-                  <Image
-                    src="https://homegifs.s3.us-west-2.amazonaws.com/image2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095423Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f8c78dde0ff7b498bc88ff3f045bd7ed238cba5de84ba65a16fb3368fe2a94d7"
-                    fill
-                    alt="Home Image"
-                    className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                  />
-                </div>
-              </View>
-              <View direction="right">
-                <div className="flex flex-col justify-center self-start px-6 w-[20rem] h-[20rem] relative">
-                  {" "}
-                  <Image
-                    src="https://homegifs.s3.us-west-2.amazonaws.com/image3.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095446Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=95caa118ae68d009ea410510323e53e5c60501735e9f93bda3fce1855bca980b"
-                    fill
-                    alt="Home Image"
-                    className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                  />{" "}
-                </div>
-              </View>
-              <View direction="right">
-                <div className="flex flex-col justify-center px-6">
-                  <h1 className="text-3xl font-heading font-bold text-gray-800 text-right">
-                    Deepen your understanding
-                  </h1>
-                  <p className="text-xl mt-2 text-gray-600 text-right italic">
-                    &quot;Can you explain the intuition behind by cells need
-                    ATP?&quot;, &quot;Does DFS always require recursion?&quot;,
-                    etc.
-                  </p>
-                </div>
-              </View>
-              <View direction="left">
-                <div className="flex flex-col justify-center px-6">
-                  <h1 className="text-3xl font-heading font-bold text-gray-800 text-left">
-                    Clear any doubts
-                  </h1>
-                  <p className="text-xl mt-2 text-gray-600 text-left italic">
-                    &quot;Why don&apos;t all governments use the same
-                    currency?&quot;, &apos;Why doesn&apos;t my code work?&apos;,
-                    etc.
-                  </p>
-                </div>
-              </View>
-              <View direction="left">
-                <div className="flex flex-col justify-center self-end px-6 w-[20rem] h-[20rem] relative">
-                  {" "}
-                  <Image
-                    src="https://homegifs.s3.us-west-2.amazonaws.com/image4.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095525Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00a8f1c0cfdf9c5ff28a916ad13421fedd0a30a6512d7fcce001d57978f9e8f1"
-                    fill
-                    alt="Home Image"
-                    className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                  />{" "}
-                </div>
-              </View>
+          <div className="flex flex-col items-center justify-center min-h-1/2 max-w-screen-lg w-4/5">
+            <div className="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-24 items-center">
+              <div className="col-span-1">
+                <View direction="left">
+                  <div className="flex flex-col justify-center items-center px-6">
+                    <h1 className="text-5xl font-heading font-bold text-gray-800 text-right">
+                      Ask targeted questions
+                    </h1>
+                    {/* <p className="text-xl mt-2 text-gray-600 text-right italic">
+                      &quot;What is the difference between a cell and a
+                      tissue?&quot;, &quot;What caused the French
+                      Revolution?&quot;, etc.
+                    </p> */}
+                  </div>
+                </View>
+              </div>
+              <div className="col-span-2">
+                <View direction="left">
+                  <div className="flex flex-col justify-center self-end px-6 w-full h-full relative">
+                    {/* <Image
+                      src="https://homegifs.s3.us-west-2.amazonaws.com/image2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095423Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f8c78dde0ff7b498bc88ff3f045bd7ed238cba5de84ba65a16fb3368fe2a94d7"
+                      fill
+                      alt="Home Image"
+                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
+                    /> */}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_1} />}
+                  </div>
+                </View>
+              </div>
+              <div className="col-span-2">
+                <View direction="right">
+                  <div className="flex flex-col justify-center self-start px-6 w-full h-full relative">
+                    {/* {" "}
+                    <Image
+                      src="https://homegifs.s3.us-west-2.amazonaws.com/image3.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095446Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=95caa118ae68d009ea410510323e53e5c60501735e9f93bda3fce1855bca980b"
+                      fill
+                      alt="Home Image"
+                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
+                    />{" "} */}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_2} />}
+                  </div>
+                </View>
+              </div>
+              <div className="col-span-1">
+                <View direction="right">
+                  <div className="flex flex-col justify-center px-6">
+                    <h1 className="text-5xl font-heading font-bold text-gray-800 text-left">
+                      Deepen your understanding
+                    </h1>
+                    {/* <p className="text-xl mt-2 text-gray-600 text-left italic">
+                      &quot;Can you explain the intuition behind by cells need
+                      ATP?&quot;, &quot;Does DFS always require recursion?&quot;,
+                      etc.
+                    </p> */}
+                  </div>
+                </View>
+              </div>
+              <div className="col-span-1">
+                <View direction="left">
+                  <div className="flex flex-col justify-center px-6">
+                    <h1 className="text-5xl font-heading font-bold text-gray-800 text-right">
+                      Clear any doubts
+                    </h1>
+                    {/* <p className="text-xl mt-2 text-gray-600 text-right italic">
+                      &quot;Why don&apos;t all governments use the same
+                      currency?&quot;, &apos;Why doesn&apos;t my code work?&apos;,
+                      etc.
+                    </p> */}
+                  </div>
+                </View>
+              </div>
+              <div className="col-span-2">
+                <View direction="left">
+                  <div className="flex flex-col justify-center self-end px-6 w-full h-full relative">
+                    {/* {" "}
+                    <Image
+                      src="https://homegifs.s3.us-west-2.amazonaws.com/image4.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095525Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00a8f1c0cfdf9c5ff28a916ad13421fedd0a30a6512d7fcce001d57978f9e8f1"
+                      fill
+                      alt="Home Image"
+                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
+                    />{" "} */}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_3} />}
+                  </div>
+                </View>
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-center w-1/5 px-12" />
