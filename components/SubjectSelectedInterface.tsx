@@ -56,6 +56,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   const selectedSubject = props.selectedSubject;
   const setSelectedSubject = props.setSelectedSubject;
   const handleClear = props.handleClear;
+  const animate = props.animate;
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -74,6 +75,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
         setSelectedPrompt={setSelectedPrompt}
         selectedPrompt={selectedPrompt}
         size={"large"}
+        animate={animate}
       />
       <QueryInput
         handleSubmit={handleSubmit}
