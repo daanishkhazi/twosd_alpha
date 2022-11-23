@@ -81,12 +81,17 @@ module.exports = {
           "0%": { transform: "translateX(-20%)" },
           "20%": { transform: "translateX(0)" },
         },
+        pulser: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.4)' },
+        }
       },
       animation: {
         "fade-in": "fadeIn 1s linear",
         bottom: "bottom 2s ease-in-out",
         left: "left 2s ease-in-out",
         right: "right 2s ease-in-out",
+        pulser: 'pulser 0.6s ease-in-out 1',
       },
     },
   },

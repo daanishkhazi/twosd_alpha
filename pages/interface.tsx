@@ -195,6 +195,7 @@ export default function Interface() {
     selectedSubject: selectedSubject,
     setSelectedSubject: setSelectedSubject,
     handleClear: handleClear,
+    size: "large"
   };
 
   if (status === "unauthenticated") {

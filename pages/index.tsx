@@ -9,6 +9,7 @@ import ScrollingBloom from "../components/scrollingBloom";
 import { useState, useEffect } from "react";
 import Script from "next/script";
 import QueryOutputAnimation from "../components/QueryOutputAnimation";
+import InterfaceAnimation from "../components/InterfaceAnimation";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -50,6 +51,13 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
 
+  const sample_query_outputs_0 = [
+    ['What is dynamic typing and what are some of its associated challenges?               ', 
+      'Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.', "Ask an open ended question"],
+    ["What is the difference between a cell and a tissue?               ", "GET ANSWER LATER", "What's the difference between..."],
+    ["What were the main causes of the French Revolution?               ", "GET ANSWER LATER", "Ask an open ended question"],
+  ]
+
   const sample_query_outputs_1 = [
     ['What is dynamic typing and what are some of its associated challenges?', 
       'Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.'],
@@ -87,8 +95,8 @@ export default function Home() {
               gradient.initGradient("#gradient-canvas", "#ef008f","#6ec3f4", "#7038ff", "#ffba27")`}
           </Script> */}
         </div>
-        <div className="w-full justify-center min-h-screen flex flex-col px-12 items-center z-10">
-          <h1 className="text-7xl font-heading font-bold text-gray-800 text-center mb-12">
+        <div className="w-full justify-center pt-14 min-h-screen flex flex-col px-12 items-center z-10">
+          <h1 className="text-6xl font-heading font-bold text-gray-800 text-center">
             AI Tutors for AP, IB and More
           </h1>
           {status === "authenticated" ? (
@@ -102,19 +110,20 @@ export default function Home() {
           ) : (
             <Link
               href="/api/auth/signin"
-              className="hover:-translate-y-0.5 transition ease-out delay-50 mt-4 px-4 py-2 text-gray-600"
+              className="hover:-translate-y-0.5 transition ease-out delay-50 mt-4 mb-8 px-4 py-2 bg-base-100 border-4 border-secondary-400 rounded-full text-gray-600"
             >
               Sign up or log in to get started now ➞
             </Link>
           )}
-          <div className="w-[42rem] h-[40rem] flex justify-center relative">
-            <Image
+          {/* <div className="flex w-[42rem] h-[35rem] border-8 border-secondary-400 items-end bg-white px-16 relative overflow-hidden"> */}
+            {/* <Image
               src="https://homegifs.s3.us-west-2.amazonaws.com/image1.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095317Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a54497e730c96398ed75fb10b309c8b247db17c4e685f0908e21c5a1fb70a2a8"
               fill
               alt="Home Image"
               className="rounded-box shadow-2xl border-4 border-secondary-400 my-2 object-cover"
-            />
-          </div>
+            /> */}
+          <InterfaceAnimation sample_query_outputs={sample_query_outputs_0}/>
+          {/* </div> */}
         </div>
         <div className="w-full flex flex-col items-center mb-12 p-16">
           <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-12 px-12">
@@ -178,7 +187,7 @@ export default function Home() {
                       alt="Home Image"
                       className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
                     /> */}
-                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_1} />}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_1} dynamic={true} textSize={"text-xl"}/>}
                   </div>
                 </View>
               </div>
@@ -192,7 +201,7 @@ export default function Home() {
                       alt="Home Image"
                       className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
                     />{" "} */}
-                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_2} />}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_2} dynamic={true} textSize={"text-xl"}/>}
                   </div>
                 </View>
               </div>
@@ -234,7 +243,7 @@ export default function Home() {
                       alt="Home Image"
                       className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
                     />{" "} */}
-                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_3} />}
+                    {scrollTop >= 1240 && <QueryOutputAnimation sample_query_outputs={sample_query_outputs_3} dynamic={true} textSize={"text-xl"}/>}
                   </div>
                 </View>
               </div>

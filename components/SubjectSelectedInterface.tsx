@@ -73,6 +73,7 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
         prompts={prompts}
         setSelectedPrompt={setSelectedPrompt}
         selectedPrompt={selectedPrompt}
+        size={"large"}
       />
       <QueryInput
         handleSubmit={handleSubmit}
