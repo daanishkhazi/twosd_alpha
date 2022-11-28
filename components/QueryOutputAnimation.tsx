@@ -65,19 +65,11 @@ const QueryOutputAnimation = (props: {sample_query_outputs: Array<Array<string>>
                         <CopyButton copied={false}/>
                     </div>
                     }
-                    {/* </div> */}
                     </div>}
             </div>
             {currentOutput !== "" ? 
             <div className={`flex pt-6 p-4 italic ${outputTextSize} items-center`}>
-                {/* {sample_query_output[1] != "" ? ( */}
                 <div className="flex items-center break-words">{currentOutput}</div>
-                {/* ) 
-                : (
-                <div className="flex items-center justify-center h-16">
-                    <LoadingSymbol color={"#EE909C"} />
-                </div>
-                )} */}
             </div> : null}
         </div>
         );

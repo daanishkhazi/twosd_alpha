@@ -11,6 +11,7 @@ declare module "next-auth" {
     tokensUsed: number;
     promptsUsed: number;
     promptsQuota: number;
+    offWaitlist?: boolean;
   }
   interface Session {
     user: {

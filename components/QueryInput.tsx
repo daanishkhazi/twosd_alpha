@@ -57,9 +57,10 @@ const QueryInput = (props: QueryInputProps) => {
           <textarea
             rows={6}
             placeholder={
-              selectedPrompt
-                ? selectedPrompt.placeholder
-                : "Please select prompt"
+              promptBalance.balance < promptBalance.quota ? (selectedPrompt
+                                                                  ? selectedPrompt.placeholder
+                                                                  : "Please select prompt") 
+                                                          : "Monthly Quota Exceeded"
             }
             className="bg-white ring-transparent focus:outline-none resize-none rounded-2xl p-5 block w-full appearance-none leading-normal"
             onChange={handleQueryChange}
@@ -80,7 +81,7 @@ const QueryInput = (props: QueryInputProps) => {
                   <Image src="/send.svg" alt="logo" height={30} width={30} />
                 </div>
               ) : (
-                "Monthly Quota Exceeded"
+                <div></div>
               )}
             </button>
           </div>
