@@ -21,20 +21,20 @@ const Navbar = (props: NavbarProps) => {
   const { promptBalance, setPromptBalance } = useBalance();
 
   // Can hide navbar if at top of page
-  // const [visible, setVisible] = useState(false);
-  // const handleScroll = () => {
-  //   if (window.scrollY > 25) {
-  //     setVisible(true);
-  //   } else {
-  //     setVisible(false);
-  //   }
-  // };
+  const [visible, setVisible] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 25) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-  const visible = true;
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  // const visible = true;
 
   useEffect(() => {
     if (session && promptBalance.balance === -1) {
