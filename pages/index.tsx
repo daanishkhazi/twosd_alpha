@@ -150,15 +150,7 @@ export default function Home() {
               Sign up or log in to get started now ➞
             </Link>
           )}
-          {/* <div className="flex w-[42rem] h-[35rem] border-8 border-secondary-400 items-end bg-white px-16 relative overflow-hidden"> */}
-          {/* <Image
-              src="https://homegifs.s3.us-west-2.amazonaws.com/image1.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095317Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a54497e730c96398ed75fb10b309c8b247db17c4e685f0908e21c5a1fb70a2a8"
-              fill
-              alt="Home Image"
-              className="rounded-box shadow-2xl border-4 border-secondary-400 my-2 object-cover"
-            /> */}
           <InterfaceAnimation sample_query_outputs={sample_query_outputs_0} />
-          {/* </div> */}
         </div>
         <div className="w-full flex flex-col items-center mb-12 p-16">
           <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-12 px-12">
@@ -191,11 +183,6 @@ export default function Home() {
       </div>
       <div className="mask-it">
         <div className="flex flex-col pt-32 pb-48 px-24 items-center z-10 bg-[url('/herobg2.svg')]">
-          {/* <View direction="bottom">
-            <h1 className="text-5xl font-heading font-bold text-gray-800 text-center my-12 px-12 z-30">
-              Knowledgable and Easy to Understand
-            </h1>
-          </View> */}
           <div className="flex flex-col items-center w-1/5 px-12" />
           <div className="flex flex-col items-center justify-center min-h-1/2 max-w-screen-lg w-4/5">
             <div className="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-24 items-center">
@@ -205,23 +192,12 @@ export default function Home() {
                     <h1 className="text-5xl font-heading font-bold text-gray-800 text-right">
                       Ask targeted questions
                     </h1>
-                    {/* <p className="text-xl mt-2 text-gray-600 text-right italic">
-                      &quot;What is the difference between a cell and a
-                      tissue?&quot;, &quot;What caused the French
-                      Revolution?&quot;, etc.
-                    </p> */}
                   </div>
                 </View>
               </div>
               <div className="col-span-2">
                 <View direction="left">
                   <div className="flex flex-col justify-center self-end px-6 w-full h-full relative">
-                    {/* <Image
-                      src="https://homegifs.s3.us-west-2.amazonaws.com/image2.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095423Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f8c78dde0ff7b498bc88ff3f045bd7ed238cba5de84ba65a16fb3368fe2a94d7"
-                      fill
-                      alt="Home Image"
-                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                    /> */}
                     {scrollTop >= 1240 && (
                       <QueryOutputAnimation
                         sample_query_outputs={sample_query_outputs_1}
@@ -235,13 +211,6 @@ export default function Home() {
               <div className="col-span-2">
                 <View direction="right">
                   <div className="flex flex-col justify-center self-start px-6 w-full h-full relative">
-                    {/* {" "}
-                    <Image
-                      src="https://homegifs.s3.us-west-2.amazonaws.com/image3.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095446Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=95caa118ae68d009ea410510323e53e5c60501735e9f93bda3fce1855bca980b"
-                      fill
-                      alt="Home Image"
-                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                    />{" "} */}
                     {scrollTop >= 1240 && (
                       <QueryOutputAnimation
                         sample_query_outputs={sample_query_outputs_2}
@@ -258,11 +227,6 @@ export default function Home() {
                     <h1 className="text-5xl font-heading font-bold text-gray-800 text-left">
                       Deepen your understanding
                     </h1>
-                    {/* <p className="text-xl mt-2 text-gray-600 text-left italic">
-                      &quot;Can you explain the intuition behind by cells need
-                      ATP?&quot;, &quot;Does DFS always require recursion?&quot;,
-                      etc.
-                    </p> */}
                   </div>
                 </View>
               </div>
@@ -272,24 +236,12 @@ export default function Home() {
                     <h1 className="text-5xl font-heading font-bold text-gray-800 text-right">
                       Clear any doubts
                     </h1>
-                    {/* <p className="text-xl mt-2 text-gray-600 text-right italic">
-                      &quot;Why don&apos;t all governments use the same
-                      currency?&quot;, &apos;Why doesn&apos;t my code work?&apos;,
-                      etc.
-                    </p> */}
                   </div>
                 </View>
               </div>
               <div className="col-span-2">
                 <View direction="left">
                   <div className="flex flex-col justify-center self-end px-6 w-full h-full relative">
-                    {/* {" "}
-                    <Image
-                      src="https://homegifs.s3.us-west-2.amazonaws.com/image4.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ7TIADCYJFRAZLFB%2F20221122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221122T095525Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00a8f1c0cfdf9c5ff28a916ad13421fedd0a30a6512d7fcce001d57978f9e8f1"
-                      fill
-                      alt="Home Image"
-                      className="flex flex-col items-start rounded-box shadow-lg border-4 border-secondary-400 my-6 object-cover"
-                    />{" "} */}
                     {scrollTop >= 1240 && (
                       <QueryOutputAnimation
                         sample_query_outputs={sample_query_outputs_3}
