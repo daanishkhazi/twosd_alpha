@@ -16,13 +16,14 @@ type Props = {
 const Layout: React.FC<Props> = ({ children, hideNavBar }: Props) => {
   const router = useRouter();
   return (
-    <div>
+    <div className="w-screen">
       <Head>
         <title>Laera — Your personalized AI tutor for AP, IB and more</title>
         <meta
           name="description"
           content="Laera — Your personalized AI tutor for AP, IB and more. History, Biology, Computer Science."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Navbar route={router.pathname} />

@@ -16,7 +16,7 @@ const PromptGenerator = (props: PromptGeneratorProps) => {
   if (prompts) {
     return (
       <div
-        className={`flex flex-row flex-wrap justify-center ${spacingConfig} ${textConfig}`}
+        className={`flex flex-row flex-wrap justify-center ${spacingConfig} text-[0.5rem] xs:text-[0.8rem] md:text-sm lg:text-md`}
       >
         {prompts.map((p: Prompt, index: number) => {
           if (selectedPrompt && p.description != selectedPrompt.description) {

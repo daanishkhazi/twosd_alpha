@@ -51,19 +51,28 @@ const Navbar = (props: NavbarProps) => {
     <nav
       className={
         route === "/"
-          ? `flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2 ${
-              visible ? "" : "hidden"
+          ? `flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 px-6 xl:px-12 py-2 ${
+              visible ? "z-50" : "-z-20"
             }`
-          : "flex items-center justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
+          : "flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
       }
+      // className="flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
     >
+      <div className="flex w-full h-full justify-between items-center">
+      {/* <div className="flex w-full items-center mr-6"> */}
       <div className="flex items-center mr-6">
         <Link href="/">
-          <Image src="/laera.svg" alt="logo" height={150} width={150} />
+          {/* <div className="flex items-center mr-6"> */}
+            <Image src="/laera.svg" alt="logo" 
+              height={150} width={150} 
+              // fill={true}
+            />
+          {/* </div> */}
         </Link>
       </div>
-      <div className="w-auto flex flex-grow justify-end">
-        <div className="">
+      {/* </div> */}
+      <div className="w-auto flex items-center justify-end">
+        {/* <div className=""> */}
           {/* <Link
             href="/interface"
             className={
@@ -124,18 +133,18 @@ const Navbar = (props: NavbarProps) => {
               </ScrollLink>
             </div>
           ) : null} */}
-        </div>
-        <div>
+        {/* </div> */}
+        <div className="flex items-center">
           {status === "loading" && <div>Loading...</div>}
           {status === "unauthenticated" && (
-            <div>
+            // <div>
               <Link
                 href="/api/auth/signin"
-                className="inline-block text-sm font-semibold text-gray-700 px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300 mt-4 lg:mt-0"
+                className="inline-block text-xs sm:text-sm font-semibold text-gray-700 px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300 lg:mt-0"
               >
                 Sign In
               </Link>
-            </div>
+            // </div>
           )}
           {status === "authenticated" && (
             <div className="flex items-center">
@@ -213,6 +222,7 @@ const Navbar = (props: NavbarProps) => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </nav>
   );
