@@ -28,6 +28,29 @@ export default function Interface() {
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
   const [subjects, setSubjects] = useState<Array<Subject> | null>(null);
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
+  // store firstExample dictionary in state
+  const [firstExample, setFirstExample] = useState<{ [key: string]: string }>({
+    Biology:
+      "You: What is the difference between DNA and RNA?\nBiology Tutor: DNA is the genetic material that makes up the chromosomes of an organism. It is a double-stranded molecule that contains the instructions for an organism's development and function. RNA is a single-stranded molecule that helps to carry out the instructions of DNA. It is also involved in the process of protein synthesis.\n",
+    "US History":
+      "You: What was the main purpose of the Declaration of Independence?\nHistory Tutor: The main purpose of the Declaration of Independence was to declare the colonies’ independence from Great Britain and to assert their right to self-governance. The Declaration was written by Thomas Jefferson and adopted by the Second Continental Congress on July 4, 1776. It outlined the grievances of the American colonies against King George III and declared that they were no longer under British rule. The Declaration also asserted that all men are created equal and have certain inalienable rights, including life, liberty, and the pursuit of happiness. Finally, it declared that any government which fails to protect these rights is illegitimate and should be overthrown.\n",
+    "Computer Science":
+      "You: What is dynamic typing and what are some of its associated challenges?\nComputer Science Tutor: Dynamic typing is a type of type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types.\n",
+    "World History":
+      "You: What was the main cause of the French Revolution?\nWorld History Tutor: The main cause of the French Revolution was the combination of political, social, and economic issues that had been building up in France for many years. Political issues included the absolute monarchy of Louis XVI, the lack of a representative government, and the privileges enjoyed by the nobility and clergy. Social issues included high taxes on the poor, food shortages, and a lack of civil liberties. Economic issues included high levels of debt, an inefficient taxation system that favored the wealthy, and a weak economy. All these factors led to widespread discontent among the French people which eventually boiled over into revolution.\n",
+  });
+  const [secondExample, setSecondExample] = useState<{ [key: string]: string }>(
+    {
+      Biology:
+        "You: Explain the intuition behind the function of the Golgi Apparatus\nBiology Tutor: The Golgi apparatus is a organelle found in eukaryotic cells. Its function is to modify, package, and transport molecules within the cell. The Golgi apparatus is made up of a series of flattened sacs that are stacked on top of each other. Molecules enter the Golgi apparatus from the endoplasmic reticulum. They then travel through the Golgi apparatus, where they are modified, before being shipped off to their final destination.\n",
+      "US History":
+        "You: What was the outcome of Gibbons v Ogden?\nHistory Tutor: The case of Gibbons v. Ogden was a landmark case in which the Supreme Court of the United States held that the power to regulate interstate commerce was vested exclusively in the federal government, not the states. The case arose from a dispute between two New York City steamboat operators, Aaron Ogden and Thomas Gibbons, over whether Gibbons had the right to operate his steamboat in New York waters. The Court's ruling had far-reaching implications for the development of the American economy and helped to solidify the power of the federal government vis-à-vis the states.\n",
+      "Computer Science":
+        "You:Explain the intuition behind when you would use UDP over TCP?\nWhile TCP is a reliable protocol that ensures that data is delivered in the order in which it is sent, UDP is an unreliable protocol that does not guarantee delivery of data. This is because UDP is a connectionless protocol that does not require acknowledgement from the receiver. UDP is often used for streaming audio and video traffic, where lost packets are less noticeable than with other types of data.\n",
+      "World History":
+        "You: Can you explain NAFTA and its significance?\nWolrd History Tutor: The North American Free Trade Agreement, often referred to simply as NAFTA, was an agreement signed by Canada, Mexico, and the United States which created a trilateral trade in North America. The agreement came into force on January 1, 1994 and eliminated most tariffs on products traded between the three countries, with a major focus on liberalizing trade in agriculture, textiles, and automobile manufacturing. The deal also sought to protect intellectual property, establish dispute resolution mechanisms, and, through side agreements, implement labor and environmental safeguards. NAFTA is significant because it establishes a commercial link between the countries of North America that would help define commerce during the next decade.",
+    }
+  );
   // TODO - initialize from DB and write back to DB on session close
   const [tokensUsed, setTokensUsed] = useState(0);
   const [tokenQuota, setTokenQuota] = useState(0);
@@ -35,7 +58,6 @@ export default function Interface() {
   const bottomRef = useRef<null | HTMLDivElement>(null);
   const { data: session, status } = useSession();
   const { promptBalance, setPromptBalance } = useBalance();
-
 
   const getPromptsAndSubjects = async () => {
     const res = await fetch("/api/subjectprompt", {
@@ -86,6 +108,8 @@ export default function Interface() {
         prompt: selectedPrompt?.gpt3Prefix,
         query: query,
         outputLimit: outputLimit,
+        firstExample: firstExample[selectedSubject?.name || ""],
+        secondExample: secondExample[selectedSubject?.name || ""],
       }),
     });
     const data = await res.json();
@@ -112,6 +136,21 @@ export default function Interface() {
     setHistory([...history, [description + " " + sentQuery, ""]]);
     const data = await sendPrompt();
     setHistory([...history, [description + " " + sentQuery, data.result]]);
+    setFirstExample((prevState) => {
+      return {
+        ...prevState,
+        [selectedSubject?.name || ""]:
+          secondExample[selectedSubject?.name || ""] || "",
+      };
+    });
+    const secondExampleContent =
+      "You: " + prefix + "Tutor: " + sentQuery + data.result;
+    setSecondExample((prevState) => {
+      return {
+        ...prevState,
+        [selectedSubject?.name || ""]: secondExampleContent,
+      };
+    });
     setTokensUsed(tokensUsed + data.usage.total_tokens);
     setPromptBalance({ ...promptBalance, balance: promptBalance.balance + 1 });
     setQuery("");
@@ -196,7 +235,7 @@ export default function Interface() {
     setSelectedSubject: setSelectedSubject,
     handleClear: handleClear,
     size: "large",
-    animate: false
+    animate: false,
   };
 
   if (status === "unauthenticated") {
