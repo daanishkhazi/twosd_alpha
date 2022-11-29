@@ -88,17 +88,18 @@ const InterfaceAnimation = (props: {
 
   return (
     <div
-      className={`flex w-[42rem] h-[28rem] border border-gray-300 rounded-box shadow-2xl ${
+      className={`flex h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw] border border-gray-300 rounded-box shadow-2xl ${
         currRenderedIndex >= 1 ? "items-end" : "items-center"
-      } bg-white px-14 relative overflow-hidden`}
+      } bg-white px-6 sm:px-14 relative overflow-hidden justify-center`}
     >
       <div
         className={`flex mask-up ${
           currRenderedIndex >= 1 ? "items-end" : "items-center"
-        } w-[42rem] h-[28rem] items-end`}
+        } h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw]`}
       >
-        <div className={`flex-row w-full relative pointer-events-none z-0`}>
+        <div className={`flex flex-col w-full relative pointer-events-nonez-0`}>
           {currRenderedIndex >= 0 && (
+          // {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[0]]}
               dynamic={false}
@@ -106,6 +107,7 @@ const InterfaceAnimation = (props: {
             />
           )}
           {currRenderedIndex >= 1 && (
+          //  {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[1]]}
               dynamic={false}
@@ -113,6 +115,7 @@ const InterfaceAnimation = (props: {
             />
           )}
           {currRenderedIndex >= 2 && (
+          // {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[2]]}
               dynamic={false}
@@ -124,24 +127,29 @@ const InterfaceAnimation = (props: {
             setSelectedPrompt={setSelectedPrompt}
             selectedPrompt={selectedPrompt}
             size={"small"}
-            animate={promptAnimationTrigger}
-          />
-          <div className="flex flex-col w-full justify-center align-center margin">
+            animate={promptAnimationTrigger}/>
+          <div className="flex flex-col w-full h-full justify-center align-center margin">
             <label></label>
-            <div className="bg-white resize-none border-4 border-secondary-400 rounded-2xl block w-full appearance-none leading-normal mt-3">
-              <textarea
+            <div className="bg-white w-full resize-none border-4 border-secondary-400 rounded-2xl appearance-none leading-normal mt-2 sm:mt-4">
+              {/* <textarea
                 rows={1}
-                className="bg-white text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-5 block w-full appearance-none leading-normal"
+                className="flex bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 w-full appearance-none leading-normal z-10"
                 disabled={true}
                 value={currentQuery}
-              />
-              <div className="flex justify-end">
+              /> */}
+              <div className="flex w-full bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 appearance-none leading-normal z-10">
+                {currentQuery}
+              </div>
+              <div className="flex justify-end py-1 z-0">
                 <div
-                  className={`${sendAnimationTrigger} inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none rounded-md disabled:bg-slate-400`}
+                  className={`${sendAnimationTrigger} relative inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none rounded-md disabled:bg-slate-400`}
                 >
-                  <div>
-                    <Image src="/send.svg" alt="logo" height={30} width={30} />
-                  </div>
+                  {/* <div> */}
+                    <Image src="/send.svg" alt="logo" 
+                      // height={30} width={30} 
+                      fill={true}
+                    />
+                  {/* </div> */}
                 </div>
               </div>
             </div>

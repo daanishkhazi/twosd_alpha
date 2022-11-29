@@ -3,7 +3,7 @@ import styles from "../styles/Interface.module.css";
 const LoadingSymbol = (props: { color: string }) => {
   const color = props.color;        
     return (
-      <div className="flex fill-current">
+      // <div className="flex fill-current">
         <svg className="h-full" viewBox="0 0 488 488" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g className={styles.iconfull} >
             <rect id="Rectangle 5" x="71.4729" y="71.4156" width="163.533" height="163.533" fill={color}/>
@@ -12,7 +12,7 @@ const LoadingSymbol = (props: { color: string }) => {
             <rect id="Rectangle 8" x="252.927" y="71.416" width="163.533" height="163.533" fill={color}/>
           </g>
         </svg>
-      </div>
+      // </div>
     )
   };
   

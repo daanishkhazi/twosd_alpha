@@ -1,7 +1,7 @@
 const RefreshIcon = () => {
     return (
         <div className="flex w-full h-full items-center justify-end">
-            <svg className="h-full hover:scale-110" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            <svg className="h-full hover:scale-110 fill-black" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 viewBox="0 0 329.028 329.028">
             <path id="XMLID_13_" d="M241.852,72.459l10.847-54.533c1.184-5.95-1.334-12.028-6.378-15.398c-5.045-3.37-11.623-3.37-16.667,0
                 L156.182,51.62c-0.004,0.003-0.008,0.006-0.012,0.009c-0.415,0.278-0.817,0.576-1.201,0.893c-0.219,0.181-0.418,0.377-0.625,0.568
