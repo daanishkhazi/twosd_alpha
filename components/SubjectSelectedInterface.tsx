@@ -1,5 +1,5 @@
 import { SubjectSelectedInterfaceProps } from "../types";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Interface.module.css";
 import LoadingSymbol from "./LoadingSymbol";
 
@@ -12,19 +12,11 @@ import { useSession } from "next-auth/react";
 import UsageBar from "./UsageBar";
 
 const subjectNames: { [key: string]: string } = {
-  Biology: "Rachel (Biology)",
-  "US History": "Ross (US History)",
-  "Computer Science": "Monica (Computer Science)",
-  Law: "Phoebe (Law)",
-  "World History": "Chandler (World History)",
-};
-
-const subjectImages: { [key: string]: string } = {
-  Biology: "/rachel.png",
-  "US History": "/ross.png",
-  "Computer Science": "/monica.png",
-  Law: "/phoebe.png",
-  "World History": "/chandler.png",
+  Biology: "Biology",
+  "US History": "US History",
+  "Computer Science": "Computer Science",
+  Law: "Law",
+  "World History": "World History",
 };
 
 const icon = (
@@ -64,51 +56,64 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   const isActive = data?.user?.isActive;
 
   useEffect(() => {
-    window.scrollTo({top: document.body.scrollHeight - 1200, behavior: 'smooth'})
+    window.scrollTo({
+      top: document.body.scrollHeight - 1200,
+      behavior: "smooth",
+    });
   }, [history]);
 
   const queryInterface = () => {
     return (
       <div>
-      <PromptGenerator
-        prompts={prompts}
-        setSelectedPrompt={setSelectedPrompt}
-        selectedPrompt={selectedPrompt}
-        size={"large"}
-        animate={animate}
-      />
-      <QueryInput
-        handleSubmit={handleSubmit}
-        handleQueryChange={handleQueryChange}
-        setSelectedPrompt={setSelectedPrompt}
-        selectedPrompt={selectedPrompt}
-        charCount={charCount}
-        query={query}
-        history={history}
-        handleClear = {handleClear}
-      />
-    </div>)
+        <PromptGenerator
+          prompts={prompts}
+          setSelectedPrompt={setSelectedPrompt}
+          selectedPrompt={selectedPrompt}
+          size={"large"}
+          animate={animate}
+        />
+        <QueryInput
+          handleSubmit={handleSubmit}
+          handleQueryChange={handleQueryChange}
+          setSelectedPrompt={setSelectedPrompt}
+          selectedPrompt={selectedPrompt}
+          charCount={charCount}
+          query={query}
+          history={history}
+          handleClear={handleClear}
+        />
+      </div>
+    );
   };
 
   return (
     <div className="flex-col min-h-full justify-center">
-      {collapsed ? 
+      {collapsed ? (
         <div className="flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-white top-[4.5rem] justify-start"></div>
-        : <div className="flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>}
-      {selectedSubject && <SubjectBanner 
-                              selectedSubject={selectedSubject} 
-                              setSelectedSubject={setSelectedSubject} 
-                              subjectNames={subjectNames}
-                              collapsed={collapsed}
-                              setCollapsed={setCollapsed}/>}
-        <div className={(history.length > 1) ?
-                            (collapsed ? "pt-2" : "pt-14") : "pt-3"  
-                            }>
-          {(history.length > 1) && <HistoryGenerator history={history} />}
+      ) : (
+        <div className="flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>
+      )}
+      {selectedSubject && (
+        <SubjectBanner
+          selectedSubject={selectedSubject}
+          setSelectedSubject={setSelectedSubject}
+          subjectNames={subjectNames}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+        />
+      )}
+      <div
+        className={history.length > 1 ? (collapsed ? "pt-2" : "pt-14") : "pt-3"}
+      >
+        {history.length > 1 && <HistoryGenerator history={history} />}
+      </div>
+      <div>{queryInterface()}</div>
+      {!isActive && (
+        <div className="flex justify-center">
+          <UsageBar />
         </div>
-        <div>{queryInterface()}</div>
-        {!isActive && <div className="flex justify-center"><UsageBar /></div>}
-        <div className="h-12"></div>
+      )}
+      <div className="h-12"></div>
     </div>
   );
 };
