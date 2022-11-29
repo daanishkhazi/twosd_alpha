@@ -47,37 +47,29 @@ const QueryOutputAnimation = (props: {sample_query_outputs: Array<Array<string>>
         <div
             className="animate-fade-in flex flex-col items-start rounded-xl shadow-lg border-4 border-primary-400 bg-white mb-6 hover:bg-gray-100 focus:outline-none focus:shadow-outline"
         >
-            <div className="flex justify-between w-full bg-primary-400 px-4">
+            <div className="flex justify-between w-full bg-primary-400 px-1 sm:px-4">
                 <div className="flex items-center max-w-5/6 pr-3"> 
-                <div className={`flex break-words font-medium ${queryTextSize} py-4`}>
+                <div className={`flex break-words font-medium text-[0.9rem] xs:text-sm sm:text-base md:text-lg lg:text-xl py-2`}>
                     {currentQuery}
                 </div>
                 </div>
                 {currentOutput === "" ?
-                <div className="flex justify-end w-1/6 max-h-12 pt-2 pl-2">
+                <div className="flex justify-end w-10 sm:w-1/6 max-h-12 pl-1">
                     <LoadingSymbol color={"#FFFFFF"} />
                 </div> 
-                : <div className={dynamic ? "flex tooltip tooltip-right justify-end w-1/6 max-h-14 py-3" : "flex justify-end w-1/6 max-h-14 py-3"} data-tip="Click to see another example!" >
-                    {dynamic ? <button className="flex w-full justify-end hover:scale-110" onClick={() => refresh()}>
+                : <div className={dynamic ? "flex tooltip tooltip-right justify-end w-1/6 max-h-14 py-3" : "flex justify-end w-1/12 sm:w-1/6 max-h-14 py-3"} data-tip="Click to see another example!" >
+                    {dynamic ? <button className="flex w-6 sm:w-full justify-end hover:scale-110" onClick={() => refresh()}>
                         <RefreshIcon/>
                     </button> : 
-                    <div className="h-5/6">
+                    <div className="flex justify-end w-6 pr-1 sm:pr-0 sm:w-full">
                         <CopyButton copied={false}/>
                     </div>
                     }
-                    {/* </div> */}
                     </div>}
             </div>
             {currentOutput !== "" ? 
-            <div className={`flex pt-6 p-4 italic ${outputTextSize} items-center`}>
-                {/* {sample_query_output[1] != "" ? ( */}
+            <div className={`flex sm:pt-6 p-2 sm:p-4 italic text-[0.6rem] xs:text-xs sm:text-sm lg:text-base items-center`}>
                 <div className="flex items-center break-words">{currentOutput}</div>
-                {/* ) 
-                : (
-                <div className="flex items-center justify-center h-16">
-                    <LoadingSymbol color={"#EE909C"} />
-                </div>
-                )} */}
             </div> : null}
         </div>
         );

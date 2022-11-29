@@ -7,10 +7,9 @@ const ScrollingBloom = (props: { scrollProgress: number }) => {
     const scrollProgress = props.scrollProgress;
     
     return (
-        <div className="flex w-full items-center justify-end">
+        <div className="flex w-full items-center justify-center">
         <svg className="h-full" viewBox="0 0 1761 1035" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g className={styles.movingCurve}>
-        {/* <g> */}
             <path 
                 d={`
                     M ${39 + (928-39)*scrollProgress} 898
@@ -24,9 +23,6 @@ const ScrollingBloom = (props: { scrollProgress: number }) => {
         </g>
         <path d="M39 898C417 898 475 448 808 448" stroke="#8D8282" strokeWidth="12" strokeDasharray="24 24"/>
         <path d="M1577 898C1199 898 1141 448 808 448" stroke="#8D8282" strokeWidth="12" strokeDasharray="24 24"/>
-
-        {/* <path d="M 928 897.999 C 1182.5 897.999 1145.5 54.0002 1302.99 54.0002" stroke="#FF8B20" strokeWidth="12"/> */}
-        {/* <path d="M 1677.99 897.999 C 1423.49 897.999 1460.49 54 1303 54" stroke="#FF8B20" strokeWidth="12"/> */}
         <g filter="url(#filter0_d_31_71)">
         <path d="M4 900H1722" stroke="black" strokeWidth="12"/>
         </g>

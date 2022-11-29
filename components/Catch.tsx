@@ -34,10 +34,10 @@ const Catch: React.FC = () => {
           {active == index ? (
             <div className="flex justify-between">
               <div className="flex flex-col">
-                <h1 className="font-heading font-bold text-2xl mt-2">
+                <h1 className="font-heading font-bold text-lg sm:text-2xl mt-2">
                   {faq.question}
                 </h1>
-                <p className="text-gray-600 mt-1 mb-2 italic">{faq.answer}</p>
+                <div className="text-gray-600 mt-1 mb-2 text-sm md:text-base italic">{faq.answer}</div>
               </div>
               <div className="flex text-primary-500 font-extrabold text-5xl leading-9">
                 -
@@ -45,7 +45,7 @@ const Catch: React.FC = () => {
             </div>
           ) : (
             <div className="flex justify-between">
-              <h1 className="flex justify-start font-heading font-bold text-2xl">
+              <h1 className="flex justify-start font-heading font-bold text-lg sm:text-2xl">
                 {faq.question}
               </h1>
               <div className="text-primary-500 font-extrabold text-4xl leading-7">

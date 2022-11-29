@@ -34,13 +34,7 @@ const InterfaceAnimation = (props: {
     animationPrompts[4]
   );
 
-  // For query//output pair:
-  //  1. type out message in textarea
-  //  2. show submit button popping out
-  //  3. add history generation element
-
   useEffect(() => {
-    // console.log('curr', currentQuery, 'end', endQuery)
     const effectWrapper = async () => {
       const timeout = setTimeout(() => {
         setCurrentQuery(endQuery.slice(0, currentQuery.length + 1));
@@ -54,8 +48,6 @@ const InterfaceAnimation = (props: {
         );
         setCurrRenderedIndex(currExampleIndex);
         setPromptAnimationTrigger(false);
-        // setEndQuery(sample_query_outputs[(currExampleIndex + 1) % sample_query_outputs.length][0])
-        // setEndOutput(sample_query_outputs[(currExampleIndex + 1) % sample_query_outputs.length][1])
       }
       return () => clearTimeout(timeout);
     };
@@ -83,7 +75,6 @@ const InterfaceAnimation = (props: {
               description: sample_query_outputs[currExampleIndex][2],
             });
             return () => clearTimeout(timeout2);
-            // if (currExampleIndex === 0) {setTimeout(() => {setCurrRenderedIndex(-1)}, 8000)}
           },
           currExampleIndex === 0 ? 6000 : 6000
         );
@@ -92,32 +83,23 @@ const InterfaceAnimation = (props: {
       }
     };
     effectWrapper();
-    // if (currExampleIndex === 0) {
-    //     console.log('trig')
-    //     if (!firstRender) {
-    //         setTimeout(() => {setCurrRenderedIndex(-1)}, 8000)
-    //     } else {
-    //         setFirstRender(false)
-    //     }
-    // }
-    // return () => clearTimeout(timeout2);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currExampleIndex]);
 
   return (
-    // <div className={`flex-row h-[35rem] ${currExampleIndex > -10 ? "items-end" : "items-center"} w-full pointer-events-none`}>
     <div
-      className={`flex w-[42rem] h-[28rem] border border-gray-300 rounded-box shadow-2xl ${
+      className={`flex h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw] border border-gray-300 rounded-box shadow-2xl ${
         currRenderedIndex >= 1 ? "items-end" : "items-center"
-      } bg-white px-14 relative overflow-hidden`}
+      } bg-white px-6 sm:px-14 relative overflow-hidden justify-center`}
     >
       <div
         className={`flex mask-up ${
           currRenderedIndex >= 1 ? "items-end" : "items-center"
-        } w-[42rem] h-[28rem] items-end`}
+        } h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw]`}
       >
-        <div className={`flex-row w-full relative pointer-events-none z-0`}>
+        <div className={`flex flex-col w-full relative pointer-events-nonez-0`}>
           {currRenderedIndex >= 0 && (
+          // {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[0]]}
               dynamic={false}
@@ -125,6 +107,7 @@ const InterfaceAnimation = (props: {
             />
           )}
           {currRenderedIndex >= 1 && (
+          //  {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[1]]}
               dynamic={false}
@@ -132,68 +115,46 @@ const InterfaceAnimation = (props: {
             />
           )}
           {currRenderedIndex >= 2 && (
+          // {true && (
             <QueryOutputAnimation
               sample_query_outputs={[sample_query_outputs[2]]}
               dynamic={false}
               textSize={"text-sm"}
             />
           )}
-          {/* <QueryOutputAnimation sample_query_outputs={[sample_query_outputs[0]]} dynamic={false} textSize={"text-sm"}/> */}
           <PromptGenerator
             prompts={animationPrompts}
             setSelectedPrompt={setSelectedPrompt}
             selectedPrompt={selectedPrompt}
             size={"small"}
-            animate={promptAnimationTrigger}
-          />
-          <div className="flex flex-col w-full justify-center align-center margin">
-            {/* <form> */}
+            animate={promptAnimationTrigger}/>
+          <div className="flex flex-col w-full h-full justify-center align-center margin">
             <label></label>
-            <div className="bg-white resize-none border-4 border-secondary-400 rounded-2xl block w-full appearance-none leading-normal mt-3">
-              <textarea
+            <div className="bg-white w-full resize-none border-4 border-secondary-400 rounded-2xl appearance-none leading-normal mt-2 sm:mt-4">
+              {/* <textarea
                 rows={1}
-                // placeholder={"Test"}
-                className="bg-white text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-5 block w-full appearance-none leading-normal"
-                // onChange={handleQueryChange}
+                className="flex bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 w-full appearance-none leading-normal z-10"
                 disabled={true}
                 value={currentQuery}
-                // maxLength={selectedPrompt ? selectedPrompt.charLimit : 0}
-                // onKeyDown={enterSubmit}
-              />
-              <div className="flex justify-end">
+              /> */}
+              <div className="flex w-full bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 appearance-none leading-normal z-10">
+                {currentQuery}
+              </div>
+              <div className="flex justify-end py-1 z-0">
                 <div
-                  // type="submit"
-                  className={`${sendAnimationTrigger} inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none rounded-md disabled:bg-slate-400`}
-                  // disabled={promptBalance.balance >= promptBalance.quota}
-                  // ref={buttonRef}
+                  className={`${sendAnimationTrigger} relative inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none rounded-md disabled:bg-slate-400`}
                 >
-                  {/* {promptBalance.balance < promptBalance.quota ? ( */}
-                  <div>
-                    <Image src="/send.svg" alt="logo" height={30} width={30} />
-                  </div>
-                  {/* // ) : (
-                        //     "Monthly Quota Exceeded"
-                        // )} */}
+                  {/* <div> */}
+                    <Image src="/send.svg" alt="logo" 
+                      // height={30} width={30} 
+                      fill={true}
+                    />
+                  {/* </div> */}
                 </div>
               </div>
             </div>
             <div className="flex justify-between items-top pt-3 px-6 text-sm text-gray-500 italic">
-              {/* <div>
-                        {selectedPrompt
-                        ? `${charCount} / ${selectedPrompt.charLimit} Characters`
-                        : ""}
-                    </div> */}
-              {/* {history.length > 1 ? (
-                        <button
-                        className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-primary-400 rounded-md hover:bg-red-500"
-                        // onClick={handleClear}
-                        >
-                        {" "}
-                        Clear History{" "}
-                        </button>
-                    ) : null} */}
             </div>
-            {/* </form> */}
           </div>
         </div>
       </div>

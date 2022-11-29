@@ -17,11 +17,11 @@ const subjectDescriptions: { [key: string]: string } = {
 };
 
 const subjectNames: { [key: string]: string } = {
-  Biology: "Rachel (Biology)",
-  "US History": "Ross (US History)",
-  "Computer Science": "Monica (CS)",
-  Law: "Phoebe (Law)",
-  "World History": "Phoebe (World History)",
+  Biology: "Biology",
+  "US History": "US History",
+  "Computer Science": "Computer Science",
+  Law: "Law",
+  "World History": "World History",
 };
 
 const subjectImages: { [key: string]: string } = {

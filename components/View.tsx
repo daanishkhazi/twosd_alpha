@@ -16,7 +16,7 @@ const View: React.FC<Props> = ({ children, direction }: Props) => {
   direction = "bottom";
 
   return (
-    <div ref={ref} className={inView ? `flex flex-col w-full animate-${direction} self-center` : ""}>
+    <div ref={ref} className={inView ? `flex flex-col w-full animate-${direction}` : ""}>
       {children}
     </div>
   );
