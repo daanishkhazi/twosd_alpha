@@ -61,7 +61,7 @@ const QueryOutputAnimation = (props: {sample_query_outputs: Array<Array<string>>
                     {dynamic ? <button className="flex w-6 sm:w-full justify-end hover:scale-110" onClick={() => refresh()}>
                         <RefreshIcon/>
                     </button> : 
-                    <div className="flex justify-end w-6 pr-1 sm:pr-0 sm:w-full">
+                    <div className="flex justify-end w-6 pr-1 sm:w-full">
                         <CopyButton copied={false}/>
                     </div>
                     }

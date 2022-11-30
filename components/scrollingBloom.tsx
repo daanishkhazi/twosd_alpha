@@ -7,8 +7,8 @@ const ScrollingBloom = (props: { scrollProgress: number }) => {
     const scrollProgress = props.scrollProgress;
     
     return (
-        <div className="flex w-full items-center justify-center">
-        <svg className="h-full" viewBox="0 0 1761 1035" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="grid justify-items-center items-center h-full w-full">
+        <svg className="h-full margin-auto" viewBox="0 0 1761 1035" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g className={styles.movingCurve}>
             <path 
                 d={`
