@@ -139,7 +139,7 @@ export default function Home() {
           {status === "authenticated" ? (
             <Link
               href="/interface"
-              className="hover:-translate-y-0.5 text-sm sm:text-base transition ease-out delay-50 my-4 px-4 py-2 text-gray-600 bg-base-100 border rounded-full shadow-md hover:shadow-lg"
+              className="hover:-translate-y-0.5 text-[0.5rem] min-[400px]:text-base sm:text-lg md:text-lg transition ease-out delay-50 my-4 px-4 py-2 text-gray-600 bg-base-100 border rounded-full shadow-md hover:shadow-lg"
             >
               Welcome back, {session.user?.name}! Speak with a
               tutor now ➞

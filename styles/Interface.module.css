@@ -223,7 +223,8 @@ Animation classes.
 
 @keyframes slidemeIcon {
   from { 
-    transform: translate(0)
+    transform: rotate(0deg) scale(1, 1);
+    transform-origin: 50% 50%;
   }
   20% {
     transform: rotate(45deg) scale(0.7069, 0.7069);
@@ -246,7 +247,7 @@ Animation classes.
     transfomr-origin: 50% 50%;
   } */
   90% {
-    transform: rotate(1440deg);
+    transform: rotate(1440deg) scale(1, 1);
     transform-origin: 50% 50%;
   }
   to {
@@ -254,6 +255,42 @@ Animation classes.
     transform-origin: 50% 50%;
   }
 }
+
+@-webkit-keyframes slidemeIcon {
+  from { 
+    -webkit-transform: rotate(0deg) scale(1, 1);
+    -webkit-transform-origin: 50% 50%;
+  }
+  20% {
+    -webkit-transform: rotate(45deg) scale(0.7069, 0.7069);
+    -webkit-transform-origin: 50% 50%;
+  }
+  /* 40% {
+    transform: rotate(405deg) scale(0.7069, 0.7069);
+    transform-origin: 50% 50%;
+  } */
+  /* 37.5% {
+    transform: rotate(135deg) scale(0.7069, 0.7069);
+    transform-origin: 50% 50%;
+  } */
+  /* 55% {
+    transform: rotate(180deg);
+    transform-origin: 50% 50%;
+  } */
+  /* 85% {
+    transform: rotate(1395deg) scale(0.7069, 0.7069);
+    transfomr-origin: 50% 50%;
+  } */
+  90% {
+    -webkit-transform: rotate(1440deg) scale(1, 1);
+    -webkit-transform-origin: 50% 50%;
+  }
+  to {
+    -webkit-transform: rotate(1440deg);
+    -webkit-transform-origin: 50% 50%;
+  }
+}
+
 
 @keyframes slideme1 {
   from {
