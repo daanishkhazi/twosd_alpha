@@ -253,7 +253,7 @@ export default function Interface() {
 
   return (
     <Layout>
-      <div className="flex justify-center">
+      <div className="flex justify-center min-h-[90vh] h-max bg-[#F9F1DC]">
         {/* <div className="fixed pointer-events-none top-0 bg-white left-0 w-full h-[13.25rem] z-20 ">
           <Image
             src="/meshbgcrop.svg"
@@ -263,9 +263,9 @@ export default function Interface() {
             className="opacity-30"
           />
         </div> */}
-        <div className="flex justify-center items-center min-h-[calc(100vh-194px)] sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-8">
+        <div className="flex justify-center items-center min-h-[calc(100vh-194px)] w-full sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-4">
           {/* TODO - somehow fix this alignment... */}
-          <div className="flex">
+          <div className="flex w-full justify-center">
             {selectedSubject ? (
               <SubjectSelectedInterface {...subjectSelectedProps} />
             ) : (

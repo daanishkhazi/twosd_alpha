@@ -53,9 +53,9 @@ const QueryInput = (props: QueryInputProps) => {
     <div className="flex flex-col justify-center align-center margin">
       <form onSubmit={handleSubmit}>
         <label></label>
-        <div className="bg-white resize-none border-4 border-secondary-400 rounded-2xl block w-full appearance-none leading-normal mt-3">
+        <div className="bg-white resize-none border-2 border-black text-sm sm:text-base shadow-neobrutalism-lg-black rounded-lg block w-full appearance-none leading-normal mt-3">
           <textarea
-            rows={6}
+            rows={4}
             placeholder={
               promptBalance.balance < promptBalance.quota ? (selectedPrompt
                                                                   ? selectedPrompt.placeholder
@@ -87,20 +87,20 @@ const QueryInput = (props: QueryInputProps) => {
           </div>
         </div>
         <div className="flex justify-between items-top pt-3 px-6 text-sm text-gray-500 italic">
-          <div ref={bottomRef}>
-            {selectedPrompt
-              ? `${charCount} / ${selectedPrompt.charLimit} Characters`
-              : ""}
-          </div>
           {history.length > 1 ? (
             <button
-              className="inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-primary-400 rounded-md hover:bg-red-500"
+              className="inline-block text-sm font-semibold text-gray-900 shadow-neobrutalism-md-secondary px-4 py-2 leading-none bg-secondary-400 rounded-md hover:bg-secondary-600"
               onClick={handleClear}
             >
               {" "}
               Clear History{" "}
             </button>
           ) : null}
+          <div ref={bottomRef}>
+            {selectedPrompt
+              ? `${charCount} / ${selectedPrompt.charLimit} Characters`
+              : ""}
+          </div>
         </div>
       </form>
     </div>

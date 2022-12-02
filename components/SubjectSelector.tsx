@@ -48,7 +48,7 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
                 className="flex-row justify-center items-center hover:scale-105 border-4 border-primary-300 transition ease-in-out delay-50 justify-center px-8 py-6 rounded-box shadow-2xl bg-white  focus:outline-none focus:shadow-outline"
                 onClick={() => setSelectedSubject(subject)}
               >
-                <div className="flex-row justify-center">
+                <div className="flex-col justify-center">
                   <div className="flex justify-center">
                     <Image
                       className="justify-center rounded-full border shadow"
@@ -58,6 +58,8 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
                       height={96}
                     />
                   </div>
+                </div>
+                <div className="flex-col justify-center">
                   <div>
                     <h2 className="flex justify-center text-left font-semibold text-xl pt-4 pb-2">
                       {subjectNames[subject.name]}
@@ -75,7 +77,7 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
     );
   } else {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-center justify-center h-1/4 py-2">
         <LoadingSymbol color={"#EE909C"} />
       </div>
     );
