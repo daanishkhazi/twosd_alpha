@@ -21,12 +21,12 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
         if (past_query_output[0] != "") {
           return (
             <div
-              className="animate-fade-in flex flex-col items-start rounded-xl shadow-lg border-4 border-primary-400 bg-white mb-6 hover:bg-gray-100 focus:outline-none focus:shadow-outline"
+              className="animate-fade-in flex flex-col items-start rounded-xl shadow-neobrutalism-lg-black border-2 border-black bg-white mb-6 hover:bg-gray-100 focus:outline-none focus:shadow-outline"
               key={index}
             >
-              <div className="flex justify-between w-full bg-primary-400 px-4">
+              <div className={`flex justify-between w-full bg-primary-400 rounded-tl-[10px] rounded-tr-[10px] ${past_query_output[1] === "" ? "rounded-bl-[10px] rounded-br-[10px]" : ""} px-4`}>
                 <div className="flex items-center max-w-5/6 pr-3">
-                  <div className="flex break-words font-medium text-xl py-4">
+                  <div className="flex break-words font-medium text-base sm:text-xl py-4">
                     {past_query_output[0]}
                   </div>
                 </div>
@@ -46,9 +46,9 @@ const HistoryGenerator = (props: { history: Array<Array<string>> }) => {
                 )}
               </div>
               {past_query_output[1] !== "" ? (
-                <div className="flex pt-6 p-4 items-center">
+                <div className="flex p-4 items-center">
                   {past_query_output[1] != "" ? (
-                    <div className="flex items-center break-words">
+                    <div className="flex items-center text-sm break-words">
                       {past_query_output[1]}
                     </div>
                   ) : (

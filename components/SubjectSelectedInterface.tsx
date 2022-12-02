@@ -10,6 +10,7 @@ import SubjectBanner from "./SubjectBanner";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import UsageBar from "./UsageBar";
+import PromptSelector from "./PromptSelector";
 
 const subjectNames: { [key: string]: string } = {
   Biology: "Biology",
@@ -72,6 +73,13 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
           size={"large"}
           animate={animate}
         />
+        <PromptSelector 
+          prompts={prompts}
+          setSelectedPrompt={setSelectedPrompt}
+          selectedPrompt={selectedPrompt}
+          selectedSubject={selectedSubject}
+          setSelectedSubject={setSelectedSubject}
+        />
         <QueryInput
           handleSubmit={handleSubmit}
           handleQueryChange={handleQueryChange}
@@ -87,11 +95,12 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
   };
 
   return (
-    <div className="flex-col min-h-full justify-center">
+    <div className="flex-col min-h-full w-full ml-1 pr-4 justify-center">
+      <div className="flex sm:hidden fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] top-[4.5rem] justify-start"></div>
       {collapsed ? (
-        <div className="flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-white top-[4.5rem] justify-start"></div>
+        <div className="max-sm:hidden flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] top-[4.5rem] justify-start"></div>
       ) : (
-        <div className="flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-white via-white top-[4.5rem] justify-start"></div>
+        <div className="max-sm:hidden flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] via-[#F9F1DC] top-[4.5rem] justify-start"></div>
       )}
       {selectedSubject && (
         <SubjectBanner

@@ -15,6 +15,7 @@ module.exports = {
           200: "#f8bdc3",
           300: "#f4a7af",
           400: "#ee909c",
+          // 400: "#ef5b6b",
           500: "#e8798a",
           600: "#c85d6f",
           700: "#c85d6f",
@@ -94,6 +95,12 @@ module.exports = {
         pulser: 'pulser 0.6s ease-in-out 1',
       },
     },
+    boxShadow: {
+      'neobrutalism-lg-black': '6px 6px black',
+      'neobrutalism-md-black': '3px 3px black',
+      'neobrutalism-md-primary': '3px 3px #d0919b',
+      'neobrutalism-md-secondary': '3px 3px #535b99',
+    }
   },
   daisyui: {
     themes: [

@@ -51,10 +51,10 @@ const Navbar = (props: NavbarProps) => {
     <nav
       className={
         route === "/"
-          ? `flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 px-6 xl:px-12 py-2 ${
+          ? `flex items-center w-full justify-between flex-wrap bg-white border-b-4 border-primary-400 shadow-xl sticky top-0 px-6 xl:px-12 py-2 ${
               visible ? "z-50" : "-z-20"
             }`
-          : "flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
+          : "flex items-center w-full justify-between flex-wrap bg-white border-b-4 border-primary-400 shadow-xl sticky top-0 z-50 px-6 xl:px-12 py-2"
       }
       // className="flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
     >
