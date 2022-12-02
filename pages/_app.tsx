@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
     balance: -1,
     quota: 25,
     name: "",
+    referralCodes: [],
   });
 
   return (

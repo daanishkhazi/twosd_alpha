@@ -56,6 +56,16 @@ const options = {
         },
       });
 
+      const referralCodes = await prisma.referralCode.findMany({
+        where: {
+          userId: user.id,
+        },
+        select: {
+          code: true,
+        },
+      });
+      const codes = referralCodes.map((code) => code.code);
+
       session.user.isActive = dbUser!.isActive;
       session.user.stripeSubscriptionId = dbUser!.stripeSubscriptionId;
       session.user.cancelRequested = dbUser!.cancelRequested;
@@ -63,7 +73,9 @@ const options = {
       session.user.tokensUsed = tokenBalanceFromDB;
       session.user.promptsQuota = promptsQuotaFromDB;
       session.user.promptsUsed = promptsBalanceFromDB;
+      session.user.referralCodes = codes;
       // session.user.tokenQuota = tokenQuotaFromDB;
+      console.log("sess", session);
       return session;
     },
   },

@@ -11,6 +11,7 @@ declare module "next-auth" {
     tokensUsed: number;
     promptsUsed: number;
     promptsQuota: number;
+    referralCodes: string[];
     offWaitlist?: boolean;
   }
   interface Session {
@@ -24,6 +25,7 @@ declare module "next-auth" {
       tokensUsed: number;
       promptsUsed: number;
       promptsQuota: number;
+      referralCodes: string[];
     } & DefaultSession["user"];
   }
 }
