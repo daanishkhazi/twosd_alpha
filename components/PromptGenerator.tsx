@@ -22,11 +22,11 @@ const PromptGenerator = (props: PromptGeneratorProps) => {
           if (selectedPrompt && p.description != selectedPrompt.description) {
             return (
               <div
-                className="flex justify-center items-center px-0 sm:px-2 py-1"
+                className="flex justify-center items-center px-0 sm:px-1 py-1"
                 key={index}
               >
                 <button
-                  className={`justify-center items-center transition ease-in-out delay-50 inline-block text-md text-gray-600 ${bubbleConfig} leading-none bg-primary-100 shadow-neobrutalism-md-primary rounded-xl hover:scale-105`}
+                  className={`justify-center items-center transition ease-in-out delay-50 inline-block text-md text-gray-600 ${bubbleConfig} leading-none bg-white border-2 border-black rounded-full hover:scale-105`}
                   onClick={() => setSelectedPrompt(p)}
                 >
                   {p.description}
@@ -36,11 +36,11 @@ const PromptGenerator = (props: PromptGeneratorProps) => {
           } else {
             return (
               <div
-                className={`flex justify-center items-center px-0 sm:px-3 py-1 ${animateConfig}`}
+                className={`flex justify-center items-center px-0 sm:px-2 py-1 ${animateConfig}`}
                 key={index}
               >
                 <button
-                  className={`transition ease-in-out delay-50 inline-block text-md font-medium text-black ${bubbleConfig} leading-none bg-primary-400 shadow-neobrutalism-md-primary rounded-xl hover:scale-105`}
+                  className={`transition ease-in-out delay-50 inline-block text-md font-medium text-black ${bubbleConfig} leading-none bg-secondary-400 border-2 border-black rounded-full hover:scale-105`}
                   onClick={() => setSelectedPrompt(p)}
                 >
                   {p.description}
