@@ -92,8 +92,23 @@ model User {
   cancelRequested      Boolean           @default(false)
   isActive             Boolean           @default(false)
   offWaitlist          Boolean           @default(false)
+  isAmbassador         Boolean           @default(false)
+  referralCodes        ReferralCode[]    @relation("UserReferralCodes")
+  referred             ReferralCode?     @relation(fields: [referredCode], references: [code])
+  referredCode         String?
   accounts             Account[]
   sessions             Session[]
+}
+
+model ReferralCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  user      User     @relation("UserReferralCodes", fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  expiresAt DateTime @default("2030-03-19T14:21:00+02:00")
+  User      User[]
 }
 
 model VerificationToken {

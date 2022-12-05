@@ -5,15 +5,12 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Payment from "../components/Payment";
-import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useBalance } from "../Context/balance-context";
 import EditIcon from "../components/icons/editIcon";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Cancel from "../components/Cancel";
-import Image from "next/image";
 
 export default function Settings() {
   const [selectedTab, setSelectedTab] = useState("Account");
@@ -21,7 +18,9 @@ export default function Settings() {
   const { promptBalance, setPromptBalance } = useBalance();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
-  const router = useRouter();
+  const handleCopy = (code: string) => () => {
+    navigator.clipboard.writeText(code);
+  };
 
   const handleEditName = () => {
     if (isEditing && name !== "") {
@@ -38,8 +37,31 @@ export default function Settings() {
     }
     setIsEditing(!isEditing);
   };
+  const handleGenerateReferralCode = async () => {
+    const res = await fetch("/api/generateCode", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: session?.user?.email,
+        id: session?.user?.id,
+      }),
+    });
+    const result = await res.json();
+    if (result.error) {
+      alert("You already have two referral codes");
+    } else {
+      console.log("result", result);
+      const newReferralCodes = [
+        ...promptBalance.referralCodes,
+        result.newCode.code,
+      ];
+      setPromptBalance({ ...promptBalance, referralCodes: newReferralCodes });
+    }
+    return result;
+  };
 
-  console.log(promptBalance);
   return (
     <Layout>
       <div className="flex flex-col py-2 min-h-[75vh]">
@@ -65,6 +87,16 @@ export default function Settings() {
                 onClick={() => setSelectedTab("Billing")}
               >
                 Billing
+              </button>
+              <button
+                className={
+                  selectedTab === "Referral Codes"
+                    ? "translate-x-1 transition ease-in-out delay-50 bg-primary-300 font-semibold py-1 px-4 mb-2 text-left shadow rounded-r-full min-w-max"
+                    : "hover:translate-x-1 transition ease-in-out delay-50 bg-gray-100 py-1 px-4 mb-2 border border-gray-200 shadow text-left rounded-r-full  min-w-max"
+                }
+                onClick={() => setSelectedTab("Referral Codes")}
+              >
+                Referral Codes
               </button>
               <button
                 className={
@@ -157,6 +189,37 @@ export default function Settings() {
                         {promptBalance.quota == 25 ? <Payment /> : <Cancel />}
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+              {selectedTab === "Referral Codes" && (
+                <div className="flex flex-col w-full">
+                  <h1 className="text-4xl font-bold mb-12">Referral Codes</h1>
+                  <div className="flex flex-col justify-center w-full items-center">
+                    <p className="text-lg mt-4 italic">
+                      You have up to two referral codes to share with friends.
+                      You&apos;ll continue to receive more codes as we can
+                      support more users.
+                    </p>
+                    <div className="flex flex-col w-full justify-center mt-12">
+                      {promptBalance.referralCodes?.map((code) => (
+                        <div
+                          className="flex flex-row w-full justify-center"
+                          key={code.toString()}
+                          onClick={handleCopy(code)}
+                        >
+                          <p className="hover:scale-105 transition ease-in-out delay-50 text-lg ml-4 rounded-full py-1 px-6 bg-gray-200 my-1 cursor-pointer">
+                            {code}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      className="hover:scale-105 transition ease-in-out delay-50 bg-primary-500 text-white font-bold py-2 px-4 rounded mt-4 max-w-[50%]"
+                      onClick={handleGenerateReferralCode}
+                    >
+                      Generate Referral Code
+                    </button>
                   </div>
                 </div>
               )}

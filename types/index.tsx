@@ -60,6 +60,7 @@ export interface promptContextValue {
   balance: number;
   quota: number;
   name: string;
+  referralCodes: Array<string>;
 }
 
 export interface NavbarProps {
