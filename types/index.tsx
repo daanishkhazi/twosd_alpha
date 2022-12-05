@@ -19,6 +19,7 @@ export interface Subject {
 
 export interface SubjectSelectorProps {
   subjects: Array<Subject> | null;
+  selectedSubject: Subject | null;
   setSelectedSubject: React.Dispatch<React.SetStateAction<Subject | null>>;
 }
 
