@@ -34,6 +34,7 @@ const subjectImages: { [key: string]: string } = {
 
 const SubjectSelector = (props: SubjectSelectorProps) => {
   const subjects = props.subjects;
+  const selectedSubject = props.selectedSubject
   const setSelectedSubject = props.setSelectedSubject;
   if (subjects) {
     return (
@@ -42,13 +43,14 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
           return (
             <div
               key={index}
-              className="flex-col xl:w-[45%] lg:w-full mb-8 items-center justify-center"
+              className="flex-row w-full sm:w-5/6 xl:w-4/6 mb-8 items-center justify-center"
             >
               <button
-                className="flex-row justify-center items-center hover:scale-105 border-4 border-primary-300 transition ease-in-out delay-50 justify-center px-8 py-6 rounded-box shadow-2xl bg-white  focus:outline-none focus:shadow-outline"
+                className={`flex-row w-full justify-center items-center hover:scale-105 border-4 border-black transition ease-in-out delay-50 justify-center px-1 py-4 shadow-neobrutalism-lg-black focus:outline-none focus:shadow-outline
+                            ${subject == selectedSubject ? "bg-secondary-400 rotate-3" : "bg-white"}`}
                 onClick={() => setSelectedSubject(subject)}
               >
-                <div className="flex-col justify-center">
+                {/* <div className="flex-col justify-center">
                   <div className="flex justify-center">
                     <Image
                       className="justify-center rounded-full border shadow"
@@ -58,16 +60,16 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
                       height={96}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="flex-col justify-center">
-                  <div>
-                    <h2 className="flex justify-center text-left font-semibold text-xl pt-4 pb-2">
+                  {/* <div> */}
+                    <h2 className="flex justify-center text-center font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl">
                       {subjectNames[subject.name]}
                     </h2>
-                    <p className="text-gray-600 text-center text-md">
+                    {/* <p className="text-gray-600 text-center text-md">
                       {subjectDescriptions[subject.name]}
-                    </p>
-                  </div>
+                    </p> */}
+                  {/* </div> */}
                 </div>
               </button>
             </div>

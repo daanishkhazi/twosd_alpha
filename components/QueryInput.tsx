@@ -89,7 +89,7 @@ const QueryInput = (props: QueryInputProps) => {
         <div className="flex justify-between items-top pt-3 px-6 text-sm text-gray-500 italic">
           {history.length > 1 ? (
             <button
-              className="inline-block text-sm font-semibold text-gray-900 shadow-neobrutalism-md-secondary px-4 py-2 leading-none bg-secondary-400 rounded-md hover:bg-secondary-600"
+              className="inline-block text-sm font-semibold text-gray-900 border-2 border-black px-4 py-1 leading-none bg-secondary-400 rounded-md hover:scale-105"
               onClick={handleClear}
             >
               {" "}

@@ -253,7 +253,7 @@ export default function Interface() {
 
   return (
     <Layout>
-      <div className="flex justify-center min-h-[90vh] h-max bg-[#F9F1DC]">
+      <div className="flex flex-row border-b-4 sm:border-r-4 sm:border-l-4 border-black justify-center min-h-[90vh] h-max bg-[#E7F0D6]">
         {/* <div className="fixed pointer-events-none top-0 bg-white left-0 w-full h-[13.25rem] z-20 ">
           <Image
             src="/meshbgcrop.svg"
@@ -263,19 +263,30 @@ export default function Interface() {
             className="opacity-30"
           />
         </div> */}
-        <div className="flex justify-center items-center min-h-[calc(100vh-194px)] w-full sm:w-full md:w-5/6 lg: lg:w-7/12 max-w-screen-l px-4">
-          {/* TODO - somehow fix this alignment... */}
-          <div className="flex w-full justify-center">
-            {selectedSubject ? (
-              <SubjectSelectedInterface {...subjectSelectedProps} />
-            ) : (
-              <SubjectSelector
-                subjects={subjects}
-                setSelectedSubject={setSelectedSubject}
-              />
-            )}
+      {selectedSubject &&
+        <div className="max-sm:hidden flex items-center bg-[#E7F0D6] sticky top-[4.6rem] w-1/4 flex-grow h-[90vh] border-r-4 border-black">
+          <SubjectSelector
+                  subjects={subjects}
+                  selectedSubject={selectedSubject}
+                  setSelectedSubject={setSelectedSubject}
+                />
+        </div>}
+        <div className="flex w-full sm:w-3/4  justify-center">
+          <div className="flex justify-center items-center min-h-[calc(100vh-194px)] w-full sm:w-full md:w-5/6 lg:w-3/4 max-w-screen-l px-4">
+            {/* TODO - somehow fix this alignment... */}
+            <div className="flex w-full justify-center">
+              {selectedSubject ? (
+                <SubjectSelectedInterface {...subjectSelectedProps} />
+              ) : (
+                <SubjectSelector
+                  selectedSubject={selectedSubject}
+                  subjects={subjects}
+                  setSelectedSubject={setSelectedSubject}
+                />
+              )}
+            </div>
+            <div ref={bottomRef} />
           </div>
-          <div ref={bottomRef} />
         </div>
       </div>
     </Layout>

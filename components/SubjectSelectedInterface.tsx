@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import UsageBar from "./UsageBar";
 import PromptSelector from "./PromptSelector";
+import Arrow from "./icons/curvyArrow";
 
 const subjectNames: { [key: string]: string } = {
   Biology: "Biology",
@@ -96,33 +97,37 @@ const SubjectSelectedInterface = (props: SubjectSelectedInterfaceProps) => {
 
   return (
     <div className="flex-col min-h-full w-full ml-1 pr-4 justify-center">
-      <div className="flex sm:hidden fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] top-[4.5rem] justify-start"></div>
-      {collapsed ? (
-        <div className="max-sm:hidden flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] top-[4.5rem] justify-start"></div>
-      ) : (
-        <div className="max-sm:hidden flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-[#F9F1DC] via-[#F9F1DC] top-[4.5rem] justify-start"></div>
-      )}
-      {selectedSubject && (
-        <SubjectBanner
-          selectedSubject={selectedSubject}
-          setSelectedSubject={setSelectedSubject}
-          subjectNames={subjectNames}
-          collapsed={collapsed}
-          setCollapsed={setCollapsed}
-        />
-      )}
-      <div
-        className={history.length > 1 ? (collapsed ? "pt-2" : "pt-14") : "pt-3"}
-      >
-        {history.length > 1 && <HistoryGenerator history={history} />}
-      </div>
-      <div>{queryInterface()}</div>
-      {!isActive && (
-        <div className="flex justify-center">
-          <UsageBar />
+      {/* <div className="flex-row w-full h-full border-8 border-primary-800"> */}
+        <div className="flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#E7F0D6] top-[4.5rem] justify-start"></div>
+        {/* {collapsed ? (
+          <div className="max-sm:hidden flex fixed pointer-events-none h-[4rem] w-screen z-10 bg-gradient-to-b from-[#E7F0D6] top-[4.5rem] justify-start"></div>
+        ) : (
+          <div className="max-sm:hidden flex fixed pointer-events-none h-[11rem] w-screen z-10 bg-gradient-to-b from-[#E7F0D6] via-[#E7F0D6] top-[4.5rem] justify-start"></div>
+        )} */}
+        {/* {selectedSubject && (
+          <SubjectBanner
+            selectedSubject={selectedSubject}
+            setSelectedSubject={setSelectedSubject}
+            subjectNames={subjectNames}
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+          />
+        )} */}
+        <div
+          className={history.length > 1 ? (collapsed ? "pt-2" : "pt-14") : "pt-3"}
+        >
+          {history.length > 1 && <HistoryGenerator history={history} />}
         </div>
-      )}
-      <div className="h-12"></div>
+        <div>{queryInterface()}</div>
+        {!isActive && (
+          <div className="flex pl-12 justify-center">
+            <UsageBar />
+            <div className="align-right w-[14%] sm:w-[12%] md:w-[10%] lg:w-[8%] xl:w-[6%] max-w-screen-lg ml-2"><Arrow/></div>
+            
+          </div>
+        )}
+        <div className="h-12"></div>
+      {/* </div> */}
     </div>
   );
 };
