@@ -11,6 +11,7 @@ export const BalanceCtx = React.createContext<BalanceContextInterface>({
     balance: 0,
     quota: 25,
     name: "",
+    referralCodes: [],
   },
   setPromptBalance: () => null,
 });
