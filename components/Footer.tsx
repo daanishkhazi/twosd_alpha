@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div className="px-5 py-2">
             <Link
               href="/terms"
-              className="text-base text-gray-700 hover:text-gray-800"
+              className="text-base lg:text-xl text-gray-700 hover:text-gray-800"
             >
               Terms and Conditions
             </Link>
@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           <div className="px-5 py-2">
             <Link
               href="/privacy"
-              className="text-base text-gray-700 hover:text-gray-800"
+              className="text-base lg:text-xl text-gray-700 hover:text-gray-800"
             >
               Privacy Policy
             </Link>
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           <div className="px-5 py-2">
             <Link
               href="mailto:hello@laera.xyz"
-              className="text-base text-gray-700 hover:text-gray-800"
+              className="text-base lg:text-xl text-gray-700 hover:text-gray-800"
             >
               Contact
             </Link>
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
           <div className="px-5 py-2">
             <Link
               href="mailto:jobs@laera.xyz"
-              className="text-base text-gray-700 hover:text-gray-800"
+              className="text-base lg:text-xl text-gray-700 hover:text-gray-800"
             >
               Careers (We&apos;re Hiring!)
             </Link>
