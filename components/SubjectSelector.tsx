@@ -34,7 +34,7 @@ const subjectImages: { [key: string]: string } = {
 
 const SubjectSelector = (props: SubjectSelectorProps) => {
   const subjects = props.subjects;
-  const selectedSubject = props.selectedSubject
+  const selectedSubject = props.selectedSubject;
   const setSelectedSubject = props.setSelectedSubject;
   if (subjects) {
     return (
@@ -46,8 +46,12 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
               className="flex-row w-full sm:w-5/6 xl:w-4/6 mb-8 items-center justify-center"
             >
               <button
-                className={`flex-row w-full justify-center items-center hover:scale-105 border-4 border-black transition ease-in-out delay-50 justify-center px-1 py-4 shadow-neobrutalism-lg-black focus:outline-none focus:shadow-outline
-                            ${subject == selectedSubject ? "bg-secondary-400 rotate-3" : "bg-white"}`}
+                className={`flex-row w-full justify-center items-center hover:scale-105 border-4 border-black transition ease-in-out delay-50 justify-center px-1 py-4 shadow-neobrutalism-lg-black focus:outline-none focus:shadow-outline font-recoleta
+                            ${
+                              subject == selectedSubject
+                                ? "bg-secondary-400 rotate-3"
+                                : "bg-white"
+                            }`}
                 onClick={() => setSelectedSubject(subject)}
               >
                 {/* <div className="flex-col justify-center">
@@ -63,10 +67,10 @@ const SubjectSelector = (props: SubjectSelectorProps) => {
                 </div> */}
                 <div className="flex-col justify-center">
                   {/* <div> */}
-                    <h2 className="flex justify-center text-center font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                      {subjectNames[subject.name]}
-                    </h2>
-                    {/* <p className="text-gray-600 text-center text-md">
+                  <h2 className="flex justify-center text-center font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                    {subjectNames[subject.name]}
+                  </h2>
+                  {/* <p className="text-gray-600 text-center text-md">
                       {subjectDescriptions[subject.name]}
                     </p> */}
                   {/* </div> */}
