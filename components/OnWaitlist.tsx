@@ -2,11 +2,14 @@ import React from "react";
 import Layout from "./Layout";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const OnWaitlist: React.FC = () => {
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
   const [code, setCode] = useState("");
   const [justRequested, setJustRequested] = useState(false);
+  const email = session?.user.email;
+  const router = useRouter();
 
   const useCode = async () => {
     const res = await fetch("/api/useCode", {
@@ -16,11 +19,15 @@ const OnWaitlist: React.FC = () => {
       },
       body: JSON.stringify({
         code,
+        email,
       }),
     });
     const result = await res.json();
     if (result.error) {
       console.log(result.error);
+      alert(result.error);
+    } else {
+      router.reload();
     }
     return result;
   };
