@@ -33,7 +33,7 @@ const Payment = () => {
               if (isCheckoutLoading) return;
               else goToCheckout();
             }}
-            className="hover:scale-105 transition ease-in-out delay-50 bg-primary-500 text-white font-semibold py-2 px-4 mt-4 rounded-lg"
+            className="hover:scale-105 transition ease-in-out delay-50 border-4 border-black font-semibold py-2 px-4 mt-4 rounded-l shadow-neobrutalism-lg-black"
           >
             {isCheckoutLoading ? "Loading..." : "Upgrade Account"}
           </button>

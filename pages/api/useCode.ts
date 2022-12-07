@@ -13,10 +13,10 @@ export default async function handler(
         code: req.body.code,
       },
     });
-    if (code) {
+    if (code && !code.used) {
       await prisma.user.update({
         where: {
-          id: session?.user?.id as string,
+          email: req.body.email,
         },
         data: {
           offWaitlist: true,
@@ -35,7 +35,8 @@ export default async function handler(
       });
       res.status(200).json({ result: { offWaitlist: true } });
     } else {
-      res.status(200).json({ result: { offWaitlist: false } });
+      // return an error if the code is not found or has already been used
+      res.status(405).json({ error: "Invalid Code" });
     }
   } catch (e) {
     console.error(e);

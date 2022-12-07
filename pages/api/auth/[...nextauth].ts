@@ -100,6 +100,33 @@ const options = {
             },
           });
         });
+      // generate two referral codes for the user
+      try {
+        const code1 = (+new Date()).toString(36).slice(-8);
+        // make sure the second code is different
+        let code2 = (+new Date()).toString(36).slice(-8);
+        while (code1 === code2) {
+          code2 = (+new Date()).toString(36).slice(-8);
+        }
+        const newCode1 = await prisma.referralCode.create({
+          data: {
+            code: code1,
+            user: {
+              connect: { email: user.email! },
+            },
+          },
+        });
+        const newCode2 = await prisma.referralCode.create({
+          data: {
+            code: code2,
+            user: {
+              connect: { email: user.email! },
+            },
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   adapter: PrismaAdapter(prisma),
