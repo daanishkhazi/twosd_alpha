@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "RECOLETA";
+  src: url("../public/fonts/Recoleta-Medium.ttf");
+}
+
 html,
 body {
   padding: 0;

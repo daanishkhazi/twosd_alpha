@@ -42,6 +42,7 @@ const Navbar = (props: NavbarProps) => {
         balance: session.user.promptsUsed,
         quota: session.user.promptsQuota,
         name: session.user.name,
+        referralCodes: session.user.referralCodes,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,178 +52,113 @@ const Navbar = (props: NavbarProps) => {
     <nav
       className={
         route === "/"
-          ? `flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 px-6 xl:px-12 py-2 ${
+          ? `flex items-center w-full justify-between flex-wrap bg-white border-b-4 border-black shadow-xl sticky top-0 px-6 xl:px-12 py-2 ${
               visible ? "z-50" : "-z-20"
             }`
-          : "flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
+          : "flex items-center w-full justify-between flex-wrap bg-white border-b-4 border-black shadow-xl sticky top-0 z-50 px-6 xl:px-12 py-2"
       }
       // className="flex items-center w-full justify-between flex-wrap bg-white shadow-md sticky top-0 z-50 px-6 xl:px-12 py-2"
     >
       <div className="flex w-full h-full justify-between items-center">
-      {/* <div className="flex w-full items-center mr-6"> */}
-      <div className="flex items-center mr-6">
-        <Link href="/">
-          {/* <div className="flex items-center mr-6"> */}
-            <Image src="/laera.svg" alt="logo" 
-              height={150} width={150} 
-              // fill={true}
-            />
-          {/* </div> */}
-        </Link>
-      </div>
-      {/* </div> */}
-      <div className="w-auto flex items-center justify-end">
-        {/* <div className=""> */}
-          {/* <Link
-            href="/interface"
-            className={
-              "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
-            }
-          >
-            Tutor
+        {/* <div className="flex w-full items-center mr-6"> */}
+        <div className="flex items-center mr-6">
+          <Link href="/">
+            {/* <div className="flex items-center mr-6"> */}
+            <Image src="/laera.svg" alt="logo" height={150} width={150} />
+            {/* </div> */}
           </Link>
-          {isActive("/") ? (
-            <div className="block mt-4 lg:inline-block lg:mt-0 mr-4">
-              <ScrollLink
-                activeClass="activeScrollElement"
-                to="features"
-                spy={true}
-                smooth={true}
-                duration={500}
-                className={
-                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 active:border-b-4 active:border-primary-400 mr-4"
-                }
-              >
-                Features
-              </ScrollLink>
-              <ScrollLink
-                activeClass="activeScrollElement"
-                to="testimonials"
-                spy={true}
-                smooth={true}
-                duration={500}
-                className={
-                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
-                }
-              >
-                Testimonials
-              </ScrollLink>
-              <ScrollLink
-                activeClass="activeScrollElement"
-                to="faqs"
-                spy={true}
-                smooth={true}
-                duration={500}
-                className={
-                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
-                }
-              >
-                FAQs
-              </ScrollLink>
-              <ScrollLink
-                activeClass="activeScrollElement"
-                to="pricing"
-                spy={true}
-                smooth={true}
-                duration={500}
-                className={
-                  "block mt-4 lg:inline-block lg:mt-0 text-gray-700 hover:text-primary-500 mr-4"
-                }
-              >
-                Pricing
-              </ScrollLink>
-            </div>
-          ) : null} */}
+        </div>
         {/* </div> */}
-        <div className="flex items-center">
-          {status === "loading" && <div>Loading...</div>}
-          {status === "unauthenticated" && (
-            // <div>
+        <div className="w-auto flex items-center justify-end">
+          <div className="flex items-center">
+            {status === "loading" && <div>Loading...</div>}
+            {status === "unauthenticated" && (
+              // <div>
               <Link
                 href="/api/auth/signin"
                 className="inline-block text-xs sm:text-sm font-semibold text-gray-700 px-4 py-2 leading-none bg-slate-200 rounded-full hover:bg-slate-300 lg:mt-0"
               >
                 Sign In
               </Link>
-            // </div>
-          )}
-          {status === "authenticated" && (
-            <div className="flex items-center">
-              <div className="dropdown dropdown-end space-y-2">
-                <div
-                  tabIndex={0}
-                  className="w-10 h-10 border-4 border-black rounded-full"
-                >
-                  {session.user.image ? (
-                    <div>
-                      <Image
-                        src={session.user.image}
-                        layout="fill"
-                        objectFit="cover"
-                        alt=""
-                        className="shadow-md rounded-full cursor-pointer"
-                      />
-                    </div>
-                  ) : (
-                    <div>{session.user.name}</div>
-                  )}
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu p-2 shadow-2xl border bg-base-100 rounded-box w-52"
-                >
-                  <li className="mx-4 my-2">{promptBalance.name}</li>
-                  <li>
-                    <div
-                      className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700 hover:text-primary-500 flex items-center"
-                      data-tip="Your monthly usage so far"
-                    >
-                      <progress
-                        className="progress justify-right h-4"
-                        value={
+              // </div>
+            )}
+            {status === "authenticated" && (
+              <div className="flex items-center">
+                <div className="dropdown dropdown-end space-y-2">
+                  <div
+                    tabIndex={0}
+                    className="w-10 h-10 border-4 border-black rounded-full"
+                  >
+                    {session.user.image ? (
+                      <div>
+                        <Image
+                          src={session.user.image}
+                          layout="fill"
+                          objectFit="cover"
+                          alt=""
+                          className="border-2 border-black rounded-full cursor-pointer"
+                        />
+                      </div>
+                    ) : (
+                      <div>{session.user.name}</div>
+                    )}
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu p-2 border-black border-4 bg-base-100 w-52"
+                  >
+                    <li className="mx-4 my-2">{promptBalance.name}</li>
+                    <li>
+                      <div
+                        className="tooltip tooltip-left lg:mt-0 text-sm text-gray-700  flex items-center"
+                        data-tip="Your monthly usage so far"
+                      >
+                        <progress
+                          className="progress justify-right h-4"
+                          value={
+                            (promptBalance.balance / promptBalance.quota) * 100
+                          }
+                          max="100"
+                        >{`${Math.round(
                           (promptBalance.balance / promptBalance.quota) * 100
-                        }
-                        max="100"
-                      >{`${Math.round(
-                        (promptBalance.balance / promptBalance.quota) * 100
-                      )}%`}</progress>
-                      <a className="text-xs">{`${Math.round(
-                        100 * (promptBalance.balance / promptBalance.quota)
-                      )}%`}</a>
-                    </div>
-                  </li>
-                  <li>
-                    <Link
-                      href="/settings"
-                      className="hover:text-primary-500 text-sm text-gray-700 flex flex-row mt-1"
-                    >
-                      <div className="flex flex-col w-1/4">
-                        <Settings />
+                        )}%`}</progress>
+                        <a className="text-xs">{`${Math.round(
+                          100 * (promptBalance.balance / promptBalance.quota)
+                        )}%`}</a>
                       </div>
-                      <div className="flex flex-col w-3/4">Settings</div>
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => signOut()}
-                      className="flex flex-row bg-slate-200 hover:bg-slate-300 mt-1"
-                    >
-                      <div className="flex flex-col w-1/4">
-                        <SignOut />
-                      </div>
-                      <div className="flex flex-col w-3/4">
-                        <a className="text-sm font-semibold text-gray-700 text-left">
-                          Sign out
-                        </a>
-                      </div>
-                    </button>
-                  </li>
-                </ul>
+                    </li>
+                    <li>
+                      <Link
+                        href="/settings"
+                        className="text-sm text-gray-700 flex flex-row mt-1 active:bg-base-100"
+                      >
+                        <div className="flex flex-col w-1/4">
+                          <Settings />
+                        </div>
+                        <div className="flex flex-col w-3/4">Settings</div>
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => signOut()}
+                        className="flex flex-row bg-primary-50 hover:bg-primary-100 mt-1"
+                      >
+                        <div className="flex flex-col w-1/4">
+                          <SignOut />
+                        </div>
+                        <div className="flex flex-col w-3/4">
+                          <a className="text-sm font-semibold text-gray-700 text-left">
+                            Sign out
+                          </a>
+                        </div>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </nav>
   );

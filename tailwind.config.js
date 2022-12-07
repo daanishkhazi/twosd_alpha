@@ -15,6 +15,7 @@ module.exports = {
           200: "#f8bdc3",
           300: "#f4a7af",
           400: "#ee909c",
+          // 400: "#ef5b6b",
           500: "#e8798a",
           600: "#c85d6f",
           700: "#c85d6f",
@@ -63,6 +64,7 @@ module.exports = {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
+        recoleta: ["Recoleta"],
       },
       keyframes: {
         fadeIn: {
@@ -82,17 +84,23 @@ module.exports = {
           "20%": { transform: "translateX(0)" },
         },
         pulser: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.4)' },
-        }
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.4)" },
+        },
       },
       animation: {
         "fade-in": "fadeIn 1s linear",
         bottom: "bottom 2s ease-in-out",
         left: "left 2s ease-in-out",
         right: "right 2s ease-in-out",
-        pulser: 'pulser 0.6s ease-in-out 1',
+        pulser: "pulser 0.6s ease-in-out 1",
       },
+    },
+    boxShadow: {
+      "neobrutalism-lg-black": "6px 6px black",
+      "neobrutalism-md-black": "3px 3px black",
+      "neobrutalism-md-primary": "3px 3px #d0919b",
+      "neobrutalism-md-secondary": "3px 3px #535b99",
     },
   },
   daisyui: {

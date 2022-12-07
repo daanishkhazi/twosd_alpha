@@ -52,7 +52,7 @@ const Cancel = () => {
         <div>
           <button
             onClick={cancelPremium}
-            className="hover:scale-105 transition ease-in-out delay-50 bg-red-500 text-white font-semibold py-2 px-4 mt-4 rounded-lg"
+            className="hover:scale-105 transition ease-in-out delay-50 border-4 bg-red-400 border-black font-semibold py-2 px-4 mt-4 rounded-l shadow-neobrutalism-lg-black"
           >
             {isCheckoutLoading ? "Loading..." : "Cancel Premium"}
           </button>
