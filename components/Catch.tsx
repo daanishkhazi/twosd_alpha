@@ -29,7 +29,7 @@ const Catch: React.FC = () => {
           onClick={() => {
             index === active ? setActive(-1) : setActive(index);
           }}
-          className="hover:scale-105 transition ease-in-out delay-50 flex flex-col justify-between rounded-box shadow-lg border-4 border-primary-400 py-4 px-8 cursor-pointer"
+          className="hover:scale-105 bg-white transition ease-in-out delay-50 flex flex-col justify-between rounded-box shadow-neobrutalism-lg-black border-4 border-black py-4 px-8 cursor-pointer"
         >
           {active == index ? (
             <div className="flex justify-between">

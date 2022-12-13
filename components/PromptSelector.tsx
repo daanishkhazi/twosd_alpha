@@ -33,10 +33,10 @@ const PromptSelector = (props: any) => {
     return (
 
         <div>
-            <div className="flex sm:hidden ml-4 py-[0.2rem] w-max h-full bg-primary-400 rounded-tl-lg rounded-tr-lg shadow-neobrutalism-md-black">
+            {(selectedSubject !== null) && <div className="flex sm:hidden ml-4 py-[0.2rem] w-max h-full bg-primary-400 rounded-tl-lg rounded-tr-lg shadow-neobrutalism-md-black">
                 <button className="flex items-center relative h-full pl-2 pr-1" onClick={() => setSelectedSubject(null)}>{icon}</button>
                 <p className="text-center italic text-xs pr-2">{selectedSubject.name}</p>
-            </div>
+            </div>}
             <div className="flex sm:hidden items-center w-full">        
             <Listbox value={selectedPrompt} onChange={setSelectedPrompt}>
                 <div className="flex w-full relative">

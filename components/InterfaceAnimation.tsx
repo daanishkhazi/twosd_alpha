@@ -7,6 +7,7 @@ import QueryOutputAnimation from "./QueryOutputAnimation";
 import Image from "next/image";
 import PromptGenerator from "./PromptGenerator";
 import { Prompt } from "../types";
+import PromptSelector from "./PromptSelector";
 
 const InterfaceAnimation = (props: {
   sample_query_outputs: Array<Array<string>>;
@@ -22,6 +23,7 @@ const InterfaceAnimation = (props: {
   const [firstRender, setFirstRender] = useState(true);
   const [sendAnimationTrigger, setSendAnimationTrigger] = useState("");
   const [promptAnimationTrigger, setPromptAnimationTrigger] = useState(true);
+  const [selectedSubject, setSelectedSubject] = useState(null)
 
   const animationPrompts = [
     { description: "What's the difference between..." },
@@ -88,16 +90,17 @@ const InterfaceAnimation = (props: {
 
   return (
     <div
-      className={`flex h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw] border border-gray-300 rounded-box shadow-2xl ${
+      className={`flex h-full w-full 
+        rounded-box ${
         currRenderedIndex >= 1 ? "items-end" : "items-center"
-      } bg-white px-6 sm:px-14 relative overflow-hidden justify-center`}
+      } relative overflow-hidden justify-center`}
     >
       <div
         className={`flex mask-up ${
           currRenderedIndex >= 1 ? "items-end" : "items-center"
-        } h-[65vh] w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw]`}
+        } h-full`}
       >
-        <div className={`flex flex-col w-full relative pointer-events-nonez-0`}>
+        <div className={`flex flex-col w-full relative pointer-events-none z-0 px-2`}>
           {currRenderedIndex >= 0 && (
           // {true && (
             <QueryOutputAnimation
@@ -128,16 +131,23 @@ const InterfaceAnimation = (props: {
             selectedPrompt={selectedPrompt}
             size={"small"}
             animate={promptAnimationTrigger}/>
-          <div className="flex flex-col w-full h-full justify-center align-center margin">
+          <PromptSelector 
+            prompts={animationPrompts}
+            setSelectedPrompt={setSelectedPrompt}
+            selectedPrompt={selectedPrompt}
+            selectedSubject={selectedSubject}
+            setSelectedSubject={setSelectedSubject}
+          />
+          <div className="flex flex-col w-full h-full justify-center align-center">
             <label></label>
-            <div className="bg-white w-full resize-none border-4 border-secondary-400 rounded-2xl appearance-none leading-normal mt-2 sm:mt-4">
+            <div className="bg-white w-full resize-none border-4 border-black shadow-neobrutalism-md-black rounded-2xl appearance-none leading-normal mt-2 sm:mt-4">
               {/* <textarea
                 rows={1}
                 className="flex bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 w-full appearance-none leading-normal z-10"
                 disabled={true}
                 value={currentQuery}
               /> */}
-              <div className="flex w-full bg-white text-[0.5rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 appearance-none leading-normal z-10">
+              <div className="flex w-full bg-white text-[0.8rem] sm:text-sm ring-transparent focus:outline-none resize-none rounded-2xl p-2 sm:p-5 appearance-none leading-normal z-10">
                 {currentQuery}
               </div>
               <div className="flex justify-end py-1 z-0">

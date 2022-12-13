@@ -10,6 +10,9 @@ import { useState, useEffect } from "react";
 import Script from "next/script";
 import QueryOutputAnimation from "../components/QueryOutputAnimation";
 import InterfaceAnimation from "../components/InterfaceAnimation";
+import DynamicLogo from "../components/icons/DyanmicLogo";
+import CurlyArrow from "../components/icons/curlyArrow";
+import FunkyWindow from "../components/funkyWindow";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -117,29 +120,16 @@ export default function Home() {
   return (
     
     <Layout hideNavBar={scrollTop <= 700}>
-      <div className="flex min-h-screen w-screen justify-center items-center pb-24">
-        <div className="absolute top-0 left-0 w-full h-[70vh] clip-it -z-10">
-          <Image
-            src="/herobg.svg"
-            width={2560}
-            height={1920}
-            // fill={true}
-            alt="Home Background"
-          />
-          {/* <canvas id="gradient-canvas" data-js-darken-top></canvas>
-          <Script id="show-banner">
-            {`var gradient = new Gradient();
-              gradient.initGradient("#gradient-canvas", "#ef008f","#6ec3f4", "#7038ff", "#ffba27")`}
-          </Script> */}
-        </div>
-        <div className="flex flex-col justify-center text-wrap px-4 sm:px-12 items-center z-10">
-          <h1 className="text-3xl min-[319px]:text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-gray-800 text-center">
-            AI Tutors for AP, IB and More
-          </h1>
+      <div className="flex flex-wrap absolute top-0 min-h-screen max-h-screen w-screen justify-center bg-[#FF6868] items-center">
+        <div className="flex-row w-full sm:w-1/3 h-1/4 sm:h-full pt-8 sm:pt-16 pl-12 pr-12 sm:pl-12 sm:pr-4 items-center justify-center"> 
+          {/* <div className="flex w-full justify-left"><Image src="/laera.svg" alt="logo" height={400} width={400} /></div> */}
+          <div className="flex w-full justify-center items-center"><DynamicLogo color={"white"} /></div>
+          <div className="flex w-full text-white text-center italic text-lg sm:text-xl md:text-2xl lg:text-3xl py-1 font-semibold">School just got a whole lot easier</div>
+          <div className="flex justify-center text-center">
           {status === "authenticated" ? (
             <Link
               href="/interface"
-              className="hover:-translate-y-0.5 text-[0.5rem] min-[400px]:text-base sm:text-lg md:text-lg transition ease-out delay-50 my-4 px-4 py-2 text-gray-600 bg-base-100 border rounded-full shadow-md hover:shadow-lg"
+              className="w-full z-10 text-center hover:-translate-y-0.5 text-[0.5rem] min-[400px]:text-base transition ease-out px-4 delay-50 text-gray-600 bg-secondary-400 border-4 border-black rounded-full shadow-neobrutalism-md-black hover:shadow-lg"
             >
               Welcome back, {session.user?.name}! Speak with a
               tutor now ➞
@@ -147,29 +137,55 @@ export default function Home() {
           ) : (
             <Link
               href="/api/auth/signin"
-              className="hover:-translate-y-0.5 transition ease-out delay-50 mt-2 lg:mt-4 mb-2 px-2 py-2 text-[0.6rem] min-[320px]:text-md sm:text-lg text-gray-700 italic"
+              className="w-full text-center z-10 hover:-translate-y-0.5 transition ease-out delay-50 text-[0.9rem] px-4 min-[320px]:text-sm sm:text-md lg:text-lg text-gray-700 bg-secondary-400 rounded-full shadow-neobrutalism-md-black border-4 border-black italic"
             >
-              Sign up or log in to get started now ➞
+              Sign up or log in now ➞
             </Link>
           )}
-          {/* <div className="flex flex-col basis-1/3 grow-0 shrink-0"> */}
+          </div>
+          <div className="hidden sm:flex justify-end sm:ml-[10vw] lg:ml-[17vw] w-2/3"><CurlyArrow color={"white"}/></div>
+        </div>
+        <div className="flex w-[100%] sm:w-2/3 h-[73vh] sm:h-[95vh] sm:py-8 justify-center">
+          <div className="absolute w-[72%] sm:w-[48%] mt-[5vh] sm:ml-[1vw] h-[64vh] sm:h-[74vh] z-20">
             <InterfaceAnimation sample_query_outputs={sample_query_outputs_0} />
+          </div>
+          <div className="relative w-full h-full sm:w-11/12 sm:h-11/12 z-10"><FunkyWindow color={"#E3FF7A"}/></div>
+        </div>
+        {/* <div className="flex flex-col basis-1/3 grow-0 shrink-0">
+          <InterfaceAnimation sample_query_outputs={sample_query_outputs_0} />
+        </div> */}
+        {/* <div className="absolute top-0 left-0 w-full h-[70vh] clip-it -z-10">
+          <Image
+            src="/herobg.svg"
+            width={2560}
+            height={1920}
+            // fill={true}
+            alt="Home Background"
+          />
+        </div>
+        <div className="flex flex-col justify-center text-wrap px-4 sm:px-12 items-center z-10">
+          <h1 className="text-3xl min-[319px]:text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-gray-800 text-center">
+            AI Tutors for AP, IB and More
+          </h1> */}
+          {/* <div className="flex flex-col basis-1/3 grow-0 shrink-0"> */}
+            {/* <InterfaceAnimation sample_query_outputs={sample_query_outputs_0} /> */}
           {/* </div> */}
-        </div>
-        </div>
-        <div className="w-full h-[90vh] flex flex-col items-between justify-center px-8">
-          <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-800 text-center mb-6">
+        {/* </div> */} 
+      </div>
+      <div className="flex flex-wrap relative top-0 min-h-[88vh] max-h-[88vh] w-screen justify-center items-center"></div>
+        <div className="w-full h-[90vh] bg-secondary-400 flex flex-col items-between justify-center px-8">
+          <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white text-center mb-6">
             Get your grades up with Laera
           </h1>
           <div className="flex flex-col w-full justify-center items-center">
-            <div className="flex w-full max-h-[45vh] sm:w-5/6 md:w-2/3 lg:w-1/2 2xl:w-5/12 mb-8 p-2 sm:p-8 rounded-2xl border-8 border-primary-400 shadow-xl border-secondary-400">
+            <div className="flex bg-[#E6FFDC] w-full max-h-[45vh] sm:w-5/6 md:w-2/3 lg:w-1/2 2xl:w-5/12 mb-8 p-2 sm:p-8 rounded-2xl border-8 border-primary-400 shadow-neobrutalism-lg-black">
               <ScrollingBloom scrollProgress={scrollProgress} />
             </div>
             {/* <div className="flex flex-col items-center max-w-screen-lg w-1/5 sm:px-12" /> */}
-            <div className="text-sm min-[319px]:text-base sm:text-base md:text-lg lg:text-xl max-w-screen-lg text-gray-600 text-left justify-center items-center w-full lg:w-9/12">
+            <div className="text-sm min-[319px]:text-base sm:text-base md:text-lg lg:text-xl max-w-screen-lg text-white text-left justify-center items-center w-full lg:w-9/12">
               One-on-one instruction is the {"  "}
               <Link
-                className="text-primary-500"
+                className="text-primary-400 font-bold"
                 href="https://en.wikipedia.org/wiki/Bloom%27s_2_sigma_problem"
               >
                 single most effective way
@@ -180,7 +196,7 @@ export default function Home() {
               Laera offers affordable, personalized tutoring on your own terms.
               Our AI-powered tutors boast an enormous body of knowledge across
               subjects you care about. Let us help you master your coursework -{" "}
-              <Link className="text-primary-500" href="/api/auth/signin">
+              <Link className="text-primary-400 font-bold" href="/api/auth/signin">
                 {" "}
                 get started now for free.
               </Link>
@@ -188,8 +204,8 @@ export default function Home() {
           </div>
         </div>
       {/* </div> */}
-      <div className="mask-it">
-        <div className="flex flex-col lg:pt-32 lg:pb-48 lg:px-24 items-center justify-center z-10 bg-[url('/herobg2.svg')]">
+      {/* <div className="mask-it"> */}
+        <div className="flex flex-col lg:pt-32 lg:pb-48 lg:px-24 items-center justify-center z-10 bg-[#E3FF7A]">
           <div className="flex flex-col items-center w-1/5 px-12" />
           <div className="flex flex-col items-center justify-center min-h-1/2 max-w-screen-xl w-screen px-4 md:w-4/5">
             {/* <div className="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-8 lg:gap-y-24 items-center"> */}
@@ -273,11 +289,11 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-center w-1/5 px-12" />
         </div>
-      </div>
-      <div className="flex flex-row items-center">
+      {/* </div> */}
+      <div className="flex flex-row items-center bg-[#FF6868]">
         <div className="flex flex-col items-center w-full my-12">
           <View direction="bottom">
-            <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-800 text-center mb-12 px-12">
+            <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white text-center mb-12 px-12">
               What&apos;s the catch?
             </h1>
           </View>

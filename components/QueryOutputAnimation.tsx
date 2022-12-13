@@ -45,9 +45,9 @@ const QueryOutputAnimation = (props: {sample_query_outputs: Array<Array<string>>
 
     return (
         <div
-            className="animate-fade-in flex flex-col items-start rounded-xl shadow-lg border-4 border-primary-400 bg-white mb-6 hover:bg-gray-100 focus:outline-none focus:shadow-outline"
+            className="animate-fade-in flex flex-col items-start rounded-xl shadow-neobrutalism-lg-black border-2 border-black bg-white mb-6 hover:bg-gray-100 focus:outline-none focus:shadow-outline"
         >
-            <div className="flex justify-between w-full bg-primary-400 px-1 sm:px-4">
+            <div className={`flex justify-between w-full bg-primary-400 rounded-tl-[10px] rounded-tr-[10px] ${currentOutput === "" ? "rounded-bl-[10px] rounded-br-[10px]" : ""} px-2 sm:px-4`}>
                 <div className="flex items-center max-w-5/6 pr-3"> 
                 <div className={`flex break-words font-medium text-[0.9rem] xs:text-sm sm:text-base md:text-lg lg:text-xl py-2`}>
                     {currentQuery}
