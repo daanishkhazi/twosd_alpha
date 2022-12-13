@@ -129,28 +129,49 @@ export default function Settings() {
                   </>
                 )}
               </div>
-              <div className="w-full mt-6">
-                <p className="text-lg font-bold">Referral codes:</p>
-                <p className="text-lg italic">
-                  {" "}
-                  We&apos;re starting you off with 2 referral codes 😎. Click on
-                  a code below to copy it to your clipboard and get one of your
-                  friends on Laera. Keep on learning for more codes soon!
-                </p>
-              </div>
-              <div className="flex flex-row mt-4">
-                {promptBalance.referralCodes?.map((code) => (
-                  <div
-                    className="flex flex-row w-full justify-center"
-                    key={code.toString()}
-                    onClick={handleCopy(code)}
-                  >
-                    <p className="hover:border-b-2 border-black transition ease-in-out delay-50 text-xl ml-4  my-1 cursor-pointer">
-                      {code}
+
+              {session?.user?.offWaitlist ? (
+                <>
+                  <div className="w-full mt-6">
+                    <p className="text-lg font-bold">Referral codes:</p>
+                    <p className="text-lg italic">
+                      {" "}
+                      We&apos;re starting you off with 2 referral codes 😎.
+                      Click on a code below to copy it to your clipboard and get
+                      one of your friends on Laera. Keep on learning for more
+                      codes soon!
                     </p>
                   </div>
-                ))}
-              </div>
+                  <div className="flex flex-row mt-4">
+                    {promptBalance.referralCodes?.map((code) => (
+                      <div
+                        className="flex flex-row w-full justify-center"
+                        key={code.toString()}
+                        onClick={handleCopy(code)}
+                      >
+                        <p className="hover:border-b-2 border-black transition ease-in-out delay-50 text-xl ml-4  my-1 cursor-pointer">
+                          {code}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col w-full mt-6">
+                  <p className="text-lg mb-2">
+                    You&apos;re on the waitlist! Head to our tutoring space to
+                    enter a referral code and get started with learning.
+                  </p>
+                  <Link
+                    href="/interface"
+                    className="hover:translate-x-1 transition ease-in-out delay-50 text-primary-400 text-lg font-bold"
+                  >
+                    {" "}
+                    Tutoring Space →
+                  </Link>
+                </div>
+              )}
+
               {/* <button
                 className="hover:translate-x-1 transition ease-in-out delay-50 inline-block text-sm font-semibold text-gray-900 px-4 py-2 leading-none bg-red-400 rounded-md mt-4 max-w-fit"
                 onClick={() => signOut()}
