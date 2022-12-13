@@ -23,7 +23,7 @@ const Navbar = (props: NavbarProps) => {
   // Can hide navbar if at top of page
   const [visible, setVisible] = useState(false);
   const handleScroll = () => {
-    if (window.scrollY > 25) {
+    if (window.scrollY > 140) {
       setVisible(true);
     } else {
       setVisible(false);
