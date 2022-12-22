@@ -97,7 +97,7 @@ const InterfaceAnimation = (props: {
     >
       <div
         className={`flex mask-up ${
-          currRenderedIndex >= 1 ? "items-end" : "items-center"
+          currRenderedIndex >= 0 ? "items-end" : "items-center"
         } h-full`}
       >
         <div className={`flex flex-col w-full relative pointer-events-none z-0 px-2`}>
