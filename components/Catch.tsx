@@ -10,12 +10,11 @@ const faqs = [
   {
     question: "How do I know the answers are correct?",
     answer:
-      "Laera has ingested nearly all of the information on the internet and has a strong foundation in the subjects we've specially prepared it for. That being said, we encourage you to fact check any answer a Laera tutor gives you, as this is meant to be a study guide and not a tool to replace your own work. Do not use Laera to do anything that violates your school's code of conduct.",
+      "Laera is built on the same technology that powers ChatGPT, which means that is has ingested nearly all of the internet's data. It is especially strong in the subjects we've prepared it for - History & Biology. That being said, we encourage you to fact check any answer a Laera tutor gives you, as this is meant to be a study guide and not a tool to replace your own work. Do not use Laera to do anything that violates your school's code of conduct.",
   },
   {
     question: "Do you have a mobile app?",
-    answer:
-      "Not yet! We're working on it, but for now you can use Laera on your phone's browser. To get the most out of Laera, we recommend using Chrome on your desktop or laptop.",
+    answer: "Not yet! But you can use Laera on your phone's browser.",
   },
 ];
 
@@ -29,7 +28,7 @@ const Catch: React.FC = () => {
           onClick={() => {
             index === active ? setActive(-1) : setActive(index);
           }}
-          className="hover:scale-105 transition ease-in-out delay-50 flex flex-col justify-between rounded-box shadow-lg border-4 border-primary-400 py-4 px-8 cursor-pointer"
+          className="hover:scale-105 bg-white transition ease-in-out delay-50 flex flex-col justify-between rounded-box shadow-neobrutalism-lg-black border-4 border-black py-4 px-8 cursor-pointer"
         >
           {active == index ? (
             <div className="flex justify-between">
@@ -37,7 +36,9 @@ const Catch: React.FC = () => {
                 <h1 className="font-heading font-bold text-lg sm:text-2xl mt-2">
                   {faq.question}
                 </h1>
-                <div className="text-gray-600 mt-1 mb-2 text-sm md:text-base italic">{faq.answer}</div>
+                <div className="text-gray-600 mt-1 mb-2 text-sm md:text-base italic">
+                  {faq.answer}
+                </div>
               </div>
               <div className="flex text-primary-500 font-extrabold text-5xl leading-9">
                 -
