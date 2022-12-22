@@ -57,7 +57,7 @@ export default function Home() {
   const sample_query_outputs_0 = [
     [
       "What was the outcome of Gibbons v Ogden?               ",
-      "The case of Gibbons v. Ogden was a landmark decision in which the Supreme Court of the United States held that the power to regulate interstate commerce was vested exclusively in the federal government, not the states. The case arose from a dispute between two New York City steamboat operators, Aaron Ogden and Thomas Gibbons, over whether Gibbons had the right to operate his steamboat in New York waters. The Court's ruling had far-reaching implications for the development of the American economy and helped to solidify the power of the federal government vis-à-vis the states. In its ruling, Chief Justice John Marshall wrote that Congress had exclusive authority over interstate commerce under Article I, Section 8 of the Constitution. He further held that state laws which interfered with Congress' power were unconstitutional and thus invalid. This ruling established an important precedent for federalism and helped to ensure that interstate commerce would be regulated by one central authority rather than by individual states.",
+      "The case of Gibbons v. Ogden was a landmark decision in which the Supreme Court of the United States held that the power to regulate interstate commerce was vested exclusively in the federal government, not the states. The case arose from a dispute between two New York City steamboat operators, Aaron Ogden and Thomas Gibbons, over whether Gibbons had the right to operate his steamboat in New York waters. The Court's ruling had far-reaching implications for the development of the American economy and helped to solidify the power of the federal government vis-à-vis the states. In its ruling, Chief Justice John Marshall wrote that Congress had exclusive authority over interstate commerce under Article I, Section 8 of the Constitution. He further held that state laws which interfered with Congress' power were unconstitutional and thus invalid.",
       "Ask an open ended question",
     ],
     [
@@ -109,11 +109,11 @@ export default function Home() {
     ],
     [
       "What is dynamic typing and what are some of its associated challenges?",
-      "Dynamic typing is a type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types. The main challenge associated with dynamic typing is that it can be difficult to debug errors due to the lack of compile-time type checking. Since the types are only checked at runtime, it can be difficult to identify the source of an error since it may not be obvious which variable or value has the wrong type. Additionally, dynamic typing can lead to unexpected behavior since operations may be performed on values of different types without any warning or indication that this could cause an issue. Finally, dynamic typing can also lead to performance issues since operations on values of different types require additional processing and memory usage for typecasting.",
+      "Dynamic typing is a type system in which type checking is performed at runtime instead of at compile time. This means that types are not associated with their variables, but with values. This can lead to some challenges, such as type errors being thrown at runtime instead of at compile time, and the need for typecasts in order to perform operations on values of different types. The main challenge associated with dynamic typing is that it can be difficult to debug errors due to the lack of compile-time type checking. Since the types are only checked at runtime, it can be difficult to identify the source of an error since it may not be obvious which variable or value has the wrong type. Additionally, dynamic typing can lead to unexpected behavior since operations may be performed on values of different types without any warning or indication that this could cause an issue.",
     ],
     [
       "What is the difference between a for loop and a while loop?",
-      "The main difference between the two is that a for loop is used when you know the exact number of iterations you want to perform, while a while loop is used when you don't know the exact number of iterations you want to perform. A for loop is typically used when you have an array or list of items that need to be iterated over, since it allows you to specify the starting point, ending point, and increment/decrement value for each iteration. A while loop is typically used when you don't know how many times a certain operation needs to be performed, since it will keep executing until a certain condition is met. In terms of syntax, a for loop typically has three parts: an initialization statement (which sets up the starting point), a condition statement (which defines when the loop should end), and an increment/decrement statement (which defines how much the counter should change each iteration). A while loop only has one part: a condition statement which defines when the loop should end.",
+      "The main difference between the two is that a for loop is used when you know the exact number of iterations you want to perform, while a while loop is used when you don't know the exact number of iterations you want to perform. A for loop is typically used when you have an array or list of items that need to be iterated over, since it allows you to specify the starting point, ending point, and increment/decrement value for each iteration. A while loop is typically used when you don't know how many times a certain operation needs to be performed, since it will keep executing until a certain condition is met. A for loop typically has three parts: an initialization statement (which sets up the starting point), a condition statement (which defines when the loop should end), and an increment/decrement statement (which defines how much the counter should change each iteration). A while loop only has one part: a condition statement which defines when the loop should end.",
     ],
   ];
 
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="flex w-full justify-center items-center">
             <DynamicLogo color={"white"} />
           </div>
-          <div className="flex pl-2 w-full text-white text-center text-lg sm:text-xl md:text-2xl lg:text-3xl py-1 font-semibold mb-2">
+          <div className="flex pl-2 w-full text-white justify-center text-center text-xl sm:text-xl md:text-2xl lg:text-3xl py-1 font-semibold mb-2">
             Learn faster with AI tutors
           </div>
           <div className="flex justify-center text-center">
@@ -178,9 +178,9 @@ export default function Home() {
         {/* </div> */}
         {/* </div> */}
       </div>
-      <div className="flex flex-wrap relative top-0 min-h-[88vh] max-h-[88vh] w-screen justify-center items-center"></div>
+      <div className="flex flex-wrap relative top-0 min-h-[87vh] max-h-[87vh] w-screen justify-center items-center"></div>
       <div className="w-full h-[90vh] bg-[#B69FF6] flex flex-col items-between justify-center px-8">
-        <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-recoleta font-black text-center mb-6">
+        <h1 className="text-2xl min-[319px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-recoleta font-black text-center my-6">
           Get your grades up with Laera
         </h1>
         <div className="flex flex-col w-full justify-center items-center">
@@ -211,11 +211,11 @@ export default function Home() {
       </div>
       {/* </div> */}
       {/* <div className="mask-it"> */}
-      <div className="flex flex-col lg:pt-32 lg:pb-48 lg:px-24 items-center justify-center z-10 bg-[#E3FF7A]">
+      <div className="flex flex-col 3xl:pt-32 3xl:pb-48 items-center justify-center z-10 bg-[#E3FF7A]">
         <div className="flex flex-col items-center w-1/5 px-12" />
-        <div className="flex flex-col items-center justify-center min-h-1/2 max-w-screen-xl w-screen px-4 md:w-4/5">
+        <div className="flex flex-col items-center justify-center min-h-1/2 max-w-screen-xl w-screen px-4 md:w-11/12">
           {/* <div className="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-8 lg:gap-y-24 items-center"> */}
-          <div className="flex flex-row flex-wrap flex-none h-[115vh] sm:h-[150vh] items-center pt-12 pb-24">
+          <div className="flex flex-row flex-wrap flex-none h-[130vh] sm:h-[180vh] items-center pt-12 pb-24">
             <div className="flex pb-4 sm:pb-0 w-full h-[5vh] sm:w-1/3 sm:h-1/3 justify-center items-end sm:items-center">
               {/* <View direction="left"> */}
               <div className="flex flex-col justify-center items-center sm:px-6">
@@ -225,10 +225,10 @@ export default function Home() {
               </div>
               {/* </View> */}
             </div>
-            <div className="flex h-[30vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
+            <div className="flex h-[35vh] sm:h-[40vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
               {/* <View direction="left"> */}
               <div className="flex flex-col justify-start sm:justify-center sm:px-6 w-full h-full relative">
-                {scrollTop >= 1240 && (
+                {scrollTop >= 840 && (
                   <QueryOutputAnimation
                     sample_query_outputs={sample_query_outputs_1}
                     dynamic={true}
@@ -247,10 +247,10 @@ export default function Home() {
               </div>
               {/* </View> */}
             </div>
-            <div className="flex h-[30vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
+            <div className="flex h-[35vh] sm:h-[40vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
               {/* <View direction="right"> */}
               <div className="flex flex-col justify-start sm:justify-center sm:px-6 w-full h-full relative">
-                {scrollTop >= 1240 && (
+                {scrollTop >= 840 && (
                   <QueryOutputAnimation
                     sample_query_outputs={sample_query_outputs_2}
                     dynamic={true}
@@ -263,7 +263,7 @@ export default function Home() {
             <div className="hidden sm:flex w-full sm:w-1/3 sm:h-1/3 items-center">
               {/* <View direction="right"> */}
               <div className="flex flex-col justify-center sm:px-6">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-recoleta font-black text-gray-800 text-left">
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-recoleta font-black text-gray-800 text-left">
                   Deepen your understanding
                 </h1>
               </div>
@@ -278,10 +278,10 @@ export default function Home() {
               </div>
               {/* </View> */}
             </div>
-            <div className="flex h-[30vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
+            <div className="flex h-[35vh] sm:h-[40vh] w-full sm:w-2/3 sm:h-1/3 items-start sm:items-center">
               {/* <View direction="left"> */}
               <div className="flex flex-col justify-start sm:justify-center sm:px-6 w-full h-full relative">
-                {scrollTop >= 1240 && (
+                {scrollTop >= 840 && (
                   <QueryOutputAnimation
                     sample_query_outputs={sample_query_outputs_3}
                     dynamic={true}
